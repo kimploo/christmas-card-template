@@ -6,6 +6,9 @@ import { KakaoLogin } from './components/KakaoLogin';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Edit } from './pages/Edit';
 import { Card } from './pages/Card';
+import { LandingPage } from './pages/LandingPage';
+import { Preview } from './pages/Preview';
+import { MyCards } from './pages/MyCards';
 
 const textInputStyles = createStyles((theme) => ({
   input: {
@@ -21,9 +24,7 @@ function App() {
 
   useEffect(() => {
     try {
-      // if (Kakao.isInitialized()) {
-      Kakao.init(VITE_KAKAO_JAVASCRIPT_API); // 사용하려는 앱의 JavaScript 키 입력
-      // }
+      Kakao.init(VITE_KAKAO_JAVASCRIPT_API);
     } catch (e) {
       console.error(e);
     }
@@ -59,9 +60,11 @@ function App() {
             <BrowserRouter>
               <Routes>
                 {/* 버튼 작동시키기 */}
-                <Route path="/" element={<KakaoLogin isLogin={isLogin} setIsLogin={setIsLogin}></KakaoLogin>}></Route>
+                <Route path="/" element={<LandingPage />}></Route>
+                <Route path="/preview" element={<Preview />}></Route>
+                <Route path="/card" element={<Card />}></Route>
+                <Route path="/my-cards" element={<MyCards />}></Route>
                 <Route path="/edit" element={<Edit />}></Route>
-                <Route path="/card" element={<Card></Card>}></Route>
               </Routes>
             </BrowserRouter>
             <Flex justify={'center'} gap={'1.5rem'} pt={'4rem'} pb={'2rem'}>
