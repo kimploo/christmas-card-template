@@ -14,20 +14,20 @@ const textInputStyles = createStyles((theme) => ({
 }));
 
 function App() {
+  const { VITE_KAKAO_JAVASCRIPT_API } = import.meta.env;
+
   const [isLogin, setIsLogin] = useState(false);
   const [userInfo, setUserInfo] = useState({});
 
   useEffect(() => {
     try {
       // if (Kakao.isInitialized()) {
-      Kakao.init('9eb64fceb46ebd9b4c253f52c852327d'); // 사용하려는 앱의 JavaScript 키 입력
+      Kakao.init(VITE_KAKAO_JAVASCRIPT_API); // 사용하려는 앱의 JavaScript 키 입력
       // }
     } catch (e) {
       console.error(e);
     }
   }, []);
-
-  // const { classes } = textInputStyles();
 
   return (
     <>

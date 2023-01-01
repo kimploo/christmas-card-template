@@ -6,10 +6,8 @@ interface Props {
   setIsLogin: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const { VITE_SERVER_URI } = import.meta.env;
-
 export const KakaoLogin = ({ isLogin, setIsLogin }: Props) => {
-  const { MODE } = import.meta.env;
+  const { VITE_SERVER_URI, MODE } = import.meta.env;
 
   const [kakaoToken, setToken] = useState('');
   const getCookie = (name: string) => {
