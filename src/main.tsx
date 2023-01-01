@@ -11,10 +11,20 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
       withNormalizeCSS
       theme={{
         fontFamily: 'Noto Sans KR, sans-serif',
+        colors: {
+          brandText: ['#CED4DA'],
+        },
       }}
     >
       <App />
-      <Snowfall color="white" />
+      <Snowfall
+        color="white"
+        style={{
+          position: 'fixed',
+          width: '100vw',
+          height: '100vh',
+        }}
+      />
     </MantineProvider>
   </React.StrictMode>
 );

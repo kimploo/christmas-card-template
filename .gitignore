@@ -1,4 +1,6 @@
 Asset 1.png
+.env.development
+.env.production
 
 # Created by https://www.toptal.com/developers/gitignore/api/react,node
 # Edit at https://www.toptal.com/developers/gitignore?templates=react,node

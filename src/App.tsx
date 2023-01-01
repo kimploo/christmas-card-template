@@ -1,18 +1,33 @@
-import { Image, Box, Flex, TextInput, Textarea } from '@mantine/core';
+import { Image, Box, Flex, TextInput, Textarea, Text, Anchor, createStyles } from '@mantine/core';
 import { IconBrandInstagram, IconMailOpened, IconShare } from '@tabler/icons';
+import { useEffect } from 'react';
 import { useState } from 'react';
+import { KakaoLogin } from './components/KakaoLogin';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Edit } from './pages/Edit';
+import { Card } from './pages/Card';
+
+const textInputStyles = createStyles((theme) => ({
+  input: {
+    color: '#CED4DA',
+  },
+}));
 
 function App() {
-  const [inputTo, setInputTo] = useState('To. ');
-  const [inputFrom, setInputFrom] = useState('From. ');
-  const handleTo: React.ChangeEventHandler<HTMLInputElement> = (event) => {
-    setInputTo(event.target.value);
-    return;
-  };
-  const handleFrom: React.ChangeEventHandler<HTMLInputElement> = (event) => {
-    setInputFrom(event.target.value);
-    return;
-  };
+  const [isLogin, setIsLogin] = useState(false);
+  const [userInfo, setUserInfo] = useState({});
+
+  useEffect(() => {
+    try {
+      // if (Kakao.isInitialized()) {
+      Kakao.init('9eb64fceb46ebd9b4c253f52c852327d'); // 사용하려는 앱의 JavaScript 키 입력
+      // }
+    } catch (e) {
+      console.error(e);
+    }
+  }, []);
+
+  // const { classes } = textInputStyles();
 
   return (
     <>
@@ -34,48 +49,21 @@ function App() {
           <Box
             sx={(theme) => ({
               textAlign: 'center',
-              maxWidth: theme.breakpoints.sm,
-              minWidth: `${window.innerWidth - 16 * 4}px`,
+              maxWidth: `${theme.breakpoints.sm - 16 * 8}px`,
+              width: `${window.innerWidth - 16 * 4}px`,
             })}
           >
             {/* To. From. 남겨두기 */}
             {/* 폰트 컬러 바꾸기 color: '#3E3A39', */}
             {/* placeholder 중앙정렬 */}
-            <TextInput
-              size={'lg'}
-              sx={{
-                backgroundColor: '#F6F3A5',
-                borderBottom: '1px solid #ced4da',
-              }}
-              variant={'unstyled'}
-              placeholder="To. "
-              value={inputTo}
-              onChange={handleTo}
-            ></TextInput>
-            <Textarea
-              size={'lg'}
-              sx={{
-                backgroundColor: '#F6F3A5',
-                borderBottom: '1px solid #ced4da',
-              }}
-              variant={'unstyled'}
-              placeholder={`효디 작가의 모바일 축하 카드 생성기에 오신 것을 환영합니다. 여러분이 원하는 메시지를 담은 모바일 축하 카드를 적어보세요.
-`}
-              autosize
-            ></Textarea>
-            <TextInput
-              size={'lg'}
-              sx={{
-                fontColor: '#3E3A39',
-                backgroundColor: '#F6F3A5',
-                borderBottom: '1px solid #ced4da',
-              }}
-              variant={'unstyled'}
-              placeholder="From. "
-              value={inputFrom}
-              onChange={handleFrom}
-            ></TextInput>
-            {/* 버튼 작동시키기 */}
+            <BrowserRouter>
+              <Routes>
+                {/* 버튼 작동시키기 */}
+                <Route path="/" element={<KakaoLogin isLogin={isLogin} setIsLogin={setIsLogin}></KakaoLogin>}></Route>
+                <Route path="/edit" element={<Edit />}></Route>
+                <Route path="/card" element={<Card></Card>}></Route>
+              </Routes>
+            </BrowserRouter>
             <Flex justify={'center'} gap={'1.5rem'} pt={'4rem'} pb={'2rem'}>
               <Box p={2}>
                 <IconMailOpened strokeWidth={0.8} size={36} color={'#CED4DA'}></IconMailOpened>
@@ -87,6 +75,13 @@ function App() {
               {/* 카톡 아이콘 따로 제작 필요 */}
               <Image width={44} src="https://team-hh.s3.ap-northeast-2.amazonaws.com/christmas-card-template/kakaotalk-logo-gray.svg"></Image>
             </Flex>
+            <Text color={'#CED4DA'} pb={'1rem'}>
+              Copyright 2022.{' '}
+              <Anchor underline={true} href="https://www.instagram.com/hyodee.r/">
+                Hyodee
+              </Anchor>{' '}
+              & Homesick. All rights reserved
+            </Text>
           </Box>
         </Flex>
       </Flex>
