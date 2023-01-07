@@ -1,8 +1,9 @@
 import { MainArtwork } from '@components/MainArtwork';
-import { Box, Flex } from '@mantine/core';
+import { Box, Flex, Image } from '@mantine/core';
 import { Footer } from '@components/Footer';
 import { CardInputContainer } from '@components/CardInputContainer';
 import { KakaoLogin } from '@components/KakaoLogin';
+import { Carousel } from '@mantine/carousel';
 
 export const LandingPage = () => {
   return (
@@ -19,6 +20,18 @@ export const LandingPage = () => {
             width: `${window.innerWidth - 16 * 4}px`,
           })}
         >
+          원하는 카드를 선택하세요.
+          <Carousel slideSize="33%" height={200} slideGap="md" controlSize={32} withIndicators>
+            <Carousel.Slide>
+              <Image src="Asset 1.png"></Image>
+            </Carousel.Slide>
+            <Carousel.Slide>
+              <Image src="Asset 1.png"></Image>
+            </Carousel.Slide>
+            <Carousel.Slide>
+              <Image src="Asset 1.png"></Image>
+            </Carousel.Slide>
+          </Carousel>
           <CardInputContainer></CardInputContainer>
           <KakaoLogin></KakaoLogin>
           <Footer></Footer>
