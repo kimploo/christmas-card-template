@@ -1,15 +1,13 @@
 import { Center, Box, Image, Button } from '@mantine/core';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { KakaoLoginContext } from 'src/main';
 
-interface Props {
-  isLogin: boolean;
-  setIsLogin: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-export const KakaoLogin = ({ isLogin, setIsLogin }: Props) => {
+export const KakaoLogin = () => {
   const { VITE_SERVER_URI, MODE } = import.meta.env;
-
   const [kakaoToken, setToken] = useState('');
+
+  const loginInfo = useContext(KakaoLoginContext);
+
   const getCookie = (name: string) => {
     const parts = document.cookie.split(name + '=');
     if (parts.length === 2) {
@@ -50,7 +48,6 @@ export const KakaoLogin = ({ isLogin, setIsLogin }: Props) => {
       >
         <Image src="kakao_login_large_narrow.png"></Image>
       </Box>
-      <Button onClick={displayToken}>check</Button>
     </Center>
   );
 };
