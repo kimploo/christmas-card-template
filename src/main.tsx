@@ -1,10 +1,14 @@
 import { MantineProvider } from '@mantine/core';
-import React from 'react';
+import React, { createContext } from 'react';
 import ReactDOM from 'react-dom/client';
 import Snowfall from 'react-snowfall';
 import App from './App';
+import { kakaoLoginContext } from './context/loginContext';
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+export const KakaoLoginContext = createContext(kakaoLoginContext);
+
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
+root.render(
   <React.StrictMode>
     <MantineProvider
       withGlobalStyles
@@ -16,7 +20,9 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
         },
       }}
     >
-      <App />
+      <KakaoLoginContext.Provider value={kakaoLoginContext}>
+        <App />
+      </KakaoLoginContext.Provider>
       <Snowfall
         color="white"
         style={{
