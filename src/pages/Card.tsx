@@ -1,58 +1,33 @@
-import { TextInput, Textarea } from '@mantine/core';
+import { CardInputContainer } from '@components/CardInputContainer';
+import { MainArtwork } from '@components/MainArtwork';
+import { Footer } from '@components/Footer';
+import { Carousel } from '@mantine/carousel';
+import { Flex, Image, Box, Button } from '@mantine/core';
 import { useState } from 'react';
+import { PreviewInputContainer } from '@components/PreviewInputContainer';
 
 export const Card = () => {
-  const [inputTo, setInputTo] = useState('To. ');
-  const [inputFrom, setInputFrom] = useState('From. ');
-
-  const handleTo: React.ChangeEventHandler<HTMLInputElement> = (event) => {
-    setInputTo(event.target.value);
-    return;
-  };
-  const handleFrom: React.ChangeEventHandler<HTMLInputElement> = (event) => {
-    setInputFrom(event.target.value);
-    return;
-  };
-
   return (
     <>
-      <TextInput
-        size={'lg'}
-        sx={() => ({
-          backgroundColor: '#F6F3A5',
-          borderBottom: '1px solid #ced4da',
-        })}
-        variant={'unstyled'}
-        placeholder="To. "
-        value={inputTo}
-        onChange={handleTo}
-        disabled
-      ></TextInput>
-      <Textarea
-        size={'lg'}
-        sx={{
-          backgroundColor: '#F6F3A5',
-          borderBottom: '1px solid #ced4da',
-        }}
-        variant={'unstyled'}
-        placeholder={`효디 작가의 모바일 축하 카드 생성기에 오신 것을 환영합니다. 여러분이 원하는 메시지를 담은 모바일 축하 카드를 적어보세요.
-`}
-        autosize
-        disabled
-      ></Textarea>
-      <TextInput
-        size={'lg'}
-        sx={{
-          fontColor: '#3E3A39',
-          backgroundColor: '#F6F3A5',
-          borderBottom: '1px solid #ced4da',
-        }}
-        variant={'unstyled'}
-        placeholder="From. "
-        value={inputFrom}
-        onChange={handleFrom}
-        disabled
-      ></TextInput>
+      <Flex bg={`linear-gradient(180deg, #E6E6E6 80%, #F6F3A5 20%)`} justify={'center'}>
+        <MainArtwork src={'https://team-hh.s3.ap-northeast-2.amazonaws.com/christmas-card-template/2022-hyodee-christmas-card.png'}></MainArtwork>
+      </Flex>
+      <Flex bg={`#F6F3A5`} justify={'center'} pt={'1rem'}>
+        {/* 기기에 따라서 viewport 너비에 맞게 input의 너비가 조정이 되어야 한다. 현재는 모바일 전용 */}
+        <Box
+          sx={(theme) => ({
+            textAlign: 'center',
+            maxWidth: `${theme.breakpoints.sm - 16 * 8}px`,
+            width: `${window.innerWidth - 16 * 4}px`,
+          })}
+        >
+          <PreviewInputContainer from={null} to={null} content={null}></PreviewInputContainer>
+          <Flex justify={'center'} direction={'column'} gap={'1rem'}>
+            <Button>나도 만들기</Button>
+          </Flex>
+          <Footer />
+        </Box>
+      </Flex>
     </>
   );
 };
