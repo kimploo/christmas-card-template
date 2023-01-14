@@ -7,7 +7,7 @@ export const Debug = () => {
   const navigate = useNavigate();
   const moveTo: React.MouseEventHandler<HTMLButtonElement> | undefined = (event) => {
     const path = event.currentTarget.textContent;
-    navigate(path || '/');
+    navigate(path ?? '/');
   };
 
   if (DEV) {
