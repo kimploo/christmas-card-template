@@ -4,7 +4,7 @@ export const Footer = () => {
   return (
     <>
       <Text color={'#CED4DA'} pb={'1rem'}>
-        Copyright 2022.{' '}
+        Copyright {new Date().getFullYear()}.{' '}
         <Anchor underline={true} href="https://www.instagram.com/hyodee.r/">
           Hyodee
         </Anchor>{' '}
