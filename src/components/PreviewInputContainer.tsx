@@ -1,18 +1,15 @@
 import { Box, Textarea, TextInput } from '@mantine/core';
-import { useState } from 'react';
 
-export const PreviewInputContainer = () => {
-  const [inputTo, setInputTo] = useState('To. ');
-  const [inputFrom, setInputFrom] = useState('From. ');
+interface Props {
+  to: string | null;
+  content: string | null;
+  from: string | null;
+}
 
-  const handleTo: React.ChangeEventHandler<HTMLInputElement> = (event) => {
-    setInputTo(event.target.value);
-    return;
-  };
-  const handleFrom: React.ChangeEventHandler<HTMLInputElement> = (event) => {
-    setInputFrom(event.target.value);
-    return;
-  };
+export const PreviewInputContainer = ({ to, content, from }: Props) => {
+  const inputTo = to ?? 'To. ';
+  const inputFrom = from ?? 'From. ';
+  const inputContent = content ?? '모바일 축하 카드 기본 텍스트입니다.';
 
   return (
     <>
@@ -30,9 +27,7 @@ export const PreviewInputContainer = () => {
             borderBottom: '1px solid #ced4da',
           })}
           variant={'unstyled'}
-          placeholder="To. "
           value={inputTo}
-          onChange={handleTo}
           disabled
         ></TextInput>
         <Textarea
@@ -42,8 +37,7 @@ export const PreviewInputContainer = () => {
             borderBottom: '1px solid #ced4da',
           }}
           variant={'unstyled'}
-          placeholder={`효디 작가의 모바일 축하 카드 생성기에 오신 것을 환영합니다. 여러분이 원하는 메시지를 담은 모바일 축하 카드를 적어보세요.
-`}
+          value={inputContent}
           autosize
           disabled
         ></Textarea>
@@ -55,9 +49,7 @@ export const PreviewInputContainer = () => {
             borderBottom: '1px solid #ced4da',
           }}
           variant={'unstyled'}
-          placeholder="From. "
           value={inputFrom}
-          onChange={handleFrom}
           disabled
         ></TextInput>
         {/* To. From. 남겨두기 */}

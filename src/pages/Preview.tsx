@@ -1,6 +1,6 @@
 import { Footer } from '@components/Footer';
 import { MainArtwork } from '@components/MainArtwork';
-import { PreviewInputContainer } from '@components/PreviewInputContainer copy';
+import { PreviewInputContainer } from '@components/PreviewInputContainer';
 import { Box, Button, Flex } from '@mantine/core';
 
 export const Preview = () => {
@@ -18,7 +18,7 @@ export const Preview = () => {
             width: `${window.innerWidth - 16 * 4}px`,
           })}
         >
-          <PreviewInputContainer></PreviewInputContainer>
+          <PreviewInputContainer from={null} to={null} content={null}></PreviewInputContainer>
           <Flex justify={'center'} direction={'column'} gap={'1rem'}>
             <Button>공유하기</Button>
             <Button>이전에 작성한 카드 확인하기</Button>
