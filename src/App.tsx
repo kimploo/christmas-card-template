@@ -9,13 +9,14 @@ import { Card } from './pages/Card';
 import { LandingPage } from './pages/LandingPage';
 import { Preview } from './pages/Preview';
 import { MyCards } from './pages/MyCards';
+import { Debug } from '@components/Debug';
 
 function App() {
-  const { VITE_KAKAO_JAVASCRIPT_API } = import.meta.env;
+  const { VITE_KAKAO_JAVASCRIPT_API_KEY } = import.meta.env;
 
   useEffect(() => {
     try {
-      Kakao.init(VITE_KAKAO_JAVASCRIPT_API);
+      Kakao.init(VITE_KAKAO_JAVASCRIPT_API_KEY);
     } catch (e) {
       console.error(e);
     }
@@ -38,6 +39,7 @@ function App() {
             <Route path="/my-cards" element={<MyCards />}></Route>
             <Route path="/edit" element={<Edit />}></Route>
           </Routes>
+          <Debug></Debug>
         </BrowserRouter>
       </Flex>
     </>
