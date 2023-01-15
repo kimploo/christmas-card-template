@@ -7,7 +7,6 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 export default defineConfig({
   plugins: [
     react(),
-    basicSsl(),
     tsconfigPaths(),
     // avoid circular reference https://github.com/vitejs/vite/issues/3033
     {
