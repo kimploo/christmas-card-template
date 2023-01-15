@@ -3,10 +3,26 @@ import { MainArtwork } from '@components/MainArtwork';
 import { Footer } from '@components/Footer';
 import { Carousel } from '@mantine/carousel';
 import { Flex, Image, Box, Button } from '@mantine/core';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { PreviewInputContainer } from '@components/PreviewInputContainer';
+import axios from 'axios';
+
+interface CardData {
+  from: string;
+  to: string;
+  msg: string;
+  userId: number;
+}
 
 export const Card = () => {
+  const [card, setCard] = useState<CardData | null>(null);
+
+  useEffect(() => {
+    axios.get('http://localhost:3000/card/1', { withCredentials: true }).then((res) => {
+      setCard(res.data);
+    });
+  }, []);
+
   return (
     <>
       <Flex bg={`linear-gradient(180deg, #E6E6E6 80%, #F6F3A5 20%)`} justify={'center'}>
@@ -21,7 +37,7 @@ export const Card = () => {
             width: `${window.innerWidth - 16 * 4}px`,
           })}
         >
-          <PreviewInputContainer from={null} to={null} content={null}></PreviewInputContainer>
+          <PreviewInputContainer from={card?.from} to={card?.to} content={card?.msg}></PreviewInputContainer>
           <Flex justify={'center'} direction={'column'} gap={'1rem'}>
             <Button>나도 만들기</Button>
           </Flex>

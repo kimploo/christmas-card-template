@@ -1,9 +1,9 @@
 import { Box, Textarea, TextInput } from '@mantine/core';
 
 interface Props {
-  to: string | null;
-  content: string | null;
-  from: string | null;
+  to: string | undefined;
+  content: string | undefined;
+  from: string | undefined;
 }
 
 export const PreviewInputContainer = ({ to, content, from }: Props) => {

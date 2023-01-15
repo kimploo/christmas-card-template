@@ -7,6 +7,7 @@ interface Props {
 export const MainArtwork = ({ src }: Props) => {
   return (
     <>
+      {/* 768 - 16 - 16 */}
       <Box
         px={'2rem'}
         sx={(theme) => ({
