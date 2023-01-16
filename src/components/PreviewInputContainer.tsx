@@ -1,15 +1,21 @@
-import { Box, Textarea, TextInput } from '@mantine/core';
+import { Box, createStyles, Textarea, TextInput } from '@mantine/core';
+
+const useStyles = createStyles((theme) => ({
+  input: {
+    '::placeholder': {
+      color: '#fbffb0',
+    },
+  },
+}));
 
 interface Props {
-  to: string | undefined;
-  content: string | undefined;
-  from: string | undefined;
+  to: string;
+  msg: string;
+  from: string;
 }
 
-export const PreviewInputContainer = ({ to, content, from }: Props) => {
-  const inputTo = to ?? 'To. ';
-  const inputFrom = from ?? 'From. ';
-  const inputContent = content ?? '모바일 축하 카드 기본 텍스트입니다.';
+export const PreviewInputContainer = ({ to, msg, from }: Props) => {
+  const { classes } = useStyles();
 
   return (
     <>
@@ -23,34 +29,34 @@ export const PreviewInputContainer = ({ to, content, from }: Props) => {
         <TextInput
           size={'lg'}
           sx={() => ({
-            backgroundColor: '#F6F3A5',
-            borderBottom: '1px solid #ced4da',
+            borderBottom: '1px solid #444444',
           })}
           variant={'unstyled'}
-          value={inputTo}
-          disabled
+          placeholder="To. "
+          defaultValue={to}
         ></TextInput>
         <Textarea
+          classNames={{
+            input: classes.input,
+          }}
           size={'lg'}
           sx={{
-            backgroundColor: '#F6F3A5',
-            borderBottom: '1px solid #ced4da',
+            borderBottom: '1px solid #444444',
           }}
           variant={'unstyled'}
-          value={inputContent}
+          placeholder={`효디 작가의 모바일 축하 카드 생성기에 오신 것을 환영합니다. 여러분이 원하는 메시지를 담은 모바일 축하 카드를 적어보세요.
+`}
           autosize
-          disabled
+          defaultValue={msg}
         ></Textarea>
         <TextInput
           size={'lg'}
           sx={{
-            fontColor: '#3E3A39',
-            backgroundColor: '#F6F3A5',
-            borderBottom: '1px solid #ced4da',
+            borderBottom: '1px solid #444444',
           }}
           variant={'unstyled'}
-          value={inputFrom}
-          disabled
+          placeholder="From. "
+          defaultValue={from}
         ></TextInput>
         {/* To. From. 남겨두기 */}
         {/* 폰트 컬러 바꾸기 color: '#3E3A39', */}
