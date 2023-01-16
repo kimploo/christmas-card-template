@@ -9,17 +9,27 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-export const CardInputContainer = () => {
-  const { classes } = useStyles();
-  const [inputTo, setInputTo] = useState('To. ');
-  const [inputFrom, setInputFrom] = useState('From. ');
+interface Props {
+  to: string;
+  msg: string;
+  from: string;
+  setTo: React.Dispatch<React.SetStateAction<string>>;
+  setMsg: React.Dispatch<React.SetStateAction<string>>;
+  setFrom: React.Dispatch<React.SetStateAction<string>>;
+}
 
+export const CardInputContainer = ({ to, msg, from, setTo, setMsg, setFrom }: Props) => {
+  const { classes } = useStyles();
   const handleTo: React.ChangeEventHandler<HTMLInputElement> = (event) => {
-    setInputTo(event.target.value);
+    setTo(event.target.value);
+    return;
+  };
+  const handleMsg: React.ChangeEventHandler<HTMLTextAreaElement> = (event) => {
+    setMsg(event.target.value);
     return;
   };
   const handleFrom: React.ChangeEventHandler<HTMLInputElement> = (event) => {
-    setInputFrom(event.target.value);
+    setFrom(event.target.value);
     return;
   };
 
@@ -39,7 +49,7 @@ export const CardInputContainer = () => {
           })}
           variant={'unstyled'}
           placeholder="To. "
-          value={inputTo}
+          value={to}
           onChange={handleTo}
         ></TextInput>
         <Textarea
@@ -54,6 +64,8 @@ export const CardInputContainer = () => {
           placeholder={`효디 작가의 모바일 축하 카드 생성기에 오신 것을 환영합니다. 여러분이 원하는 메시지를 담은 모바일 축하 카드를 적어보세요.
 `}
           autosize
+          value={msg}
+          onChange={handleMsg}
         ></Textarea>
         <TextInput
           size={'lg'}
@@ -62,7 +74,7 @@ export const CardInputContainer = () => {
           }}
           variant={'unstyled'}
           placeholder="From. "
-          value={inputFrom}
+          value={from}
           onChange={handleFrom}
         ></TextInput>
         {/* To. From. 남겨두기 */}
