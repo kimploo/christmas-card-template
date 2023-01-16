@@ -10,9 +10,6 @@ const snowflakes = ['white', 'yellow', 'red', 'orange'].map((color) => {
 });
 
 import App from './App';
-import { kakaoLoginContext } from './context/loginContext';
-
-export const KakaoLoginContext = createContext(kakaoLoginContext);
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
@@ -27,9 +24,7 @@ root.render(
         },
       }}
     >
-      <KakaoLoginContext.Provider value={kakaoLoginContext}>
-        <App />
-      </KakaoLoginContext.Provider>
+      <App />
       <Snowfall
         color="white"
         radius={[3, 7]}
