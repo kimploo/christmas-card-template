@@ -37,7 +37,7 @@ export const Card = () => {
             width: `${window.innerWidth - 16 * 4}px`,
           })}
         >
-          <PreviewInputContainer from={card?.from} to={card?.to} content={card?.msg}></PreviewInputContainer>
+          {card ? <PreviewInputContainer from={card.from} to={card.to} msg={card.msg}></PreviewInputContainer> : null}
           <Flex justify={'center'} direction={'column'} gap={'1rem'}>
             <Button>나도 만들기</Button>
           </Flex>
