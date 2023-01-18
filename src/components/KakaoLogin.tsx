@@ -1,8 +1,9 @@
 import { Center, Box, Image, Button } from '@mantine/core';
+import { urlMaker } from 'src/util/urlMaker';
 
 export const KakaoLogin = () => {
-  const { VITE_SERVER_URI, MODE, DEV, PROD } = import.meta.env;
-  const redirectUri = DEV ? 'http://localhost:3000/auth' : PROD ? VITE_SERVER_URI + '/auth' : '';
+  const { MODE, DEV, PROD } = import.meta.env;
+  const redirectUri = urlMaker('auth').href;
   console.log(redirectUri);
 
   const handleLogin = () => {
