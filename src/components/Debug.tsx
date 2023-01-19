@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { LoginContext } from 'src/App';
 
-const { DEV, PROD } = import.meta.env;
+const { DEV } = import.meta.env;
 
 export const Debug = () => {
   const navigate = useNavigate();

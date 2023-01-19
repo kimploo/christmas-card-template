@@ -1,17 +1,14 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Footer } from '@components/Footer';
 import { MainArtwork } from '@components/MainArtwork';
 import { PreviewInputContainer } from '@components/PreviewInputContainer';
-import { Anchor, Box, Button, Flex, Text } from '@mantine/core';
-import { ShareModal } from '@components/ShareModal';
+import { Anchor, Box, Button, Flex } from '@mantine/core';
 import axios from 'axios';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { LoginContext } from 'src/App';
+import { useParams } from 'react-router-dom';
 import { urlMaker } from 'src/util/urlMaker';
-import Snowfall from 'react-snowfall';
 import { SnowfallContainer } from '@components/SnowfallContainer';
 
-const { DEV, PROD, VITE_CLIENT_DOMAIN_DEV, VITE_CLIENT_DOMAIN_PROD } = import.meta.env;
+const { PROD, VITE_CLIENT_DOMAIN_DEV, VITE_CLIENT_DOMAIN_PROD } = import.meta.env;
 
 interface CardInfo {
   artwork: string;
@@ -22,7 +19,6 @@ interface CardInfo {
 
 export const Card = () => {
   const domain = PROD ? VITE_CLIENT_DOMAIN_PROD : VITE_CLIENT_DOMAIN_DEV;
-  const { loginState } = useContext(LoginContext);
   const [isLoading, setIsLoading] = useState(true);
   const [cardInfo, setCardInfo] = useState<CardInfo>({
     artwork: '',

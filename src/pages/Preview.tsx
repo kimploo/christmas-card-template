@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { Footer } from '@components/Footer';
 import { MainArtwork } from '@components/MainArtwork';
 import { PreviewInputContainer } from '@components/PreviewInputContainer';

@@ -1,7 +1,6 @@
 import { Box, createStyles, Textarea, TextInput } from '@mantine/core';
-import { useState } from 'react';
 
-const useStyles = createStyles((theme) => ({
+const useStyles = createStyles(() => ({
   input: {
     '::placeholder': {
       color: '#fbffb0',

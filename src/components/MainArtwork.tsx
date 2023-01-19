@@ -1,4 +1,4 @@
-import { Box, Flex, Image } from '@mantine/core';
+import { Box, Image } from '@mantine/core';
 
 interface Props {
   src: string;

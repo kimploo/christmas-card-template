@@ -2,7 +2,7 @@
 // @ts-nocheck
 
 import { Box, Flex, Image, Modal } from '@mantine/core';
-import { IconBrandInstagram, IconMailOpened, IconShare } from '@tabler/icons';
+import { IconShare } from '@tabler/icons';
 
 interface Props {
   opened: boolean;

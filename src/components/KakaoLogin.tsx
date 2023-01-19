@@ -2,9 +2,8 @@ import { Center, Box, Image, Button } from '@mantine/core';
 import { urlMaker } from 'src/util/urlMaker';
 
 export const KakaoLogin = () => {
-  const { MODE, DEV, PROD } = import.meta.env;
+  const { DEV } = import.meta.env;
   const redirectUri = urlMaker('auth').href;
-  console.log(redirectUri);
 
   const handleLogin = () => {
     Kakao.Auth.authorize({
@@ -22,7 +21,7 @@ export const KakaoLogin = () => {
     <Center>
       <Box
         onClick={handleLogin}
-        sx={(theme) => ({
+        sx={() => ({
           width: 240,
           padding: '2rem 1rem',
         })}
