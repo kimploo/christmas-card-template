@@ -1,5 +1,5 @@
 import Snowfall from 'react-snowfall';
-const { DEV, PROD, VITE_CLIENT_DOMAIN_DEV, VITE_CLIENT_DOMAIN_PROD } = import.meta.env;
+const { DEV, VITE_CLIENT_DOMAIN_DEV, VITE_CLIENT_DOMAIN_PROD } = import.meta.env;
 
 interface Props {
   onOff: boolean;
@@ -12,9 +12,7 @@ const snowflakes = ['white', 'yellow', 'red', 'orange'].map((color) => {
 });
 
 export const SnowfallContainer = ({ onOff }: Props) => {
-  if (!onOff) {
-    return null;
-  }
+  if (!onOff) return null;
 
   return (
     <Snowfall

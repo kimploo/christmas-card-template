@@ -7,6 +7,7 @@ import { Carousel } from '@mantine/carousel';
 import { useContext, useState } from 'react';
 import { LoginContext } from 'src/App';
 import { useNavigate } from 'react-router-dom';
+import { SnowfallContainer } from '@components/SnowfallContainer';
 
 export const LandingPage = () => {
   const { loginState } = useContext(LoginContext);
@@ -76,6 +77,7 @@ export const LandingPage = () => {
           <Footer></Footer>
         </Box>
       </Flex>
+      <SnowfallContainer onOff={true}></SnowfallContainer>
     </>
   );
 };
