@@ -46,7 +46,7 @@ export const ShareModal = ({ opened, setOpened, title, to, from, msg, cardId, ar
     Kakao.Share.sendDefault({
       objectType: 'feed',
       content: {
-        title: `${to}애게 전합니다.`,
+        title: `${to}에게 전합니다.`,
         imageUrl: `https://card.teamhh.link/${artwork}`,
         link,
       },
