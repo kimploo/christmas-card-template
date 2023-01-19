@@ -1,3 +1,4 @@
+import isMobile from 'is-mobile';
 import Snowfall from 'react-snowfall';
 const { DEV, VITE_CLIENT_DOMAIN_DEV, VITE_CLIENT_DOMAIN_PROD } = import.meta.env;
 
@@ -12,6 +13,7 @@ const snowflakes = ['white', 'yellow', 'red', 'orange'].map((color) => {
 });
 
 export const SnowfallContainer = ({ onOff }: Props) => {
+  const snowflakeCount = isMobile() ? 75 : 150;
   if (!onOff) return null;
 
   return (
@@ -23,6 +25,7 @@ export const SnowfallContainer = ({ onOff }: Props) => {
         height: '100vh',
       }}
       images={snowflakes}
+      snowflakeCount={snowflakeCount}
     />
   );
 };
