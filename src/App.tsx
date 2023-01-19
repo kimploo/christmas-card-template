@@ -1,8 +1,6 @@
-import { Image, Box, Flex, TextInput, Textarea, Text, Anchor, createStyles } from '@mantine/core';
-import { IconBrandInstagram, IconMailOpened, IconShare } from '@tabler/icons';
-import { useContext, useEffect, createContext } from 'react';
+import { Flex } from '@mantine/core';
+import { useEffect, createContext } from 'react';
 import { useState } from 'react';
-import { KakaoLogin } from './components/KakaoLogin';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Edit } from './pages/Edit';
 import { Card } from './pages/Card';
@@ -80,7 +78,7 @@ function App() {
   return (
     <>
       {/* 두 글자 만큼 여백 */}
-      <Flex justify={'space-between'} direction={'column'} bg={'#FFF'}>
+      <Flex justify={'flex-start'} h={'100vh'} direction={'column'} bg={'#FCCB6B'}>
         {/* 위 사진과 비율 비슷하게 조정 */}
         {/* To. From. 남겨두기 */}
         {/* 폰트 컬러 바꾸기 color: '#3E3A39', */}
@@ -91,7 +89,7 @@ function App() {
               {/* 버튼 작동시키기 */}
               <Route path="/" element={<LandingPage />}></Route>
               <Route path="/preview" element={<Preview />}></Route>
-              <Route path="/card" element={<Card />}></Route>
+              <Route path="/card/:cardId" element={<Card />}></Route>
               <Route path="/my-cards" element={<MyCards />}></Route>
               <Route path="/edit" element={<Edit />}></Route>
             </Routes>
