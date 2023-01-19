@@ -8,10 +8,12 @@ import axios from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { LoginContext } from 'src/App';
 import { urlMaker } from 'src/util/urlMaker';
+import { SnowfallContainer } from '@components/SnowfallContainer';
 
 export const Preview = () => {
   const { loginState } = useContext(LoginContext);
   const [opened, setOpened] = useState(false);
+  const [cardId, setCardId] = useState(0);
   const location = useLocation();
   const { to, msg, from, artwork } = location.state;
   const navigate = useNavigate();
@@ -31,13 +33,23 @@ export const Preview = () => {
         }
       )
       .then((res) => {
-        console.log(res);
+        setOpened(true);
+        setCardId(res.data.id);
       });
   };
 
   return (
     <>
-      <ShareModal opened={opened} setOpened={setOpened} title={'작성한 카드를 소중한 사람에게 공유하세요.'}></ShareModal>
+      <ShareModal
+        opened={opened}
+        setOpened={setOpened}
+        title={'작성한 카드를 소중한 사람에게 공유하세요.'}
+        to={to}
+        msg={msg}
+        from={from}
+        cardId={cardId}
+        artwork={artwork}
+      ></ShareModal>
       <Flex bg={`linear-gradient(180deg, #F3F19D 80%, #FCCB6B 20%)`} justify={'center'} pt={'2rem'} pb={'1rem'}>
         <MainArtwork src={artwork}></MainArtwork>
       </Flex>
@@ -68,7 +80,6 @@ export const Preview = () => {
                 mb={'1rem'}
                 radius={'md'}
                 onClick={() => {
-                  setOpened(true);
                   createCard();
                 }}
               >
@@ -92,6 +103,7 @@ export const Preview = () => {
           <Footer></Footer>
         </Box>
       </Flex>
+      <SnowfallContainer onOff={true}></SnowfallContainer>
     </>
   );
 };
