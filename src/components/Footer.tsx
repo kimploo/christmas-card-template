@@ -8,7 +8,11 @@ export const Footer = () => {
         <Anchor underline={true} href="https://www.instagram.com/hyodee.r/">
           Hyodee
         </Anchor>{' '}
-        & Homesick. All rights reserved
+        &
+        <Anchor underline={true} href="https://www.github.com/kimploo/">
+          Homesick
+        </Anchor>{' '}
+        . All rights reserved
       </Text>
     </>
   );
