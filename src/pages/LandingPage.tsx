@@ -34,7 +34,14 @@ export const LandingPage = () => {
           })}
         >
           <Text py={'1rem'} color={'#444444'}>
-            {loginState.isLogin ? `${loginState.nickname}님, 원하는 카드를 선택하세요.` : '로그인하고 효디 작가의 모바일 축하 카드를 만들어보세요.'}
+            {loginState.isLogin ? (
+              `${loginState.nickname}님, 원하는 카드를 선택하세요.`
+            ) : (
+              <>
+                로그인하고 <br></br>
+                효디 작가의 모바일카드를 만들어보세요.
+              </>
+            )}
           </Text>
 
           {loginState.isLogin ? (
@@ -59,11 +66,22 @@ export const LandingPage = () => {
               </Carousel>
               <CardInputContainer to={to} msg={msg} from={from} setTo={setTo} setMsg={setMsg} setFrom={setFrom} />
               <Button
-                color={'orange'}
-                mt={'2rem'}
+                mt={'3rem'}
                 mb={'1rem'}
                 sx={(theme) => ({
+                  backgroundColor: '#fbffb0',
+                  border: '1px solid #444444',
+                  color: '#000000',
                   maxWidth: `${(theme.breakpoints.sm - 16 * 8) / 2}px`,
+                  width: `${(window.innerWidth - 16 * 4) * (2 / 3)}px`,
+
+                  ':active': {
+                    backgroundColor: '#FCCB6B',
+                  },
+
+                  ':hover': {
+                    backgroundColor: '#FCCB6B',
+                  },
                 })}
                 radius={'md'}
                 onClick={() => navigate(`/preview`, { state: { to, msg, from, artwork: artworks[ArtworkIndex] } })}

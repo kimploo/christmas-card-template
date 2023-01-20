@@ -25,7 +25,7 @@ export const ShareModal = ({ opened, setOpened, title, to, from, msg, cardId, ar
     if (navigator.share) {
       navigator
         .share({
-          title: `${to}에게 전합니다.`,
+          title: `${to}에게 전합니다.💌`,
           text: ``,
           url: `https://card.teamhh.link/card/${cardId}`,
         })
@@ -63,11 +63,19 @@ export const ShareModal = ({ opened, setOpened, title, to, from, msg, cardId, ar
     <>
       <Modal centered opened={opened} onClose={() => setOpened(false)} title={title}>
         <Flex justify={'center'} gap={'1.5rem'} pt={'4rem'} pb={'2rem'}>
-          <Box onClick={handleShareClick} p={2}>
-            <IconShare strokeWidth={0.8} size={36} color={'#CED4DA'}></IconShare>
+          <Box h={84}>
+            <Flex justify={'center'} align={'center'} gap={'1.5rem'}>
+              <Box onClick={handleShareClick} p={4}>
+                <IconShare strokeWidth={0.8} size={76} color={'#CED4DA'}></IconShare>
+              </Box>
+              {/* 카톡 아이콘 따로 제작 필요 */}
+              <Image
+                onClick={kakaoShare}
+                width={84}
+                src="https://team-hh.s3.ap-northeast-2.amazonaws.com/christmas-card-template/kakaotalk-logo-gray.svg"
+              ></Image>
+            </Flex>
           </Box>
-          {/* 카톡 아이콘 따로 제작 필요 */}
-          <Image onClick={kakaoShare} width={44} src="https://team-hh.s3.ap-northeast-2.amazonaws.com/christmas-card-template/kakaotalk-logo-gray.svg"></Image>
         </Flex>
       </Modal>
     </>

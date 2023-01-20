@@ -5,14 +5,27 @@ export const Footer = () => {
     <>
       <Text color={'#fbffb0'} pt={'1rem'} pb={'3rem'}>
         Copyright {new Date().getFullYear()}.{' '}
-        <Anchor underline={true} href="https://www.instagram.com/hyodee.r/">
+        <Anchor
+          underline={true}
+          sx={{
+            color: '#fbffb0',
+          }}
+          href="https://www.instagram.com/hyodee.r/"
+        >
           Hyodee
         </Anchor>{' '}
-        &
-        <Anchor underline={true} href="https://www.github.com/kimploo/">
+        &{' '}
+        <Anchor
+          underline={true}
+          sx={{
+            color: '#fbffb0',
+          }}
+          href="https://www.github.com/kimploo/"
+        >
           Homesick
         </Anchor>{' '}
-        . All rights reserved
+        <br></br>
+        All rights reserved.
       </Text>
     </>
   );

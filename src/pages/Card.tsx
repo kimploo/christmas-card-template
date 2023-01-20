@@ -74,11 +74,22 @@ export const Card = () => {
                 <PreviewInputContainer to={cardInfo.to} msg={cardInfo.msg} from={cardInfo.from}></PreviewInputContainer>
                 <Anchor href="https://card.teamhh.link">
                   <Button
-                    color={'orange'}
                     sx={(theme) => ({
+                      backgroundColor: '#fbffb0',
+                      border: '1px solid #444444',
+                      color: '#000000',
                       maxWidth: `${(theme.breakpoints.sm - 16 * 8) / 2}px`,
+                      width: `${(window.innerWidth - 16 * 4) * (2 / 3)}px`,
+
+                      ':active': {
+                        backgroundColor: '#FCCB6B',
+                      },
+
+                      ':hover': {
+                        backgroundColor: '#FCCB6B',
+                      },
                     })}
-                    mt={'2rem'}
+                    mt={'3rem'}
                     mb={'1rem'}
                     radius={'md'}
                   >

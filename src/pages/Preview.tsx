@@ -63,20 +63,28 @@ export const Preview = () => {
           })}
         >
           <Text py={'1rem'} color={'#444444'}>
-            {loginState.isLogin
-              ? `${loginState.nickname}님, 작성한 내용을 확인하고 소중한 사람에게 공유하세요.`
-              : '로그인이 되지 않았습니다. 아래 버튼을 눌러 처음부터 다시 진행하세요.'}
+            {loginState.isLogin ? null : '로그인이 되지 않았습니다. 아래 버튼을 눌러 처음부터 다시 진행하세요.'}
           </Text>
 
           {loginState.isLogin ? (
             <>
               <PreviewInputContainer to={to} msg={msg} from={from}></PreviewInputContainer>
               <Button
-                color={'orange'}
                 sx={(theme) => ({
+                  backgroundColor: '#fbffb0',
+                  border: '1px solid #444444',
+                  color: '#000000',
                   maxWidth: `${(theme.breakpoints.sm - 16 * 8) / 2}px`,
+                  width: `${(window.innerWidth - 16 * 4) * (2 / 3)}px`,
+                  ':active': {
+                    backgroundColor: '#FCCB6B',
+                  },
+
+                  ':hover': {
+                    backgroundColor: '#FCCB6B',
+                  },
                 })}
-                mt={'2rem'}
+                mt={'3rem'}
                 mb={'1rem'}
                 radius={'md'}
                 onClick={() => {
@@ -88,11 +96,21 @@ export const Preview = () => {
             </>
           ) : (
             <Button
-              color={'orange'}
               sx={(theme) => ({
+                backgroundColor: '#fbffb0',
+                border: '1px solid #444444',
+                color: '#000000',
                 maxWidth: `${(theme.breakpoints.sm - 16 * 8) / 2}px`,
+                width: `${(window.innerWidth - 16 * 4) * (2 / 3)}px`,
+                ':active': {
+                  backgroundColor: '#FCCB6B',
+                },
+
+                ':hover': {
+                  backgroundColor: '#FCCB6B',
+                },
               })}
-              mt={'2rem'}
+              mt={'3rem'}
               mb={'1rem'}
               radius={'md'}
               onClick={() => navigate('/')}

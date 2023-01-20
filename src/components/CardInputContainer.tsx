@@ -60,7 +60,7 @@ export const CardInputContainer = ({ to, msg, from, setTo, setMsg, setFrom }: Pr
             borderBottom: '1px solid #444444',
           }}
           variant={'unstyled'}
-          placeholder={`효디 작가의 모바일 축하 카드 생성기에 오신 것을 환영합니다. 여러분이 원하는 메시지를 담은 모바일 축하 카드를 적어보세요.
+          placeholder={`효디 작가의 모바일카드 생성기에 오신 것을 환영합니다. 소중한 사람에게 전할 메시지를 이곳에 적어보세요.
 `}
           autosize
           value={msg}
