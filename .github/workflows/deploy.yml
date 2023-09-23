@@ -35,9 +35,9 @@ jobs:
           yarn
           yarn build
         env:
-          VITE_CLIENT_DOMAIN_PROD: ${{ env.VITE_CLIENT_DOMAIN_PROD }}
+          VITE_CLIENT_DOMAIN_PROD: ${{ vars.VITE_CLIENT_DOMAIN_PROD }}
           VITE_CLIENT_DOMAIN_DEV: http://localhost:5173
-          VITE_SERVER_URI_PROD: ${{ env.VITE_SERVER_URI_PROD }}
+          VITE_SERVER_URI_PROD: ${{ vars.VITE_SERVER_URI_PROD }}
           VITE_SERVER_URI_DEV: http://localhost:3000
           VITE_KAKAO_JAVASCRIPT_API_KEY: ${{ secrets.VITE_KAKAO_JAVASCRIPT_API_KEY }}
       
