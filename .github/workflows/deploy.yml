@@ -20,4 +20,4 @@ jobs:
         DISTRIBUTION_ID: 'E1SJYWR0PXWJUR'
         AWS_REGION: 'ap-northeast-2'   # optional: defaults to us-east-1
         SOURCE_DIR: 'dist'      # optional: defaults to entire repository
-        # DIST_DIR optional: defaults to the root of the bucket
+        DIST_DIR: '.' # optional: defaults to the root of the bucket
