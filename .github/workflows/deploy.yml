@@ -42,7 +42,9 @@ jobs:
           VITE_KAKAO_JAVASCRIPT_API_KEY: ${{ secrets.VITE_KAKAO_JAVASCRIPT_API_KEY }}
       
       - name: Deploy
-        run: aws s3 sync ./dist s3://${{ secrets.AWS_BUCKET_FRONT }}
+        run: |
+          aws s3 rm s3://${{ secrets.AWS_BUCKET_FRONT }} --recursive
+          aws s3 sync ./dist s3://${{ secrets.AWS_BUCKET_FRONT }}
 
       - name: Invalidate CloudFront
         uses: chetan/invalidate-cloudfront-action@v2
