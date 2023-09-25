@@ -9,8 +9,6 @@ import { AppDispatch, RootState } from 'src/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { createCardContent, resetCardContent } from '../redux-state/CardContentSlice';
 
-// 💌✍🏻
-
 export const Preview = () => {
   const loginState = useSelector((state: RootState) => state.userProfile);
   const { cardId, artwork, to, msg, from } = useSelector((state: RootState) => state.cardContent);
@@ -36,16 +34,6 @@ export const Preview = () => {
 
   return (
     <>
-      {/* <ShareModal
-        opened={opened}
-        setOpened={setOpened}
-        title={'작성한 카드를 소중한 사람에게 공유하세요.'}
-        to={to}
-        msg={msg}
-        from={from}
-        cardId={cardId}
-        artwork={artwork}
-      ></ShareModal> */}
       <Flex
         bg={`linear-gradient(180deg, #F3F19D 80%, #FCCB6B 20%)`}
         justify={'center'}
@@ -111,7 +99,6 @@ export const Preview = () => {
                     backgroundColor: '#FCCB6B',
                   },
                 })}
-                mt={'3rem'}
                 mb={'1rem'}
                 radius={'md'}
                 onClick={() => {
