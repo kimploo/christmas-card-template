@@ -5,7 +5,7 @@ import { CardInputContainer } from '@components/CardInputContainer';
 import { KakaoLogin } from '@components/KakaoLogin';
 import { Carousel } from '@mantine/carousel';
 import { useState } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { SnowfallContainer } from '@components/SnowfallContainer';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'src/store';
