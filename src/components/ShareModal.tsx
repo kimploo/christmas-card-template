@@ -3,7 +3,7 @@
 
 import { Box, Flex, Image, Modal } from '@mantine/core';
 import { IconShare } from '@tabler/icons';
-import { CardId } from 'src/redux-state/CardContentSlice';
+import { CardId } from '@redux-state/cardContentSlice';
 
 interface Props {
   isShare: boolean;

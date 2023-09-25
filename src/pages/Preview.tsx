@@ -7,12 +7,11 @@ import { useNavigate } from 'react-router-dom';
 import { SnowfallContainer } from '@components/SnowfallContainer';
 import { AppDispatch, RootState } from 'src/store';
 import { useDispatch, useSelector } from 'react-redux';
-import { createCardContent, resetCardContent } from '../redux-state/CardContentSlice';
+import { createCardContent, resetCardContent } from '@redux-state/cardContentSlice';
 
 export const Preview = () => {
   const loginState = useSelector((state: RootState) => state.userProfile);
   const { cardId, artwork, to, msg, from } = useSelector((state: RootState) => state.cardContent);
-  const [opened, setOpened] = useState(false);
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
 
@@ -20,8 +19,7 @@ export const Preview = () => {
     dispatch(createCardContent({ cardId: null, artwork, to, msg, from }))
       .then((res) => {
         // TODO: 타입 에러 해결
-        const cardId = res.payload.uuid;
-        setOpened(true);
+        const cardId = (res.payload as any).uuid;
         navigate(`/card/${cardId}`);
       })
       .catch((e) => console.error(e));

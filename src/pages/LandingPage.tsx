@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import { SnowfallContainer } from '@components/SnowfallContainer';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'src/store';
-import { updateCardContent } from 'src/redux-state/CardContentSlice';
+import { updateCardContent } from '@redux-state/cardContentSlice';
 
 export const LandingPage = () => {
   const loginState = useSelector((state: RootState) => state.userProfile);
