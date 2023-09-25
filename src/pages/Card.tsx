@@ -6,8 +6,8 @@ import { Anchor, Box, Button, Flex } from '@mantine/core';
 import { useParams } from 'react-router-dom';
 import { SnowfallContainer } from '@components/SnowfallContainer';
 import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState } from 'src/store';
-import { getCardContent, updateCardContent } from 'src/redux-state/CardContentSlice';
+import { AppDispatch, RootState } from '../store';
+import { getCardContent } from '@redux-state/cardContentSlice';
 import { ShareModal } from '@components/ShareModal';
 
 const { PROD, VITE_CLIENT_DOMAIN_DEV, VITE_CLIENT_DOMAIN_PROD } = import.meta.env;

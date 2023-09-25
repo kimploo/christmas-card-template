@@ -1,9 +1,9 @@
 import { Button, Flex } from '@mantine/core';
-import { useContext, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { AppDispatch, RootState } from 'src/store';
-import { authServiceLogin, authServiceLogout } from '../redux-state/loginSlice';
+import { authServiceLogout } from '../redux-state/loginSlice';
 
 const { DEV } = import.meta.env;
 const { VITE_KAKAO_JAVASCRIPT_API_KEY } = import.meta.env;
@@ -34,16 +34,6 @@ export const Debug = () => {
 
   const handleServiceLogout = () => {
     dispatch(authServiceLogout());
-  };
-
-  const handleKakaoLogout = () => {
-    Kakao.Auth.logout()
-      .then(function (response) {
-        console.log(Kakao.Auth.getAccessToken()); // null
-      })
-      .catch(function (error) {
-        console.log('Not logged in.');
-      });
   };
 
   const handleKakaoId = () => {
@@ -84,7 +74,6 @@ export const Debug = () => {
           <Button onClick={moveTo}>edit</Button>
           <Button onClick={handleLogin}>login</Button>
           <Button onClick={handleServiceLogout}>logout</Button>
-          <Button onClick={handleKakaoLogout}>kakao logout</Button>
           <Button onClick={requestUserInfo}>kakao userInfo</Button>
           <Button onClick={handleKakaoId}>kakaoId</Button>
         </Flex>

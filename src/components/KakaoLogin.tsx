@@ -1,15 +1,18 @@
-import { Center, Box, Image, Button } from '@mantine/core';
+import { Center, Box, Image } from '@mantine/core';
 import { useDispatch } from 'react-redux';
-import { authServiceLogin } from 'src/redux-state/loginSlice';
-import { AppDispatch } from 'src/store';
-import { urlMaker } from 'src/util/urlMaker';
+import { authServiceLogin } from '@redux-state/loginSlice';
+import { AppDispatch } from '../store';
+import { urlMaker } from '../util/urlMaker';
 
 export const KakaoLogin = () => {
   const dispatch = useDispatch<AppDispatch>();
   const redirectUri = urlMaker('auth').href;
 
   const handleLogin = () => {
-    dispatch(authServiceLogin());
+    const controller = new AbortController();
+    dispatch(authServiceLogin(controller)).then(() => {
+      return controller.abort();
+    });
     Kakao.Auth.authorize({
       redirectUri,
     });

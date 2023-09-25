@@ -1,6 +1,6 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import loginSliceReducer from './redux-state/loginSlice';
-import cardContentSlice from './redux-state/CardContentSlice';
+import loginSliceReducer from '@redux-state/loginSlice';
+import cardContentSlice from '@redux-state/cardContentSlice';
 
 export const store = configureStore({
   reducer: {

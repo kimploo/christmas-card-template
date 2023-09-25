@@ -19,6 +19,7 @@
     "paths": {
       "@components/*": ["src/components/*"],
       "@pages/*": ["src/pages/*"],
+      "@redux-state/*": ["src/redux-state/*"],
       "@customType/*": ["src/types/*"]
     },
   },
