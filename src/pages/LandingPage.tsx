@@ -13,7 +13,7 @@ import { updateCardContent } from 'src/redux-state/CardContentSlice';
 
 export const LandingPage = () => {
   const loginState = useSelector((state: RootState) => state.userProfile);
-  const artworks = ['Asset-100-1.png', 'Asset-101-1.png', 'Asset-102-1.png'];
+  const artworks = ['Chuseok_72.png', 'Congrats_72.png', 'Asset-102-1.png'];
   const [ArtworkIndex, setIndex] = useState(0);
   const navigate = useNavigate();
   const dispatch = useDispatch();
