@@ -58,53 +58,55 @@ export const Preview = () => {
           {loginState.isLogin ? (
             <>
               <PreviewInputContainer to={to} msg={msg} from={from}></PreviewInputContainer>
-              <Button
-                sx={(theme) => ({
-                  backgroundColor: '#fbffb0',
-                  border: '1px solid #444444',
-                  color: '#000000',
-                  maxWidth: `${(theme.breakpoints.sm - 16 * 8) / 2}px`,
-                  width: `${(window.innerWidth - 16 * 4) * (2 / 3)}px`,
-                  ':active': {
-                    backgroundColor: '#FCCB6B',
-                  },
+              <Flex justify={'center'} direction={'column'} align={'center'}>
+                <Button
+                  sx={(theme) => ({
+                    backgroundColor: '#fbffb0',
+                    border: '1px solid #444444',
+                    color: '#000000',
+                    maxWidth: `${(theme.breakpoints.sm - 16 * 8) / 2}px`,
+                    width: `${(window.innerWidth - 16 * 4) * (2 / 3)}px`,
+                    ':active': {
+                      backgroundColor: '#FCCB6B',
+                    },
 
-                  ':hover': {
-                    backgroundColor: '#FCCB6B',
-                  },
-                })}
-                mt={'3rem'}
-                mb={'1rem'}
-                radius={'md'}
-                onClick={() => {
-                  handleCreateCard();
-                }}
-              >
-                이대로 공유하기 💌
-              </Button>
-              <Button
-                sx={(theme) => ({
-                  backgroundColor: '#fbffb0',
-                  border: '1px solid #444444',
-                  color: '#000000',
-                  maxWidth: `${(theme.breakpoints.sm - 16 * 8) / 2}px`,
-                  width: `${(window.innerWidth - 16 * 4) * (2 / 3)}px`,
-                  ':active': {
-                    backgroundColor: '#FCCB6B',
-                  },
+                    ':hover': {
+                      backgroundColor: '#FCCB6B',
+                    },
+                  })}
+                  mt={'3rem'}
+                  mb={'1rem'}
+                  radius={'md'}
+                  onClick={() => {
+                    handleCreateCard();
+                  }}
+                >
+                  이대로 공유하기 💌
+                </Button>
+                <Button
+                  sx={(theme) => ({
+                    backgroundColor: '#fbffb0',
+                    border: '1px solid #444444',
+                    color: '#000000',
+                    maxWidth: `${(theme.breakpoints.sm - 16 * 8) / 2}px`,
+                    width: `${(window.innerWidth - 16 * 4) * (2 / 3)}px`,
+                    ':active': {
+                      backgroundColor: '#FCCB6B',
+                    },
 
-                  ':hover': {
-                    backgroundColor: '#FCCB6B',
-                  },
-                })}
-                mb={'1rem'}
-                radius={'md'}
-                onClick={() => {
-                  handleGoBack();
-                }}
-              >
-                돌아가서 수정하기 ✍🏻
-              </Button>
+                    ':hover': {
+                      backgroundColor: '#FCCB6B',
+                    },
+                  })}
+                  mb={'1rem'}
+                  radius={'md'}
+                  onClick={() => {
+                    handleGoBack();
+                  }}
+                >
+                  돌아가서 수정하기 ✍🏻
+                </Button>
+              </Flex>
             </>
           ) : (
             <Button
