@@ -26,7 +26,7 @@ export const Card = () => {
   // TODO: 변수 명을 domain으로 하는게 좋을지, origin으로 하는게 좋을지, host로 하는게 좋을지 ..
   const domain = PROD ? VITE_CLIENT_DOMAIN_PROD : VITE_CLIENT_DOMAIN_DEV;
   const [isLoading, setIsLoading] = useState(true);
-  const [isShare, setShare] = useState(true);
+  const [isShare, setShare] = useState(false);
 
   const { cardId } = useParams();
 
@@ -60,6 +60,9 @@ export const Card = () => {
   useEffect(() => {
     getCard();
     setIsLoading(false);
+    if (loginState.isLogin) {
+      setShare(true);
+    }
   }, [dispatch]);
 
   return (
