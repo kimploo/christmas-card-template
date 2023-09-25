@@ -1,56 +1,45 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { Footer } from '@components/Footer';
 import { MainArtwork } from '@components/MainArtwork';
 import { PreviewInputContainer } from '@components/PreviewInputContainer';
 import { Box, Button, Flex, Text } from '@mantine/core';
-import { ShareModal } from '@components/ShareModal';
-import axios from 'axios';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { LoginContext } from 'src/App';
-import { urlMaker } from 'src/util/urlMaker';
+import { useNavigate } from 'react-router-dom';
 import { SnowfallContainer } from '@components/SnowfallContainer';
+import { AppDispatch, RootState } from 'src/store';
+import { useDispatch, useSelector } from 'react-redux';
+import { createCardContent, resetCardContent } from '../redux-state/CardContentSlice';
 
 export const Preview = () => {
-  const { loginState } = useContext(LoginContext);
+  const loginState = useSelector((state: RootState) => state.userProfile);
+  const { cardId, artwork, to, msg, from } = useSelector((state: RootState) => state.cardContent);
   const [opened, setOpened] = useState(false);
-  const [cardId, setCardId] = useState(0);
-  const location = useLocation();
-  const { to, msg, from, artwork } = location.state;
+  const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
 
-  const createCard = () => {
-    axios
-      .post(
-        urlMaker('card').href,
-        {
-          to,
-          msg,
-          from,
-          artwork,
-        },
-        {
-          withCredentials: true,
-        }
-      )
+  const handleCreateCard = () => {
+    dispatch(createCardContent({ cardId: null, artwork, to, msg, from }))
       .then((res) => {
+        // TODO: 타입 에러 해결
+        const cardId = res.payload.uuid;
         setOpened(true);
-        setCardId(res.data.id);
-      });
+        navigate(`/card/${cardId}`);
+      })
+      .catch((e) => console.error(e));
+  };
+
+  const handleGoBack = () => {
+    dispatch(resetCardContent({}));
+    navigate('/');
   };
 
   return (
     <>
-      <ShareModal
-        opened={opened}
-        setOpened={setOpened}
-        title={'작성한 카드를 소중한 사람에게 공유하세요.'}
-        to={to}
-        msg={msg}
-        from={from}
-        cardId={cardId}
-        artwork={artwork}
-      ></ShareModal>
-      <Flex bg={`linear-gradient(180deg, #F3F19D 80%, #FCCB6B 20%)`} justify={'center'} pt={'2rem'} pb={'1rem'}>
+      <Flex
+        bg={`linear-gradient(180deg, #F3F19D 80%, #FCCB6B 20%)`}
+        justify={'center'}
+        pt={'2rem'}
+        pb={'1rem'}
+      >
         <MainArtwork src={artwork}></MainArtwork>
       </Flex>
       <Flex bg={`#FCCB6B`} justify={'center'}>
@@ -63,7 +52,9 @@ export const Preview = () => {
           })}
         >
           <Text py={'1rem'} color={'#444444'}>
-            {loginState.isLogin ? null : '로그인이 되지 않았습니다. 아래 버튼을 눌러 처음부터 다시 진행하세요.'}
+            {loginState.isLogin
+              ? null
+              : '로그인이 되지 않았습니다. 아래 버튼을 눌러 처음부터 다시 진행하세요.'}
           </Text>
 
           {loginState.isLogin ? (
@@ -88,10 +79,33 @@ export const Preview = () => {
                 mb={'1rem'}
                 radius={'md'}
                 onClick={() => {
-                  createCard();
+                  handleCreateCard();
                 }}
               >
-                공유하기
+                이대로 공유하기 💌
+              </Button>
+              <Button
+                sx={(theme) => ({
+                  backgroundColor: '#fbffb0',
+                  border: '1px solid #444444',
+                  color: '#000000',
+                  maxWidth: `${(theme.breakpoints.sm - 16 * 8) / 2}px`,
+                  width: `${(window.innerWidth - 16 * 4) * (2 / 3)}px`,
+                  ':active': {
+                    backgroundColor: '#FCCB6B',
+                  },
+
+                  ':hover': {
+                    backgroundColor: '#FCCB6B',
+                  },
+                })}
+                mb={'1rem'}
+                radius={'md'}
+                onClick={() => {
+                  handleGoBack();
+                }}
+              >
+                돌아가서 수정하기 ✍🏻
               </Button>
             </>
           ) : (

@@ -3,19 +3,20 @@
 
 import { Box, Flex, Image, Modal } from '@mantine/core';
 import { IconShare } from '@tabler/icons';
+import { CardId } from 'src/redux-state/CardContentSlice';
 
 interface Props {
-  opened: boolean;
-  setOpened: React.Dispatch<React.SetStateAction<boolean>>;
+  isShare: boolean;
+  setShare: React.Dispatch<React.SetStateAction<boolean>>;
   title: string;
   to: string;
   from: string;
   msg: string;
-  cardId: number;
+  cardId: CardId;
   artwork: string;
 }
 
-export const ShareModal = ({ opened, setOpened, title, to, from, msg, cardId, artwork }: Props) => {
+export const ShareModal = ({ isShare, setShare, title, to, from, msg, cardId, artwork }: Props) => {
   const link = {
     mobileWebUrl: `https://card.teamhh.link/card/${cardId}`,
     webUrl: `https://card.teamhh.link/card/${cardId}`,
@@ -34,7 +35,7 @@ export const ShareModal = ({ opened, setOpened, title, to, from, msg, cardId, ar
           console.log('Error sharing', error);
         });
     } else {
-      setOpened(true);
+      setShare(true);
     }
   };
 
@@ -61,7 +62,7 @@ export const ShareModal = ({ opened, setOpened, title, to, from, msg, cardId, ar
 
   return (
     <>
-      <Modal centered opened={opened} onClose={() => setOpened(false)} title={title}>
+      <Modal centered opened={isShare} onClose={() => setShare(false)} title={title}>
         <Flex justify={'center'} gap={'1.5rem'} pt={'4rem'} pb={'2rem'}>
           <Box h={84}>
             <Flex justify={'center'} align={'center'} gap={'1.5rem'}>
