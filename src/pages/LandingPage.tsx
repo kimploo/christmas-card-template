@@ -4,24 +4,44 @@ import { Footer } from '@components/Footer';
 import { CardInputContainer } from '@components/CardInputContainer';
 import { KakaoLogin } from '@components/KakaoLogin';
 import { Carousel } from '@mantine/carousel';
-import { useContext, useState } from 'react';
-import { LoginContext } from 'src/App';
-import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { SnowfallContainer } from '@components/SnowfallContainer';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from 'src/store';
+import { updateCardContent } from 'src/redux-state/CardContentSlice';
 
 export const LandingPage = () => {
-  const { loginState } = useContext(LoginContext);
+  const loginState = useSelector((state: RootState) => state.userProfile);
   const artworks = ['Asset-100-1.png', 'Asset-101-1.png', 'Asset-102-1.png'];
   const [ArtworkIndex, setIndex] = useState(0);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [to, setTo] = useState('To. ');
   const [msg, setMsg] = useState('');
   const [from, setFrom] = useState('From. ');
 
+  const handlePreview = () => {
+    dispatch(
+      updateCardContent({
+        artwork: artworks[ArtworkIndex],
+        to,
+        msg,
+        from,
+      })
+    );
+    navigate(`/preview`);
+  };
+
   return (
     <>
-      <Flex bg={`linear-gradient(180deg, #F3F19D 80%, #FCCB6B 20%)`} justify={'center'} pt={'2rem'} pb={'1rem'}>
+      <Flex
+        bg={`linear-gradient(180deg, #F3F19D 80%, #FCCB6B 20%)`}
+        justify={'center'}
+        pt={'2rem'}
+        pb={'1rem'}
+      >
         <MainArtwork src={artworks[ArtworkIndex]}></MainArtwork>
       </Flex>
       <Flex bg={`#FCCB6B`} justify={'center'}>
@@ -64,7 +84,14 @@ export const LandingPage = () => {
                   );
                 })}
               </Carousel>
-              <CardInputContainer to={to} msg={msg} from={from} setTo={setTo} setMsg={setMsg} setFrom={setFrom} />
+              <CardInputContainer
+                to={to}
+                msg={msg}
+                from={from}
+                setTo={setTo}
+                setMsg={setMsg}
+                setFrom={setFrom}
+              />
               <Button
                 mt={'3rem'}
                 mb={'1rem'}
@@ -84,7 +111,7 @@ export const LandingPage = () => {
                   },
                 })}
                 radius={'md'}
-                onClick={() => navigate(`/preview`, { state: { to, msg, from, artwork: artworks[ArtworkIndex] } })}
+                onClick={handlePreview}
               >
                 카드 미리보기
               </Button>
