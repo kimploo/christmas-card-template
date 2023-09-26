@@ -30,11 +30,13 @@ export interface CardCreateResponse {
 export interface CardGetResponse {
   // TODO: uuid로 백엔드에서 변경 후 수정
   id: number;
-  uuid: CardId;
+  uuid: string | null;
+  createdAt: Date;
+  updatedAt: Date | null;
   from: string;
   to: string;
   msg: string;
-  index: number;
+  artwork: string;
   userId: number | null;
 }
 
@@ -139,6 +141,10 @@ export const cardContentSlice = createSlice({
       })
       .addCase(getCardContent.fulfilled, (state, action) => {
         state.cardId = action.payload.uuid;
+        state.index = state.artworks.findIndex((aw) => aw === action.payload.artwork);
+        state.to = action.payload.to;
+        state.msg = action.payload.msg;
+        state.from = action.payload.from;
       })
       .addCase(getCardContent.pending, () => {
         // TODO

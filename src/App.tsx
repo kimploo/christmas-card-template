@@ -50,7 +50,11 @@ function App() {
     return () => controller.abort();
   }, []);
 
-  const Layout = () => {
+  interface LayoutProps {
+    href: string;
+  }
+
+  const Layout = ({ href }: LayoutProps) => {
     return (
       <>
         <Flex
@@ -59,7 +63,7 @@ function App() {
           pt={'2rem'}
           pb={'1rem'}
         >
-          <MainArtwork src={getArtworkSrc(artworks[index])}></MainArtwork>
+          <MainArtwork src={getArtworkSrc(href)}></MainArtwork>
         </Flex>
         <Flex bg={`#FCCB6B`} justify={'center'}>
           {/* 기기에 따라서 viewport 너비에 맞게 input의 너비가 조정이 되어야 한다. 현재는 모바일 전용 */}
@@ -90,7 +94,7 @@ function App() {
             <Routes>
               {/* 버튼 작동시키기 */}
               <Route path="/" element={<LandingPage />}></Route>
-              <Route element={<Layout />}>
+              <Route element={<Layout href={artworks[index]} />}>
                 <Route path="/preview" element={<Preview />}></Route>
                 <Route path="/card/:cardId" element={<Card />}></Route>
                 {DEV ? <Route path="/loading" element={<Loading />}></Route> : null}
