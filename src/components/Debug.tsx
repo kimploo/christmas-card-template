@@ -1,8 +1,8 @@
 import { Button, Flex } from '@mantine/core';
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { AppDispatch, RootState } from 'src/store';
+import { AppDispatch } from 'src/store';
 import { authServiceLogout } from '../redux-state/loginSlice';
 
 const { DEV } = import.meta.env;
@@ -18,7 +18,6 @@ export const Debug = () => {
   }, []);
 
   const navigate = useNavigate();
-  const loginState = useSelector((state: RootState) => state.userProfile);
   const dispatch = useDispatch<AppDispatch>();
 
   const moveTo: React.MouseEventHandler<HTMLButtonElement> | undefined = (event) => {

@@ -1,37 +1,60 @@
-import { MainArtwork } from '@components/MainArtwork';
+import { useState } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  initialState as initialCardContentState,
+  resetCardContent,
+  updateCardContent,
+} from '@redux-state/cardContentSlice';
+
 import { Box, Button, Flex, Image, Text } from '@mantine/core';
+import { Carousel } from '@mantine/carousel';
+
 import { Footer } from '@components/Footer';
 import { CardInputContainer } from '@components/CardInputContainer';
 import { KakaoLogin } from '@components/KakaoLogin';
-import { Carousel } from '@mantine/carousel';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { SnowfallContainer } from '@components/SnowfallContainer';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from 'src/store';
-import { updateCardContent } from '@redux-state/cardContentSlice';
 
-export const LandingPage = () => {
+import { RootState } from 'src/store';
+import { MainArtwork } from '@components/MainArtwork';
+
+export default function LandingPage() {
+  // ?index=3
+  const [searchParams] = useSearchParams();
   const loginState = useSelector((state: RootState) => state.userProfile);
-  const artworks = ['Chuseok_72.png', 'Congrats_72.png', 'Asset-102-1.png'];
-  const [ArtworkIndex, setIndex] = useState(0);
+  const cardContent = useSelector((state: RootState) => state.cardContent);
+  const { artworks, index } = cardContent;
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const [to, setTo] = useState('To. ');
-  const [msg, setMsg] = useState('');
-  const [from, setFrom] = useState('From. ');
+  const newIndex = Number(searchParams.get('index')) && index;
+  const [localIndex, setLocalIndex] = useState(newIndex);
+
+  const [to, setTo] = useState(cardContent.to);
+  const [msg, setMsg] = useState(cardContent.msg);
+  const [from, setFrom] = useState(cardContent.from);
 
   const handlePreview = () => {
     dispatch(
       updateCardContent({
-        artwork: artworks[ArtworkIndex],
+        index: localIndex,
         to,
         msg,
         from,
       })
     );
     navigate(`/preview`);
+  };
+
+  const handleSlideIndex = (idx: number) => {
+    setLocalIndex(idx);
+  };
+
+  const handleReset = () => {
+    setTo(initialCardContentState.to);
+    setMsg(initialCardContentState.msg);
+    setFrom(initialCardContentState.from);
+    dispatch(resetCardContent());
   };
 
   return (
@@ -42,7 +65,7 @@ export const LandingPage = () => {
         pt={'2rem'}
         pb={'1rem'}
       >
-        <MainArtwork src={artworks[ArtworkIndex]}></MainArtwork>
+        <MainArtwork src={artworks[localIndex]}></MainArtwork>
       </Flex>
       <Flex bg={`#FCCB6B`} justify={'center'}>
         {/* 기기에 따라서 viewport 너비에 맞게 input의 너비가 조정이 되어야 한다. 현재는 모바일 전용 */}
@@ -73,10 +96,10 @@ export const LandingPage = () => {
                 controlSize={32}
                 withIndicators
                 onSlideChange={(index) => {
-                  setIndex(index);
+                  handleSlideIndex(index);
                 }}
               >
-                {artworks.map((src, idx) => {
+                {artworks?.map((src, idx) => {
                   return (
                     <Carousel.Slide key={idx}>
                       <Image src={src}></Image>
@@ -92,29 +115,53 @@ export const LandingPage = () => {
                 setMsg={setMsg}
                 setFrom={setFrom}
               />
-              <Button
-                mt={'3rem'}
-                mb={'1rem'}
-                sx={(theme) => ({
-                  backgroundColor: '#fbffb0',
-                  border: '1px solid #444444',
-                  color: '#000000',
-                  maxWidth: `${(theme.breakpoints.sm - 16 * 8) / 2}px`,
-                  width: `${(window.innerWidth - 16 * 4) * (2 / 3)}px`,
+              <Flex justify={'center'} direction={'column'} align={'center'}>
+                <Button
+                  mt={'3rem'}
+                  sx={(theme) => ({
+                    backgroundColor: '#fbffb0',
+                    border: '1px solid #444444',
+                    color: '#000000',
+                    maxWidth: `${(theme.breakpoints.sm - 16 * 8) / 2}px`,
+                    width: `${(window.innerWidth - 16 * 4) * (2 / 3)}px`,
 
-                  ':active': {
-                    backgroundColor: '#FCCB6B',
-                  },
+                    ':active': {
+                      backgroundColor: '#FCCB6B',
+                    },
 
-                  ':hover': {
-                    backgroundColor: '#FCCB6B',
-                  },
-                })}
-                radius={'md'}
-                onClick={handlePreview}
-              >
-                카드 미리보기
-              </Button>
+                    ':hover': {
+                      backgroundColor: '#FCCB6B',
+                    },
+                  })}
+                  radius={'md'}
+                  onClick={handlePreview}
+                >
+                  카드 미리보기
+                </Button>
+                <Button
+                  mt={'1rem'}
+                  mb={'1rem'}
+                  sx={(theme) => ({
+                    backgroundColor: '#fbffb0',
+                    border: '1px solid #444444',
+                    color: '#000000',
+                    maxWidth: `${(theme.breakpoints.sm - 16 * 8) / 2}px`,
+                    width: `${(window.innerWidth - 16 * 4) * (2 / 3)}px`,
+
+                    ':active': {
+                      backgroundColor: '#FCCB6B',
+                    },
+
+                    ':hover': {
+                      backgroundColor: '#FCCB6B',
+                    },
+                  })}
+                  radius={'md'}
+                  onClick={handleReset}
+                >
+                  처음부터 다시 작성하기
+                </Button>
+              </Flex>
             </>
           ) : (
             <KakaoLogin></KakaoLogin>
@@ -125,4 +172,4 @@ export const LandingPage = () => {
       <SnowfallContainer onOff={true}></SnowfallContainer>
     </>
   );
-};
+}
