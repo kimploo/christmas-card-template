@@ -1,20 +1,30 @@
-import { Flex } from '@mantine/core';
-import { useEffect } from 'react';
-import { BrowserRouter, Routes, Route, useSearchParams } from 'react-router-dom';
-import { Edit } from './pages/Edit';
-import { Card } from './pages/Card';
-import { LandingPage } from './pages/LandingPage';
-import { Preview } from './pages/Preview';
-import { MyCards } from './pages/MyCards';
-import { Debug } from '@components/Debug';
+import { Box, Flex } from '@mantine/core';
+import { useEffect, Suspense, lazy } from 'react';
+import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { authServiceLogin } from './redux-state/loginSlice';
+import { AppDispatch, RootState } from './store';
 
-import { useDispatch } from 'react-redux';
-import { authServiceLogin, authServiceLogout } from './redux-state/loginSlice';
-import { AppDispatch } from './store';
+const Card = lazy(() => import('./pages/Card'));
+const LandingPage = lazy(() => import('./pages/LandingPage'));
+const Preview = lazy(() => import('./pages/Preview'));
+
+import { Loading } from '@pages/Loading';
+import { Debug } from '@components/Debug';
+import { MainArtwork } from '@components/MainArtwork';
+
+const { VITE_CLIENT_DOMAIN_PROD, VITE_CLIENT_DOMAIN_DEV, PROD, DEV } = import.meta.env;
+const domain = PROD ? VITE_CLIENT_DOMAIN_PROD : VITE_CLIENT_DOMAIN_DEV;
 
 function App() {
-  const { VITE_KAKAO_JAVASCRIPT_API_KEY } = import.meta.env;
   const dispatch = useDispatch<AppDispatch>();
+  const { artworks, index } = useSelector((state: RootState) => state.cardContent);
+
+  const getArtworkSrc = (path: string) => {
+    const src = new URL(domain);
+    src.pathname = path;
+    return src.href;
+  };
 
   // ! TODO: 어떻게 userId를 서버로부터 건네받을것인가..
   // redirect를 써서는 userId를 건내받기가 쉽지 않음,
@@ -27,12 +37,39 @@ function App() {
     try {
       // 쿠키가 있으면 자동으로 인증이 되기 때문에 ..
       dispatch(authServiceLogin(controller));
-      Kakao.init(VITE_KAKAO_JAVASCRIPT_API_KEY);
+      // Kakao.init(VITE_KAKAO_JAVASCRIPT_API_KEY);
     } catch (e) {
       console.error(e);
     }
     return () => controller.abort();
   }, []);
+
+  const Layout = () => {
+    return (
+      <>
+        <Flex
+          bg={`linear-gradient(180deg, #F3F19D 80%, #FCCB6B 20%)`}
+          justify={'center'}
+          pt={'2rem'}
+          pb={'1rem'}
+        >
+          <MainArtwork src={getArtworkSrc(artworks[index])}></MainArtwork>
+        </Flex>
+        <Flex bg={`#FCCB6B`} justify={'center'}>
+          {/* 기기에 따라서 viewport 너비에 맞게 input의 너비가 조정이 되어야 한다. 현재는 모바일 전용 */}
+          <Box
+            sx={(theme) => ({
+              textAlign: 'center',
+              maxWidth: `${theme.breakpoints.sm - 16 * 8}px`,
+              width: `${window.innerWidth - 16 * 4}px`,
+            })}
+          >
+            <Outlet />
+          </Box>
+        </Flex>
+      </>
+    );
+  };
 
   return (
     <>
@@ -42,17 +79,20 @@ function App() {
         {/* To. From. 남겨두기 */}
         {/* 폰트 컬러 바꾸기 color: '#3E3A39', */}
         {/* placeholder 중앙정렬 */}
-        <BrowserRouter>
-          <Routes>
-            {/* 버튼 작동시키기 */}
-            <Route path="/" element={<LandingPage />}></Route>
-            <Route path="/preview" element={<Preview />}></Route>
-            <Route path="/card/:cardId" element={<Card />}></Route>
-            {/* <Route path="/my-cards" element={<MyCards />}></Route> */}
-            {/* <Route path="/edit" element={<Edit />}></Route> */}
-          </Routes>
-          <Debug></Debug>
-        </BrowserRouter>
+        <Suspense fallback={<Loading />}>
+          <BrowserRouter>
+            <Routes>
+              {/* 버튼 작동시키기 */}
+              <Route path="/" element={<LandingPage />}></Route>
+              <Route element={<Layout />}>
+                <Route path="/preview" element={<Preview />}></Route>
+                <Route path="/card/:cardId" element={<Card />}></Route>
+                {DEV ? <Route path="/loading" element={<Loading />}></Route> : null}
+              </Route>
+            </Routes>
+            {DEV ? <Debug></Debug> : null}
+          </BrowserRouter>
+        </Suspense>
       </Flex>
     </>
   );

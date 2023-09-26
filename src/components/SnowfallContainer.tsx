@@ -8,7 +8,9 @@ interface Props {
 
 const snowflakes = ['white', 'yellow', 'red', 'orange'].map((color) => {
   const img = document.createElement('img');
-  img.src = DEV ? `${VITE_CLIENT_DOMAIN_DEV}/snowflakes/${color}-snowflake-2x.png` : `${VITE_CLIENT_DOMAIN_PROD}/snowflakes/${color}-snowflake-2x.png`;
+  img.src = DEV
+    ? `${VITE_CLIENT_DOMAIN_DEV}/snowflakes/${color}-snowflake-2x.png`
+    : `${VITE_CLIENT_DOMAIN_PROD}/snowflakes/${color}-snowflake-2x.png`;
   return img;
 });
 

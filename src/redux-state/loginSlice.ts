@@ -29,7 +29,6 @@ export const authServiceLogin = createAsyncThunk<LoginState, AbortController>(
       .then((res) => {
         if (res.status === 401) {
           throw console.log('need logout');
-          // return authService.logout();
         } else {
           const accessToken = res.data.access_token;
           axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;

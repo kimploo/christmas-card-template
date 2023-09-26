@@ -8,8 +8,15 @@ const host = DEV ? VITE_SERVER_URI_DEV : VITE_SERVER_URI_PROD;
 export type CardId = string | number | null;
 
 export interface CardContentState {
+  artworks: [
+    'Chuseok_72.png',
+    'Congrats_72.png',
+    'Together_72.png',
+    'Happynewyear_72.png',
+    'Christmas_72.png'
+  ];
   cardId: CardId;
-  artwork: string;
+  index: number;
   to: string;
   msg: string;
   from: string;
@@ -17,16 +24,17 @@ export interface CardContentState {
 
 export interface CardCreateResponse {
   // TODO: uuid로 백엔드에서 변경 후 수정
-  id: number;
+  uuid: CardId;
 }
 
 export interface CardGetResponse {
   // TODO: uuid로 백엔드에서 변경 후 수정
   id: number;
+  uuid: CardId;
   from: string;
   to: string;
   msg: string;
-  artwork: string;
+  index: number;
   userId: number | null;
 }
 
@@ -35,25 +43,37 @@ export interface CardGetArg {
   cardId: string;
 }
 
-const initialState: CardContentState = {
+export const initialState: CardContentState = {
+  artworks: [
+    'Chuseok_72.png',
+    'Congrats_72.png',
+    'Together_72.png',
+    'Happynewyear_72.png',
+    'Christmas_72.png',
+  ],
   cardId: null,
-  artwork: 'Asset-100-1.png',
-  to: '',
+  index: 0,
+  to: 'To. ',
   msg: '',
-  from: '',
+  from: 'From .',
 };
 
 export const createCardContent = createAsyncThunk<CardCreateResponse, CardContentState>(
   'card/content/create',
-  async (cardContent, thunkAPI) => {
+  async (cardContent, _) => {
     // TODO: API call 분리
+    const { artworks, index, to, msg, from } = cardContent;
     const url = new URL(host);
     url.pathname = 'card';
     const res = await axios
       .post(
         url.href,
         {
-          ...cardContent,
+          artwork: artworks[index],
+          index,
+          to,
+          msg,
+          from,
         },
         {
           withCredentials: true,
@@ -72,7 +92,7 @@ export const createCardContent = createAsyncThunk<CardCreateResponse, CardConten
 
 export const getCardContent = createAsyncThunk<CardGetResponse, CardGetArg>(
   'card/content/get',
-  async (cardContent, thunkAPI) => {
+  async (cardContent, _) => {
     // TODO: API call 분리
     const url = new URL(host);
     url.pathname = `card/${cardContent.cardId}`;
@@ -92,39 +112,42 @@ export const cardContentSlice = createSlice({
   initialState,
   reducers: {
     updateCardContent(state, action) {
-      state.artwork = action.payload.artwork;
+      state.artworks = initialState.artworks;
+      state.index = action.payload.index;
       state.to = action.payload.to;
       state.msg = action.payload.msg;
       state.from = action.payload.from;
     },
-    resetCardContent(state, action) {
-      state.artwork = 'Asset-100-1.png';
-      state.to = '';
-      state.msg = '';
-      state.from = '';
+    resetCardContent(state) {
+      state.artworks = initialState.artworks;
+      state.index = initialState.index;
+      state.to = initialState.to;
+      state.msg = initialState.msg;
+      state.from = initialState.from;
+    },
+    updateIndex(state, action) {
+      state.index = action.payload.index;
     },
   },
   extraReducers(builder) {
     builder
       .addCase(createCardContent.fulfilled, (state, action) => {
-        console.log('createCardContent.fullfilled', state, action);
-        state.cardId = action.payload.id;
+        state.cardId = action.payload.uuid;
       })
-      .addCase(createCardContent.rejected, (state, action) => {
+      .addCase(createCardContent.rejected, () => {
         // TODO
       })
       .addCase(getCardContent.fulfilled, (state, action) => {
-        state.cardId = action.payload.id;
-        state.artwork = action.payload.artwork;
-        state.to = action.payload.to;
-        state.msg = action.payload.msg;
-        state.from = action.payload.from;
+        state.cardId = action.payload.uuid;
       })
-      .addCase(getCardContent.rejected, (state, action) => {
+      .addCase(getCardContent.pending, () => {
+        // TODO
+      })
+      .addCase(getCardContent.rejected, () => {
         // TODO
       });
   },
 });
 
-export const { updateCardContent, resetCardContent } = cardContentSlice.actions;
+export const { updateCardContent, resetCardContent, updateIndex } = cardContentSlice.actions;
 export default cardContentSlice.reducer;
