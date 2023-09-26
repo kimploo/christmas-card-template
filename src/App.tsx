@@ -48,8 +48,6 @@ function App() {
             <Route path="/" element={<LandingPage />}></Route>
             <Route path="/preview" element={<Preview />}></Route>
             <Route path="/card/:cardId" element={<Card />}></Route>
-            {/* <Route path="/my-cards" element={<MyCards />}></Route> */}
-            {/* <Route path="/edit" element={<Edit />}></Route> */}
           </Routes>
           <Debug></Debug>
         </BrowserRouter>
