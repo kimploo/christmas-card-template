@@ -13,7 +13,13 @@ import { Loading } from '@pages/Loading';
 import { Debug } from '@components/Debug';
 import { MainArtwork } from '@components/MainArtwork';
 
-const { VITE_CLIENT_DOMAIN_PROD, VITE_CLIENT_DOMAIN_DEV, PROD, DEV } = import.meta.env;
+const {
+  VITE_CLIENT_DOMAIN_PROD,
+  VITE_CLIENT_DOMAIN_DEV,
+  PROD,
+  DEV,
+  VITE_KAKAO_JAVASCRIPT_API_KEY,
+} = import.meta.env;
 const domain = PROD ? VITE_CLIENT_DOMAIN_PROD : VITE_CLIENT_DOMAIN_DEV;
 
 function App() {
@@ -37,7 +43,7 @@ function App() {
     try {
       // 쿠키가 있으면 자동으로 인증이 되기 때문에 ..
       dispatch(authServiceLogin(controller));
-      // Kakao.init(VITE_KAKAO_JAVASCRIPT_API_KEY);
+      Kakao.init(VITE_KAKAO_JAVASCRIPT_API_KEY);
     } catch (e) {
       console.error(e);
     }
