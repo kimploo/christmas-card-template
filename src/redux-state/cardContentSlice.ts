@@ -57,7 +57,7 @@ export const initialState: CardContentState = {
   index: 0,
   to: 'To. ',
   msg: '',
-  from: 'From .',
+  from: 'From. ',
 };
 
 export const createCardContent = createAsyncThunk<CardCreateResponse, CardContentState>(
