@@ -9,11 +9,11 @@ export type CardId = string | number | null;
 
 export interface CardContentState {
   artworks: [
-    'Chuseok_72.png',
-    'Congrats_72.png',
     'Together_72.png',
+    'Congrats_72.png',
+    'Christmas_72.png',
     'Happynewyear_72.png',
-    'Christmas_72.png'
+    'Chuseok_72.png'
   ];
   cardId: CardId;
   index: number;
@@ -47,11 +47,11 @@ export interface CardGetArg {
 
 export const initialState: CardContentState = {
   artworks: [
-    'Chuseok_72.png',
-    'Congrats_72.png',
     'Together_72.png',
-    'Happynewyear_72.png',
+    'Congrats_72.png',
     'Christmas_72.png',
+    'Happynewyear_72.png',
+    'Chuseok_72.png',
   ],
   cardId: null,
   index: 0,
