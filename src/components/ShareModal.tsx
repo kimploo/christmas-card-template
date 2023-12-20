@@ -2,7 +2,7 @@
 // @ts-nocheck
 
 import { Box, Flex, Image, Modal } from '@mantine/core';
-import { IconShare } from '@tabler/icons';
+import { IconShare } from '@tabler/icons-react';
 import { CardId } from '@redux-state/cardContentSlice';
 
 interface Props {

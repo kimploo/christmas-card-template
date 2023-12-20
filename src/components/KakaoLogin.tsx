@@ -22,10 +22,10 @@ export const KakaoLogin = () => {
     <Center>
       <Box
         onClick={handleLogin}
-        sx={() => ({
+        style={{
           width: 240,
           padding: '2rem 1rem',
-        })}
+        }}
       >
         <Image src="kakao_login_large_narrow.png"></Image>
       </Box>

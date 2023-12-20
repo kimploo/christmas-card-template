@@ -1,20 +1,29 @@
-import { Box, Image } from '@mantine/core';
+import { Box } from '@mantine/core';
+import { useSelector } from 'react-redux';
+import { RootState } from 'src/store';
 
-interface Props {
-  src: string;
-}
+export const MainArtwork = () => {
+  const { artworks, index } = useSelector((state: RootState) => state.cardContent);
 
-export const MainArtwork = ({ src }: Props) => {
   return (
     <>
       {/* 768 - 16 - 16 */}
       <Box
         px={'2rem'}
-        sx={(theme) => ({
+        style={(theme) => ({
           maxWidth: theme.breakpoints.sm,
         })}
       >
-        <Image src={src}></Image>
+        {artworks ? (
+          <img
+            src={'/' + artworks[index]}
+            style={{
+              width: '100%',
+              objectFit: 'cover',
+            }}
+            alt="card image"
+          />
+        ) : null}
       </Box>
     </>
   );

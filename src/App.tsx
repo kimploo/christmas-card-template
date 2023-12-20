@@ -1,6 +1,6 @@
 import { Box, Flex } from '@mantine/core';
 import { useEffect, Suspense, lazy } from 'react';
-import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom';
+import { Outlet, createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { authServiceLogin } from './redux-state/loginSlice';
 import { AppDispatch, RootState } from './store';
@@ -12,6 +12,8 @@ const Preview = lazy(() => import('./pages/Preview'));
 import { Loading } from '@pages/Loading';
 import { Debug } from '@components/Debug';
 import { MainArtwork } from '@components/MainArtwork';
+import { Footer } from '@components/Footer';
+import { SnowfallContainer } from '@components/SnowfallContainer';
 
 const {
   VITE_CLIENT_DOMAIN_PROD,
@@ -24,7 +26,6 @@ const domain = PROD ? VITE_CLIENT_DOMAIN_PROD : VITE_CLIENT_DOMAIN_DEV;
 
 function App() {
   const dispatch = useDispatch<AppDispatch>();
-  const { artworks, index } = useSelector((state: RootState) => state.cardContent);
 
   const getArtworkSrc = (path: string) => {
     const src = new URL(domain);
@@ -50,60 +51,72 @@ function App() {
     return () => controller.abort();
   }, []);
 
-  interface LayoutProps {
-    href: string;
-  }
-
-  const Layout = ({ href }: LayoutProps) => {
+  const Layout = () => {
     return (
-      <>
+      <Flex justify={'flex-start'} h={'100vh'} direction={'column'} bg={'#FCCB6B'}>
         <Flex
           bg={`linear-gradient(180deg, #F3F19D 80%, #FCCB6B 20%)`}
           justify={'center'}
           pt={'2rem'}
           pb={'1rem'}
         >
-          <MainArtwork src={getArtworkSrc(href)}></MainArtwork>
+          <MainArtwork></MainArtwork>
         </Flex>
-        <Flex bg={`#FCCB6B`} justify={'center'}>
+        <Flex bg={`#FCCB6B`} justify={'center'} direction={'column'}>
           {/* 기기에 따라서 viewport 너비에 맞게 input의 너비가 조정이 되어야 한다. 현재는 모바일 전용 */}
-          <Box
-            sx={(theme) => ({
-              textAlign: 'center',
-              maxWidth: `${theme.breakpoints.sm - 16 * 8}px`,
-              width: `${window.innerWidth - 16 * 4}px`,
-            })}
-          >
+          <Flex justify={'center'} direction={'column'}>
             <Outlet />
-          </Box>
+            <Footer></Footer>
+          </Flex>
+          <SnowfallContainer onOff={true}></SnowfallContainer>
         </Flex>
-      </>
+        {DEV && <Debug />}
+      </Flex>
     );
   };
+
+  const router = createBrowserRouter([
+    {
+      path: '/',
+      element: <Layout />,
+      errorElement: <Loading />,
+      children: [
+        {
+          path: '',
+          element: <LandingPage />,
+        },
+        {
+          path: 'preview',
+          element: <Preview />,
+        },
+        {
+          path: 'card/:cardId',
+          element: <Card />,
+        },
+        DEV
+          ? {
+              path: 'loading',
+              element: <Loading />,
+            }
+          : {},
+      ],
+    },
+  ]);
+
+  if (import.meta.hot) {
+    import.meta.hot.dispose(() => router.dispose());
+  }
 
   return (
     <>
       {/* 두 글자 만큼 여백 */}
-      <Flex justify={'flex-start'} h={'100vh'} direction={'column'} bg={'#FCCB6B'}>
-        {/* 위 사진과 비율 비슷하게 조정 */}
-        {/* To. From. 남겨두기 */}
-        {/* 폰트 컬러 바꾸기 color: '#3E3A39', */}
-        {/* placeholder 중앙정렬 */}
-        <Suspense fallback={<Loading />}>
-          <BrowserRouter>
-            <Routes>
-              {/* 버튼 작동시키기 */}
-              <Route path="/" element={<LandingPage />}></Route>
-              <Route element={<Layout href={artworks[index]} />}>
-                <Route path="/preview" element={<Preview />}></Route>
-                <Route path="/card/:cardId" element={<Card />}></Route>
-                {DEV ? <Route path="/loading" element={<Loading />}></Route> : null}
-              </Route>
-            </Routes>
-            {DEV ? <Debug></Debug> : null}
-          </BrowserRouter>
-        </Suspense>
-      </Flex>
+      {/* 위 사진과 비율 비슷하게 조정 */}
+      {/* To. From. 남겨두기 */}
+      {/* 폰트 컬러 바꾸기 color: '#3E3A39', */}
+      {/* placeholder 중앙정렬 */}
+      <Suspense fallback={<Loading />}>
+        <RouterProvider router={router} fallbackElement={<Loading />} />
+      </Suspense>
     </>
   );
 }

@@ -6,7 +6,7 @@ export const Loading = () => {
       <Flex bg={`#FCCB6B`} h={'100vh'} justify={'center'} align={'center'} pt={'2rem'} pb={'1rem'}>
         <Container
           px={'2rem'}
-          sx={(theme) => ({
+          style={(theme) => ({
             maxWidth: theme.breakpoints.sm,
           })}
         >

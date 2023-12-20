@@ -1,12 +1,5 @@
-import { Box, createStyles, Textarea, TextInput } from '@mantine/core';
-
-const useStyles = createStyles(() => ({
-  input: {
-    '::placeholder': {
-      color: '#fbffb0',
-    },
-  },
-}));
+import { Box, Flex, Textarea, TextInput } from '@mantine/core';
+import classes from './css/inputPlaceholder.module.css';
 
 interface Props {
   to: string;
@@ -18,7 +11,6 @@ interface Props {
 }
 
 export const CardInputContainer = ({ to, msg, from, setTo, setMsg, setFrom }: Props) => {
-  const { classes } = useStyles();
   const handleTo: React.ChangeEventHandler<HTMLInputElement> = (event) => {
     setTo(event.target.value);
     return;
@@ -33,19 +25,22 @@ export const CardInputContainer = ({ to, msg, from, setTo, setMsg, setFrom }: Pr
   };
 
   return (
-    <>
+    <Flex justify={'center'}>
       <Box
-        sx={(theme) => ({
+        style={(theme) => ({
           textAlign: 'center',
-          maxWidth: `${theme.breakpoints.sm - 16 * 8}px`,
+          maxWidth: `${Number(theme.breakpoints.sm) - 16 * 8}px`,
           width: `${window.innerWidth - 16 * 4}px`,
         })}
       >
         <TextInput
+          classNames={{
+            input: classes.input,
+          }}
           size={'lg'}
-          sx={() => ({
+          style={{
             borderBottom: '1px solid #444444',
-          })}
+          }}
           variant={'unstyled'}
           placeholder="To. "
           value={to}
@@ -56,7 +51,7 @@ export const CardInputContainer = ({ to, msg, from, setTo, setMsg, setFrom }: Pr
             input: classes.input,
           }}
           size={'lg'}
-          sx={{
+          style={{
             borderBottom: '1px solid #444444',
           }}
           variant={'unstyled'}
@@ -68,7 +63,10 @@ export const CardInputContainer = ({ to, msg, from, setTo, setMsg, setFrom }: Pr
         ></Textarea>
         <TextInput
           size={'lg'}
-          sx={{
+          classNames={{
+            input: classes.input,
+          }}
+          style={{
             borderBottom: '1px solid #444444',
           }}
           variant={'unstyled'}
@@ -80,6 +78,6 @@ export const CardInputContainer = ({ to, msg, from, setTo, setMsg, setFrom }: Pr
         {/* 폰트 컬러 바꾸기 color: '#3E3A39', */}
         {/* placeholder 중앙정렬 */}
       </Box>
-    </>
+    </Flex>
   );
 };

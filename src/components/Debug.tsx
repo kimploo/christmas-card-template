@@ -71,6 +71,7 @@ export const Debug = () => {
           <Button onClick={moveTo}>card</Button>
           <Button onClick={moveTo}>my-cards</Button>
           <Button onClick={moveTo}>edit</Button>
+          <Button onClick={moveTo}>loading</Button>
           <Button onClick={handleLogin}>login</Button>
           <Button onClick={handleServiceLogout}>logout</Button>
           <Button onClick={requestUserInfo}>kakao userInfo</Button>

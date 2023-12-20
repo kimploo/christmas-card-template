@@ -128,6 +128,7 @@ export const cardContentSlice = createSlice({
       state.from = initialState.from;
     },
     updateIndex(state, action) {
+      console.log(state, action);
       state.index = action.payload.index;
     },
   },

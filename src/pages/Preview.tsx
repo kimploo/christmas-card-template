@@ -31,7 +31,7 @@ export default function Preview() {
 
   return (
     <>
-      <Text py={'1rem'} color={'#444444'}>
+      <Text py={'1rem'} c={'#444444'}>
         {loginState.isLogin
           ? null
           : '로그인이 되지 않았습니다. 아래 버튼을 눌러 처음부터 다시 진행하세요.'}
@@ -42,11 +42,11 @@ export default function Preview() {
           <PreviewInputContainer to={to} msg={msg} from={from}></PreviewInputContainer>
           <Flex justify={'center'} direction={'column'} align={'center'}>
             <Button
-              sx={(theme) => ({
+              style={(theme) => ({
                 backgroundColor: '#fbffb0',
                 border: '1px solid #444444',
                 color: '#000000',
-                maxWidth: `${(theme.breakpoints.sm - 16 * 8) / 2}px`,
+                maxWidth: `${(Number(theme.breakpoints.sm) - 16 * 8) / 2}px`,
                 width: `${(window.innerWidth - 16 * 4) * (2 / 3)}px`,
                 ':active': {
                   backgroundColor: '#FCCB6B',
@@ -66,11 +66,11 @@ export default function Preview() {
               이대로 공유하기 💌
             </Button>
             <Button
-              sx={(theme) => ({
+              style={(theme) => ({
                 backgroundColor: '#fbffb0',
                 border: '1px solid #444444',
                 color: '#000000',
-                maxWidth: `${(theme.breakpoints.sm - 16 * 8) / 2}px`,
+                maxWidth: `${(Number(theme.breakpoints.sm) - 16 * 8) / 2}px`,
                 width: `${(window.innerWidth - 16 * 4) * (2 / 3)}px`,
                 ':active': {
                   backgroundColor: '#FCCB6B',
@@ -92,11 +92,11 @@ export default function Preview() {
         </>
       ) : (
         <Button
-          sx={(theme) => ({
+          style={(theme) => ({
             backgroundColor: '#fbffb0',
             border: '1px solid #444444',
             color: '#000000',
-            maxWidth: `${(theme.breakpoints.sm - 16 * 8) / 2}px`,
+            maxWidth: `${(Number(theme.breakpoints.sm) - 16 * 8) / 2}px`,
             width: `${(window.innerWidth - 16 * 4) * (2 / 3)}px`,
             ':active': {
               backgroundColor: '#FCCB6B',
@@ -114,8 +114,6 @@ export default function Preview() {
           처음으로 돌아가기
         </Button>
       )}
-      <Footer></Footer>
-      <SnowfallContainer onOff={true}></SnowfallContainer>
     </>
   );
 }

@@ -30,20 +30,14 @@ export default function Card() {
 
   const { cardId } = useParams();
 
-  const getArtworkSrc = (path: string) => {
-    const src = new URL(domain);
-    src.pathname = path;
-    return src.href;
-  };
-
   if (!cardId) {
     return (
       <Flex bg={`#FCCB6B`} justify={'center'}>
         {/* 기기에 따라서 viewport 너비에 맞게 input의 너비가 조정이 되어야 한다. 현재는 모바일 전용 */}
         <Box
-          sx={(theme) => ({
+          style={(theme) => ({
             textAlign: 'center',
-            maxWidth: `${theme.breakpoints.sm - 16 * 8}px`,
+            maxWidth: `${Number(theme.breakpoints.sm) - 16 * 8}px`,
             width: `${window.innerWidth - 16 * 4}px`,
           })}
         >
@@ -85,15 +79,15 @@ export default function Card() {
       ></ShareModal>
       <>
         {isLoading ? null : (
-          <>
+          <Flex justify={'center'} direction={'column'} align={'center'}>
             <PreviewInputContainer to={to} msg={msg} from={from}></PreviewInputContainer>
             <Anchor href={domain}>
               <Button
-                sx={(theme) => ({
+                style={(theme) => ({
                   backgroundColor: '#fbffb0',
                   border: '1px solid #444444',
                   color: '#000000',
-                  maxWidth: `${(theme.breakpoints.sm - 16 * 8) / 2}px`,
+                  maxWidth: `${(Number(theme.breakpoints.sm) - 16 * 8) / 2}px`,
                   width: `${(window.innerWidth - 16 * 4) * (2 / 3)}px`,
 
                   ':active': {
@@ -111,11 +105,9 @@ export default function Card() {
                 나도 카드 만들기
               </Button>
             </Anchor>
-          </>
+          </Flex>
         )}
       </>
-      <Footer></Footer>
-      <SnowfallContainer onOff={!isLoading}></SnowfallContainer>
     </>
   );
 }

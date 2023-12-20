@@ -3,11 +3,18 @@ import { Anchor, Text } from '@mantine/core';
 export const Footer = () => {
   return (
     <>
-      <Text color={'#fbffb0'} pt={'1rem'} pb={'3rem'}>
+      <Text
+        c={'#fbffb0'}
+        pt={'1rem'}
+        pb={'3rem'}
+        style={{
+          textAlign: 'center',
+        }}
+      >
         Copyright {new Date().getFullYear()}.{' '}
         <Anchor
-          underline={true}
-          sx={{
+          underline={'always'}
+          style={{
             color: '#fbffb0',
           }}
           href="https://www.instagram.com/hyodee.r/"
@@ -16,8 +23,8 @@ export const Footer = () => {
         </Anchor>{' '}
         &{' '}
         <Anchor
-          underline={true}
-          sx={{
+          underline={'always'}
+          style={{
             color: '#fbffb0',
           }}
           href="https://www.github.com/kimploo/"

@@ -1,0 +1,22 @@
+.wrapper {
+  opacity: 1;
+  color: #000000;
+}
+
+.textarea {
+  &::placeholder {
+    color: #fbffb0;
+  }
+
+  &:disabled {
+    opacity: 1;
+    color: #000000;
+  }
+}
+
+.input {
+  &:disabled {
+    color: #000000;
+    opacity: 1;
+  }
+}
