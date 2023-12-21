@@ -1,5 +1,5 @@
 import { Box, Flex, Textarea, TextInput } from '@mantine/core';
-import classes from './css/inputPlaceholder.module.css';
+import classes from '@components/css/InputPlaceholder.module.css';
 
 interface Props {
   to: string;
