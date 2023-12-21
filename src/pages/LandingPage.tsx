@@ -35,7 +35,7 @@ export default function LandingPage() {
         to,
         msg,
         from,
-      })
+      }),
     );
     navigate(`/preview`);
   };
@@ -44,7 +44,7 @@ export default function LandingPage() {
     dispatch(
       updateIndex({
         index: idx,
-      })
+      }),
     );
     setLocalIndex(idx);
   };
