@@ -8,7 +8,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../store';
 import { getCardContent } from '@redux-state/cardContentSlice';
 import { ShareModal } from '@components/ShareModal';
-import { MainArtwork } from '@components/MainArtwork';
 
 const { PROD, VITE_CLIENT_DOMAIN_DEV, VITE_CLIENT_DOMAIN_PROD } = import.meta.env;
 

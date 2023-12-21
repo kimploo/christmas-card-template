@@ -1,10 +1,8 @@
-/* eslint-disable */
-// @ts-nocheck
-
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { Box, Flex, Image, Modal } from '@mantine/core';
 import { IconShare } from '@tabler/icons-react';
 import { CardId } from '@redux-state/cardContentSlice';
-import mobile from 'is-mobile'
+import mobile from 'is-mobile';
 
 interface Props {
   isShare: boolean;
@@ -18,8 +16,8 @@ interface Props {
 }
 
 export const ShareModal = ({ isShare, setShare, title, to, from, msg, cardId, artwork }: Props) => {
-  const shareCardUrl = `https://card.teamhh.link/card/${cardId}`
-  const imageUrl =  `https://card.teamhh.link/${artwork}`
+  const shareCardUrl = `https://card.teamhh.link/card/${cardId}`;
+  const imageUrl = `https://card.teamhh.link/${artwork}`;
 
   const handleShareClick = () => {
     if (navigator.share) {
@@ -39,21 +37,24 @@ export const ShareModal = ({ isShare, setShare, title, to, from, msg, cardId, ar
   };
 
   const kakaoShare = () => {
+    //@ts-ignore
     if (!Kakao.isInitialized()) {
+      //@ts-ignore
       Kakao.init(import.meta.env.VITE_KAKAO_JAVASCRIPT_API_KEY);
     }
 
+    //@ts-ignore
     Kakao.Share.sendDefault({
       objectType: 'feed',
       content: {
         title: `${to}에게 전합니다.`,
         imageUrl,
-        link: shareCardUrl
+        link: shareCardUrl,
       },
       buttons: [
         {
           title: '확인하기',
-          link: shareCardUrl
+          link: shareCardUrl,
         },
       ],
     });
@@ -65,11 +66,11 @@ export const ShareModal = ({ isShare, setShare, title, to, from, msg, cardId, ar
         <Flex justify={'center'} gap={'1.5rem'} pt={'4rem'} pb={'2rem'}>
           <Box h={84}>
             <Flex justify={'center'} align={'center'} gap={'1.5rem'}>
-            { mobile() &&
-              <Box onClick={handleShareClick} p={4}>
-                <IconShare strokeWidth={0.8} size={76} color={'#CED4DA'}></IconShare>
-              </Box>
-            }             
+              {mobile() && (
+                <Box onClick={handleShareClick} p={4}>
+                  <IconShare strokeWidth={0.8} size={76} color={'#CED4DA'}></IconShare>
+                </Box>
+              )}
               <Image
                 onClick={kakaoShare}
                 w={84}

@@ -1,5 +1,4 @@
 import { Button, Flex } from '@mantine/core';
-import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { AppDispatch } from 'src/store';

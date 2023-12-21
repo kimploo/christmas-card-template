@@ -74,9 +74,6 @@ export const CardInputContainer = ({ to, msg, from, setTo, setMsg, setFrom }: Pr
           value={from}
           onChange={handleFrom}
         ></TextInput>
-        {/* To. From. 남겨두기 */}
-        {/* 폰트 컬러 바꾸기 color: '#3E3A39', */}
-        {/* placeholder 중앙정렬 */}
       </Box>
     </Flex>
   );

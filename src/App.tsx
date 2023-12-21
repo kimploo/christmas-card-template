@@ -1,9 +1,9 @@
-import { Box, Flex } from '@mantine/core';
+import { Flex } from '@mantine/core';
 import { useEffect, Suspense, lazy } from 'react';
 import { Outlet, createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { authServiceLogin } from './redux-state/loginSlice';
-import { AppDispatch, RootState } from './store';
+import { AppDispatch } from './store';
 
 const Card = lazy(() => import('./pages/Card'));
 const LandingPage = lazy(() => import('./pages/LandingPage'));
@@ -15,23 +15,10 @@ import { MainArtwork } from '@components/MainArtwork';
 import { Footer } from '@components/Footer';
 import { SnowfallContainer } from '@components/SnowfallContainer';
 
-const {
-  VITE_CLIENT_DOMAIN_PROD,
-  VITE_CLIENT_DOMAIN_DEV,
-  PROD,
-  DEV,
-  VITE_KAKAO_JAVASCRIPT_API_KEY,
-} = import.meta.env;
-const domain = PROD ? VITE_CLIENT_DOMAIN_PROD : VITE_CLIENT_DOMAIN_DEV;
+const { VITE_KAKAO_JAVASCRIPT_API_KEY, DEV } = import.meta.env;
 
 function App() {
   const dispatch = useDispatch<AppDispatch>();
-
-  // ! TODO: 어떻게 userId를 서버로부터 건네받을것인가..
-  // redirect를 써서는 userId를 건내받기가 쉽지 않음,
-  /// 그런데 그냥 클라이언트의 다른 주소에서 userId를 건내받고 상태 업데이트하고 메인으로 쏴주는 것도 괜찮은 것 같음
-  // .. 그리고 그냥 애매하면 얼렁 jwt로 갈아타는 것도 방법..이나.. 쿠키로 어떻게든 해결하고 넘어가보고 싶음 ....
-  // 받은 쿠키를 그냥 풀면 되는 것?.. 인데 그러면 시크릿은 클라이언트가 가지고 있어야?..
 
   useEffect(() => {
     const controller = new AbortController();
@@ -105,11 +92,6 @@ function App() {
 
   return (
     <>
-      {/* 두 글자 만큼 여백 */}
-      {/* 위 사진과 비율 비슷하게 조정 */}
-      {/* To. From. 남겨두기 */}
-      {/* 폰트 컬러 바꾸기 color: '#3E3A39', */}
-      {/* placeholder 중앙정렬 */}
       <Suspense fallback={<Loading />}>
         <RouterProvider router={router} fallbackElement={<Loading />} />
       </Suspense>

@@ -87,5 +87,4 @@ export const loginSlice = createSlice({
   },
 });
 
-// export const { increment, decrement, incrementByAmount } = loginSlice.actions;
 export default loginSlice.reducer;

@@ -39,5 +39,5 @@ root.render(
         <App />
       </Provider>
     </MantineProvider>
-  </StrictMode>
+  </StrictMode>,
 );
