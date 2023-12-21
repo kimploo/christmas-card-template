@@ -13,7 +13,7 @@ export interface CardContentState {
     'Congrats_72.png',
     'Christmas_72.png',
     'Happynewyear_72.png',
-    'Chuseok_72.png'
+    'Chuseok_72.png',
   ];
   cardId: CardId;
   index: number;
@@ -79,7 +79,7 @@ export const createCardContent = createAsyncThunk<CardCreateResponse, CardConten
         },
         {
           withCredentials: true,
-        }
+        },
       )
       .then((res) => {
         if (res.status === 201) {
@@ -89,7 +89,7 @@ export const createCardContent = createAsyncThunk<CardCreateResponse, CardConten
         }
       });
     return res;
-  }
+  },
 );
 
 export const getCardContent = createAsyncThunk<CardGetResponse, CardGetArg>(
@@ -106,7 +106,7 @@ export const getCardContent = createAsyncThunk<CardGetResponse, CardGetArg>(
         return res.data;
       });
     return res;
-  }
+  },
 );
 
 export const cardContentSlice = createSlice({

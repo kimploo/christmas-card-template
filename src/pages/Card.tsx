@@ -1,9 +1,7 @@
 import { useEffect, useState } from 'react';
-import { Footer } from '@components/Footer';
 import { PreviewInputContainer } from '@components/PreviewInputContainer';
 import { Anchor, Box, Button, Flex } from '@mantine/core';
 import { useParams } from 'react-router-dom';
-import { SnowfallContainer } from '@components/SnowfallContainer';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../store';
 import { getCardContent } from '@redux-state/cardContentSlice';
