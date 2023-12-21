@@ -1,4 +1,4 @@
-import { Center, Box, Image } from '@mantine/core';
+import { Center, Image, UnstyledButton } from '@mantine/core';
 import { useDispatch } from 'react-redux';
 import { authServiceLogin } from '@redux-state/loginSlice';
 import { AppDispatch } from '../store';
@@ -21,7 +21,7 @@ export const KakaoLogin = () => {
 
   return (
     <Center>
-      <Box
+      <UnstyledButton
         onClick={handleLogin}
         style={{
           width: 240,
@@ -29,7 +29,7 @@ export const KakaoLogin = () => {
         }}
       >
         <Image src="kakao_login_large_narrow.png"></Image>
-      </Box>
+      </UnstyledButton>
     </Center>
   );
 };
