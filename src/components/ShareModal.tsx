@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { Box, Flex, Image, Modal } from '@mantine/core';
+import { Box, Flex, Image, Modal, UnstyledButton } from '@mantine/core';
 import { IconShare } from '@tabler/icons-react';
 import { CardId } from '@redux-state/cardContentSlice';
 import mobile from 'is-mobile';
@@ -49,12 +49,18 @@ export const ShareModal = ({ isShare, setShare, title, to, from, msg, cardId, ar
       content: {
         title: `${to}에게 전합니다.`,
         imageUrl,
-        link: shareCardUrl,
+        link: {
+          mobileWebUrl: shareCardUrl,
+          webUrl: shareCardUrl,
+        },
       },
       buttons: [
         {
           title: '확인하기',
-          link: shareCardUrl,
+          link: {
+            mobileWebUrl: shareCardUrl,
+            webUrl: shareCardUrl,
+          },
         },
       ],
     });
@@ -67,15 +73,16 @@ export const ShareModal = ({ isShare, setShare, title, to, from, msg, cardId, ar
           <Box h={84}>
             <Flex justify={'center'} align={'center'} gap={'1.5rem'}>
               {mobile() && (
-                <Box onClick={handleShareClick} p={4}>
+                <UnstyledButton onClick={handleShareClick} p={4}>
                   <IconShare strokeWidth={0.8} size={76} color={'#CED4DA'}></IconShare>
-                </Box>
+                </UnstyledButton>
               )}
-              <Image
-                onClick={kakaoShare}
-                w={84}
-                src="https://team-hh.s3.ap-northeast-2.amazonaws.com/christmas-card-template/kakaotalk-logo-gray.svg"
-              ></Image>
+              <UnstyledButton onClick={kakaoShare}>
+                <Image
+                  w={84}
+                  src="https://team-hh.s3.ap-northeast-2.amazonaws.com/christmas-card-template/kakaotalk-logo-gray.svg"
+                ></Image>
+              </UnstyledButton>
             </Flex>
           </Box>
         </Flex>
