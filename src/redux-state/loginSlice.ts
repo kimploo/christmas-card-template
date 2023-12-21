@@ -18,7 +18,7 @@ const initialState: LoginState = {
 
 export const authServiceLogin = createAsyncThunk<LoginState, AbortController>(
   'auth/login',
-  async (abortController: AbortController, thunkAPI) => {
+  async (abortController: AbortController) => {
     const url = new URL(host);
     url.pathname = 'login';
 
@@ -40,10 +40,10 @@ export const authServiceLogin = createAsyncThunk<LoginState, AbortController>(
         }
       });
     return res;
-  }
+  },
 );
 
-export const authServiceLogout = createAsyncThunk('auth/logout', async (userId, thunkAPI) => {
+export const authServiceLogout = createAsyncThunk('auth/logout', async () => {
   const url = new URL(host);
   url.pathname = 'logout';
   return axios.post(url.href).then((res) => {
