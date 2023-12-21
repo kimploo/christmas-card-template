@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   initialState as initialCardContentState,
@@ -16,15 +16,13 @@ import { KakaoLogin } from '@components/KakaoLogin';
 import { RootState } from 'src/store';
 
 export default function LandingPage() {
-  const [searchParams] = useSearchParams();
   const loginState = useSelector((state: RootState) => state.userProfile);
   const cardContent = useSelector((state: RootState) => state.cardContent);
   const { artworks, index } = cardContent;
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const newIndex = Number(searchParams.get('index')) && index;
-  const [localIndex, setLocalIndex] = useState(newIndex);
+  const [localIndex, setLocalIndex] = useState(index);
 
   const [to, setTo] = useState(cardContent.to);
   const [msg, setMsg] = useState(cardContent.msg);
@@ -90,6 +88,7 @@ export default function LandingPage() {
                 slideGap="md"
                 controlSize={32}
                 withIndicators
+                initialSlide={localIndex}
                 onSlideChange={(index) => {
                   handleSlideIndex(index);
                 }}

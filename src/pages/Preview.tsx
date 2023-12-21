@@ -5,7 +5,6 @@ import { AppDispatch, RootState } from '../store';
 import { Footer } from '@components/Footer';
 import { PreviewInputContainer } from '@components/PreviewInputContainer';
 import { Button, Flex, Text } from '@mantine/core';
-import { SnowfallContainer } from '@components/SnowfallContainer';
 import { createCardContent } from '@redux-state/cardContentSlice';
 
 export default function Preview() {
