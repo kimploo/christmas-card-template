@@ -37,7 +37,7 @@ export default function Card() {
         <Box
           style={(theme) => ({
             textAlign: 'center',
-            maxWidth: `${Number(theme.breakpoints.sm) - 16 * 8}px`,
+            maxWidth: `calc(${theme.breakpoints.sm} - (16px * 8))`,
             width: `${window.innerWidth - 16 * 4}px`,
           })}
         >
@@ -87,7 +87,7 @@ export default function Card() {
                   backgroundColor: '#fbffb0',
                   border: '1px solid #444444',
                   color: '#000000',
-                  maxWidth: `${(Number(theme.breakpoints.sm) - 16 * 8) / 2}px`,
+                  maxWidth: `calc(${theme.breakpoints.sm} - (16px * 8) / 2)`,
                   width: `${(window.innerWidth - 16 * 4) * (2 / 3)}px`,
 
                   ':active': {

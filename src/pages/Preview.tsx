@@ -46,7 +46,7 @@ export default function Preview() {
                 backgroundColor: '#fbffb0',
                 border: '1px solid #444444',
                 color: '#000000',
-                maxWidth: `${(Number(theme.breakpoints.sm) - 16 * 8) / 2}px`,
+                maxWidth: `calc(${theme.breakpoints.sm} - (16px * 8) / 2)`,
                 width: `${(window.innerWidth - 16 * 4) * (2 / 3)}px`,
                 ':active': {
                   backgroundColor: '#FCCB6B',
@@ -70,7 +70,7 @@ export default function Preview() {
                 backgroundColor: '#fbffb0',
                 border: '1px solid #444444',
                 color: '#000000',
-                maxWidth: `${(Number(theme.breakpoints.sm) - 16 * 8) / 2}px`,
+                maxWidth: `calc(${theme.breakpoints.sm} - (16px * 8) / 2)`,
                 width: `${(window.innerWidth - 16 * 4) * (2 / 3)}px`,
                 ':active': {
                   backgroundColor: '#FCCB6B',
@@ -96,7 +96,7 @@ export default function Preview() {
             backgroundColor: '#fbffb0',
             border: '1px solid #444444',
             color: '#000000',
-            maxWidth: `${(Number(theme.breakpoints.sm) - 16 * 8) / 2}px`,
+            maxWidth: `calc(${theme.breakpoints.sm} - (16px * 8) / 2)`,
             width: `${(window.innerWidth - 16 * 4) * (2 / 3)}px`,
             ':active': {
               backgroundColor: '#FCCB6B',

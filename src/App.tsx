@@ -27,12 +27,6 @@ const domain = PROD ? VITE_CLIENT_DOMAIN_PROD : VITE_CLIENT_DOMAIN_DEV;
 function App() {
   const dispatch = useDispatch<AppDispatch>();
 
-  const getArtworkSrc = (path: string) => {
-    const src = new URL(domain);
-    src.pathname = path;
-    return src.href;
-  };
-
   // ! TODO: 어떻게 userId를 서버로부터 건네받을것인가..
   // redirect를 써서는 userId를 건내받기가 쉽지 않음,
   /// 그런데 그냥 클라이언트의 다른 주소에서 userId를 건내받고 상태 업데이트하고 메인으로 쏴주는 것도 괜찮은 것 같음

@@ -13,7 +13,7 @@ export const PreviewInputContainer = ({ to, msg, from }: Props) => {
       <Box
         style={(theme) => ({
           textAlign: 'center',
-          maxWidth: `${Number(theme.breakpoints.sm) - 16 * 8}px`,
+          maxWidth: `calc(${theme.breakpoints.sm} - (16px * 8))`,
           width: `${window.innerWidth - 16 * 4}px`,
         })}
       >

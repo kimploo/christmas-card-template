@@ -14,10 +14,8 @@ import { Carousel } from '@mantine/carousel';
 import { CardInputContainer } from '@components/CardInputContainer';
 import { KakaoLogin } from '@components/KakaoLogin';
 import { RootState } from 'src/store';
-import { MainArtwork } from '@components/MainArtwork';
 
 export default function LandingPage() {
-  // ?index=3
   const [searchParams] = useSearchParams();
   const loginState = useSelector((state: RootState) => state.userProfile);
   const cardContent = useSelector((state: RootState) => state.cardContent);
@@ -50,7 +48,7 @@ export default function LandingPage() {
         index: idx,
       })
     );
-    // setLocalIndex(idx);
+    setLocalIndex(idx);
   };
 
   const handleReset = () => {
@@ -62,24 +60,16 @@ export default function LandingPage() {
 
   return (
     <Flex direction={'column'}>
-      {/* TODO: 아트웤을 여기에 넣는게 좋을지, 레이아웃에 넣는게 좋을지 고민 */}
-      {/* <Flex
-        bg={`linear-gradient(180deg, #F3F19D 80%, #FCCB6B 20%)`}
-        justify={'center'}
-        pt={'2rem'}
-        pb={'1rem'}
-      >
-        <MainArtwork></MainArtwork>
-      </Flex> */}
-
       <Flex bg={`#FCCB6B`} justify={'center'}>
         {/* 기기에 따라서 viewport 너비에 맞게 input의 너비가 조정이 되어야 한다. 현재는 모바일 전용 */}
         <Box
-          style={(theme) => ({
-            textAlign: 'center',
-            maxWidth: `${Number(theme.breakpoints.sm) - 16 * 8}px`,
-            width: `${window.innerWidth - 16 * 4}px`,
-          })}
+          style={(theme) => {
+            return {
+              textAlign: 'center',
+              maxWidth: `calc(${theme.breakpoints.sm} - (16px * 8))`,
+              width: `${window.innerWidth - 16 * 4}px`,
+            };
+          }}
         >
           <Text py={'1rem'} c={'#444444'}>
             {loginState.isLogin ? (
@@ -107,7 +97,7 @@ export default function LandingPage() {
                 {artworks?.map((src, idx) => {
                   return (
                     <Carousel.Slide key={idx}>
-                      <Image src={src}></Image>
+                      <Image h={200} fit="contain" src={src}></Image>
                     </Carousel.Slide>
                   );
                 })}
@@ -127,7 +117,7 @@ export default function LandingPage() {
                     backgroundColor: '#fbffb0',
                     border: '1px solid #444444',
                     color: '#000000',
-                    maxWidth: `${(Number(theme.breakpoints.sm) - 16 * 8) / 2}px`,
+                    maxWidth: `calc(${theme.breakpoints.sm} - (16px * 8) / 2)`,
                     width: `${(window.innerWidth - 16 * 4) * (2 / 3)}px`,
 
                     ':active': {
@@ -150,7 +140,7 @@ export default function LandingPage() {
                     backgroundColor: '#fbffb0',
                     border: '1px solid #444444',
                     color: '#000000',
-                    maxWidth: `${(Number(theme.breakpoints.sm) - 16 * 8) / 2}px`,
+                    maxWidth: `calc(${theme.breakpoints.sm} - (16px * 8) / 2)`,
                     width: `${(window.innerWidth - 16 * 4) * (2 / 3)}px`,
 
                     ':active': {
