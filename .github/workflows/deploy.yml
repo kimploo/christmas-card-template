@@ -28,7 +28,7 @@ jobs:
       - name: Setup Node.js environment
         uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 20
 
       - name: Run a multi-line script
         run: |
@@ -40,6 +40,7 @@ jobs:
           VITE_SERVER_URI_PROD: ${{ vars.VITE_SERVER_URI_PROD }}
           VITE_SERVER_URI_DEV: http://localhost:3000
           VITE_KAKAO_JAVASCRIPT_API_KEY: ${{ secrets.VITE_KAKAO_JAVASCRIPT_API_KEY }}
+          VITE_KAKAO_REST_API_KEY: ${{ secrets.VITE_KAKAO_JAVASCRIPT_API_KEY }}
       
       - name: Deploy
         run: |

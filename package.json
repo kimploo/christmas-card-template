@@ -33,7 +33,6 @@
     "react-snowfall": "^1.2.1"
   },
   "devDependencies": {
-    "@types/kakao-js-sdk": "^1.39.4",
     "@types/node": "^20.10.5",
     "@types/react": "^18.2.45",
     "@types/react-dom": "^18.2.18",

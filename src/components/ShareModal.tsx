@@ -41,7 +41,7 @@ export const ShareModal = ({ isShare, setShare, title, to, from, msg, cardId, ar
 
   const kakaoShare = () => {
     if (!Kakao.isInitialized()) {
-      Kakao.init(import.meta.env.VITE_APP_KAKAO_API_KEY);
+      Kakao.init(import.meta.env.VITE_KAKAO_JAVASCRIPT_API_KEY);
     }
 
     Kakao.Share.sendDefault({

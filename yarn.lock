@@ -756,11 +756,6 @@
   resolved "https://registry.yarnpkg.com/@types/json-schema/-/json-schema-7.0.15.tgz#596a1747233694d50f6ad8a7869fcb6f56cf5841"
   integrity sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==
 
-"@types/kakao-js-sdk@^1.39.4":
-  version "1.39.4"
-  resolved "https://registry.yarnpkg.com/@types/kakao-js-sdk/-/kakao-js-sdk-1.39.4.tgz#ec6c4572c199b71489bc7a2c4924461d7fb27633"
-  integrity sha512-s4IcnSW8maC2mja4kPA1CGTu/qYfwxuwVPXnpmASnFVpdaQXM2TKCtzyq6tR21FgDw7OyWwXHOarWQoulfqVkg==
-
 "@types/node@^20.10.5":
   version "20.10.5"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-20.10.5.tgz#47ad460b514096b7ed63a1dae26fad0914ed3ab2"

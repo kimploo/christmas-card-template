@@ -3,20 +3,11 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { AppDispatch } from 'src/store';
-import { authServiceLogout } from '../redux-state/loginSlice';
+import { authServiceLogin, authServiceLogout } from '../redux-state/loginSlice';
 
 const { DEV } = import.meta.env;
-const { VITE_KAKAO_JAVASCRIPT_API_KEY } = import.meta.env;
 
 export const Debug = () => {
-  useEffect(() => {
-    try {
-      Kakao.init(VITE_KAKAO_JAVASCRIPT_API_KEY);
-    } catch (e) {
-      console.error(e);
-    }
-  }, []);
-
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
 
@@ -26,40 +17,17 @@ export const Debug = () => {
   };
 
   const handleLogin = () => {
-    Kakao.Auth.authorize({
-      redirectUri: 'http://localhost:3000/auth',
-    });
+    const controller = new AbortController();
+    try {
+      dispatch(authServiceLogin(controller));
+    } catch (e) {
+      console.error(e);
+    }
+    return () => controller.abort();
   };
 
   const handleServiceLogout = () => {
     dispatch(authServiceLogout());
-  };
-
-  const handleKakaoId = () => {
-    console.log('click?');
-    Kakao.API.request({
-      url: '/v2/user/me',
-    })
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
-
-  const requestUserInfo = () => {
-    console.log('requestUserInfo');
-
-    Kakao.API.request({
-      url: '/v2/user/me',
-    })
-      .then(function (res) {
-        console.log(JSON.stringify(res));
-      })
-      .catch(function (err) {
-        console.log('failed to request user information: ' + JSON.stringify(err));
-      });
   };
 
   if (DEV) {
@@ -74,8 +42,6 @@ export const Debug = () => {
           <Button onClick={moveTo}>loading</Button>
           <Button onClick={handleLogin}>login</Button>
           <Button onClick={handleServiceLogout}>logout</Button>
-          <Button onClick={requestUserInfo}>kakao userInfo</Button>
-          <Button onClick={handleKakaoId}>kakaoId</Button>
         </Flex>
       </>
     );

@@ -44,6 +44,8 @@ function App() {
     try {
       // 쿠키가 있으면 자동으로 인증이 되기 때문에 ..
       dispatch(authServiceLogin(controller));
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       Kakao.init(VITE_KAKAO_JAVASCRIPT_API_KEY);
     } catch (e) {
       console.error(e);
