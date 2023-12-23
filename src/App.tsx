@@ -4,6 +4,7 @@ import { Outlet, createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { authServiceLogin } from './redux-state/loginSlice';
 import { AppDispatch } from './store';
+import * as Sentry from '@sentry/react';
 
 const Card = lazy(() => import('./pages/Card'));
 const LandingPage = lazy(() => import('./pages/LandingPage'));
@@ -60,7 +61,9 @@ function App() {
     );
   };
 
-  const router = createBrowserRouter([
+  const sentryCreateBrowserRouter = Sentry.wrapCreateBrowserRouter(createBrowserRouter);
+
+  const router = sentryCreateBrowserRouter([
     {
       path: '/',
       element: <Layout />,
@@ -94,9 +97,11 @@ function App() {
 
   return (
     <>
-      <Suspense fallback={<Loading />}>
-        <RouterProvider router={router} fallbackElement={<Loading />} />
-      </Suspense>
+      <Sentry.ErrorBoundary fallback={<Loading />} showDialog>
+        <Suspense fallback={<Loading />}>
+          <RouterProvider router={router} fallbackElement={<Loading />} />
+        </Suspense>
+      </Sentry.ErrorBoundary>
     </>
   );
 }

@@ -1,4 +1,4 @@
-import { StrictMode } from 'react';
+import { StrictMode, useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App';
 import { store } from './store';
@@ -11,6 +11,12 @@ import '@mantine/carousel/styles.css';
 import 'react-toastify/dist/ReactToastify.css';
 
 import * as Sentry from '@sentry/react';
+import {
+  createRoutesFromChildren,
+  matchRoutes,
+  useLocation,
+  useNavigationType,
+} from 'react-router-dom';
 
 Sentry.init({
   dsn: 'https://3586f14333f31c2216b8109765706902@o4506428366061568.ingest.sentry.io/4506428367634432',
@@ -18,6 +24,13 @@ Sentry.init({
     new Sentry.BrowserTracing({
       // Set 'tracePropagationTargets' to control for which URLs distributed tracing should be enabled
       tracePropagationTargets: ['localhost', /^https:\/\/card\.teamhh\.link/],
+      routingInstrumentation: Sentry.reactRouterV6Instrumentation(
+        useEffect,
+        useLocation,
+        useNavigationType,
+        createRoutesFromChildren,
+        matchRoutes,
+      ),
     }),
     new Sentry.Replay({
       maskAllText: false,
