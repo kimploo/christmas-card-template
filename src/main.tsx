@@ -8,6 +8,7 @@ import axios from 'axios';
 import { MantineColorsTuple, MantineProvider, createTheme } from '@mantine/core';
 import '@mantine/core/styles.css';
 import '@mantine/carousel/styles.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 const brandTextColors: MantineColorsTuple = [
   '#eaf7fd',

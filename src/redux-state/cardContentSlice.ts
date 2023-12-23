@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const { VITE_SERVER_URI_PROD, VITE_SERVER_URI_DEV, DEV } = import.meta.env;
 const host = DEV ? VITE_SERVER_URI_DEV : VITE_SERVER_URI_PROD;
@@ -137,7 +138,7 @@ export const cardContentSlice = createSlice({
         state.cardId = action.payload.uuid;
       })
       .addCase(createCardContent.rejected, () => {
-        // TODO
+        toast.error('createCardContent Error');
       })
       .addCase(getCardContent.fulfilled, (state, action) => {
         state.cardId = action.payload.uuid;
@@ -150,6 +151,7 @@ export const cardContentSlice = createSlice({
         // TODO
       })
       .addCase(getCardContent.rejected, () => {
+        toast.error('getCardContent Error');
         // TODO
       });
   },

@@ -1,17 +1,18 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const { VITE_SERVER_URI_PROD, VITE_SERVER_URI_DEV, DEV } = import.meta.env;
 const host = DEV ? VITE_SERVER_URI_DEV : VITE_SERVER_URI_PROD;
 
 interface LoginState {
-  userId: number;
+  userId: number | null;
   nickname: string | null;
   isLogin: boolean;
 }
 
 const initialState: LoginState = {
-  userId: -1,
+  userId: null,
   nickname: null,
   isLogin: false,
 };
@@ -28,7 +29,12 @@ export const authServiceLogin = createAsyncThunk<LoginState, AbortController>(
       })
       .then((res) => {
         if (res.status === 401) {
-          throw console.log('need logout');
+          console.log('need logout');
+          return {
+            userId: null,
+            nickname: null,
+            isLogin: false,
+          };
         } else {
           const accessToken = res.data.access_token;
           axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
@@ -49,11 +55,16 @@ export const authServiceLogout = createAsyncThunk('auth/logout', async () => {
   return axios.post(url.href).then((res) => {
     if (res.status === 205) {
       return {
+        userId: null,
         nickname: null,
         isLogin: false,
       };
     } else {
-      // TODO: 비정상 로그아웃 시 비즈니스 로직
+      return {
+        userId: null,
+        nickname: null,
+        isLogin: false,
+      };
     }
   });
 });
@@ -74,6 +85,7 @@ export const loginSlice = createSlice({
         state.isLogin = action.payload.isLogin;
       })
       .addCase(authServiceLogin.rejected, (state) => {
+        toast.error('authServiceLogin Error');
         state.nickname = null;
         state.isLogin = false;
       })
@@ -81,8 +93,11 @@ export const loginSlice = createSlice({
         state.nickname = null;
         state.isLogin = false;
       })
-      .addCase(authServiceLogout.rejected, () => {
-        // TODO
+      .addCase(authServiceLogout.rejected, (state) => {
+        toast.error('authServiceLogout Error');
+        state.userId = null;
+        state.nickname = null;
+        state.isLogin = false;
       });
   },
 });
