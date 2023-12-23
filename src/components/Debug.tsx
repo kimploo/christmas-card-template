@@ -41,7 +41,7 @@ export const Debug = () => {
           <Button onClick={moveTo}>loading</Button>
           <Button onClick={handleLogin}>login</Button>
           <Button onClick={handleServiceLogout}>logout</Button>
-          <button onClick={() => methodDoesNotExist()}>Break the world</button>
+          {/* <button onClick={() => methodDoesNotExist()}>Break the world</button> */}
         </Flex>
       </>
     );
