@@ -84,7 +84,8 @@ export const loginSlice = createSlice({
         state.nickname = action.payload.nickname;
         state.isLogin = action.payload.isLogin;
       })
-      .addCase(authServiceLogin.rejected, (state) => {
+      .addCase(authServiceLogin.rejected, (state, action) => {
+        console.error(action.error);
         toast.error('authServiceLogin Error');
         state.nickname = null;
         state.isLogin = false;
@@ -93,7 +94,8 @@ export const loginSlice = createSlice({
         state.nickname = null;
         state.isLogin = false;
       })
-      .addCase(authServiceLogout.rejected, (state) => {
+      .addCase(authServiceLogout.rejected, (state, action) => {
+        console.error(action.error);
         toast.error('authServiceLogout Error');
         state.userId = null;
         state.nickname = null;

@@ -137,7 +137,8 @@ export const cardContentSlice = createSlice({
       .addCase(createCardContent.fulfilled, (state, action) => {
         state.cardId = action.payload.uuid;
       })
-      .addCase(createCardContent.rejected, () => {
+      .addCase(createCardContent.rejected, (_, action) => {
+        console.error(action.error);
         toast.error('createCardContent Error');
       })
       .addCase(getCardContent.fulfilled, (state, action) => {
@@ -150,7 +151,8 @@ export const cardContentSlice = createSlice({
       .addCase(getCardContent.pending, () => {
         // TODO
       })
-      .addCase(getCardContent.rejected, () => {
+      .addCase(getCardContent.rejected, (_, action) => {
+        console.error(action.error);
         toast.error('getCardContent Error');
         // TODO
       });
