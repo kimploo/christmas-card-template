@@ -29,7 +29,7 @@ function App() {
       dispatch(authServiceLogin(controller));
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
-      Kakao.init(VITE_KAKAO_JAVASCRIPT_API_KEY);
+      if (!Kakao.isInitialized()) Kakao.init(VITE_KAKAO_JAVASCRIPT_API_KEY);
     } catch (e) {
       console.error(e);
     }

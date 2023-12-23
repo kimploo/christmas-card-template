@@ -11,7 +11,7 @@ export const store = configureStore({
     userProfile: loginSliceReducer,
     cardContent: cardContentSlice,
   },
-  enhancers: sentryReduxEnhancer,
+  enhancers: (getDefaultMiddleware) => getDefaultMiddleware().concat(sentryReduxEnhancer),
 });
 
 export type AppDispatch = typeof store.dispatch;
