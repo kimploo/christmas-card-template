@@ -40,7 +40,7 @@ export const authServiceLogin = createAsyncThunk<LoginState, AbortController>(
           axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
           return {
             userId: res.data.properties ? res.data.properties.userId : null,
-            nickname: res.data.properties.nickname,
+            nickname: res.data.properties ? res.data.properties.nickname : null,
             isLogin: true,
           };
         }
