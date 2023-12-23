@@ -71,7 +71,7 @@ export default function LandingPage() {
         >
           <Text py={'1rem'} c={'#444444'}>
             {loginState.isLogin ? (
-              `${loginState.nickname && '사용자'}님, 원하는 카드를 선택하세요.`
+              `${loginState.nickname || '사용자'}님, 원하는 카드를 선택하세요.`
             ) : (
               <>
                 로그인하고 <br></br>
