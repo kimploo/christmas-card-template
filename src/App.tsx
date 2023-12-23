@@ -14,6 +14,7 @@ import { Debug } from '@components/Debug';
 import { MainArtwork } from '@components/MainArtwork';
 import { Footer } from '@components/Footer';
 import { SnowfallContainer } from '@components/SnowfallContainer';
+import { ToastContainer } from 'react-toastify';
 
 const { VITE_KAKAO_JAVASCRIPT_API_KEY, DEV } = import.meta.env;
 
@@ -53,6 +54,7 @@ function App() {
           </Flex>
           <SnowfallContainer onOff={true}></SnowfallContainer>
         </Flex>
+        <ToastContainer />
         {DEV && <Debug />}
       </Flex>
     );
