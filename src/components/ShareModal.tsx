@@ -40,6 +40,8 @@ export const ShareModal = ({ isShare, setShare, title, to, from, msg, cardId, ar
     //@ts-ignore
     if (!Kakao.isInitialized()) {
       //@ts-ignore
+      Kakao.cleanup();
+      //@ts-ignore
       Kakao.init(import.meta.env.VITE_KAKAO_JAVASCRIPT_API_KEY);
     }
 
