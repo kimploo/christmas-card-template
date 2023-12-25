@@ -75,6 +75,7 @@ function App() {
       errorElement: <Loading />,
       children: [
         {
+          index: true,
           path: '',
           element: <LandingPage />,
         },
