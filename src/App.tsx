@@ -32,7 +32,7 @@ function App() {
       if (!Kakao.isInitialized()) {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
-        kakao.cleanup();
+        Kakao.cleanup();
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         Kakao.init(VITE_KAKAO_JAVASCRIPT_API_KEY);
