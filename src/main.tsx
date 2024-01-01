@@ -3,7 +3,6 @@ import { createRoot } from 'react-dom/client';
 import App from './App';
 import { store } from './store';
 import { Provider } from 'react-redux';
-import axios from 'axios';
 
 import { MantineColorsTuple, MantineProvider, createTheme } from '@mantine/core';
 import '@mantine/core/styles.css';
@@ -56,8 +55,6 @@ const brandTextColors: MantineColorsTuple = [
   '#556575',
   '#44586a',
 ];
-
-axios.defaults.withCredentials = true;
 
 const theme = createTheme({
   fontFamily: 'Noto Sans Korean, sans-serif',
