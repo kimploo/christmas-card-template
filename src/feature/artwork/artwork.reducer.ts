@@ -1,8 +1,11 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { GetArtworkResDTO } from './artwork.dto';
 import { getArtworksApi } from './artwork.api';
 
-interface InitialState {
+export interface ArtworkInitialState {
+  currentArtworkIndex: number;
+  currentArtworkBackgroundIndex: number;
+  currentArtworkSnowFlakeIndex: number;
   artworkId: number;
   artworkBackgroundId: number;
   artworkSnowFlakeId: number;
@@ -13,7 +16,11 @@ const initialArtworkInfo = {
   ArtworkBackground: [
     {
       id: 1,
-      bgColor: 'linear-gradient(180deg, #F3F19D 80%, #FCCB6B 20%)',
+      bgInfo: {
+        type: 'linear-gradient',
+        cssValue: 'linear-gradient(180deg, #F3F19D 80%, #FCCB6B 20%)',
+        colors: ['#F3F19D', '#FCCB6B'],
+      },
     },
   ],
   ArtworkSnowFlake: [
@@ -29,7 +36,10 @@ const initialArtworkInfo = {
   ],
 };
 
-const initialState: InitialState = {
+const initialState: ArtworkInitialState = {
+  currentArtworkIndex: 0,
+  currentArtworkBackgroundIndex: 0,
+  currentArtworkSnowFlakeIndex: 0,
   artworkId: 1,
   artworkBackgroundId: 1,
   artworkSnowFlakeId: 1,
@@ -72,21 +82,41 @@ export const artworkSlice = createSlice({
   name: 'artwork',
   initialState,
   reducers: {
-    updateArtworkId(state, action) {
+    updateArtworkId(state, action: PayloadAction<{ artworkId: number }>) {
       state.artworkId = action.payload.artworkId;
     },
-    updateArtworkBackgroundId(state, action) {
+    updateArtworkBackgroundId(state, action: PayloadAction<{ artworkBackgroundId: number }>) {
       state.artworkBackgroundId = action.payload.artworkBackgroundId;
     },
-    updateArtworkSnowFlakeId(state, action) {
+    updateArtworkSnowFlakeId(state, action: PayloadAction<{ artworkSnowFlakeId: number }>) {
       state.artworkSnowFlakeId = action.payload.artworkSnowFlakeId;
+    },
+    updateCurrentArtworkIndex(state, action: PayloadAction<{ currentArtworkIndex: number }>) {
+      state.currentArtworkIndex = action.payload.currentArtworkIndex;
+    },
+    updateCurrentArtworkBackgroundIndex(
+      state,
+      action: PayloadAction<{ currentArtworkBackgroundIndex: number }>,
+    ) {
+      state.currentArtworkBackgroundIndex = action.payload.currentArtworkBackgroundIndex;
+    },
+    updateCurrentArtworkSnowFlakeIndex(
+      state,
+      action: PayloadAction<{ currentArtworkSnowFlakeIndex: number }>,
+    ) {
+      state.currentArtworkSnowFlakeIndex = action.payload.currentArtworkSnowFlakeIndex;
     },
   },
   extraReducers(builder) {
     builder
-      .addCase(getArtworksApi.fulfilled, (state, payload) => {
-        const p = payload.payload;
-        if ('data' in p) state.artworkInfo = p.data;
+      .addCase(getArtworksApi.fulfilled, (state, action: PayloadAction<GetArtworkResDTO[]>) => {
+        console.log(action.payload);
+        state.artworkInfo = action.payload;
+        state.artworkBackgroundId = action.payload[0].ArtworkBackground[0].id;
+        state.artworkSnowFlakeId = action.payload[0].ArtworkSnowFlake[0].id;
+        state.currentArtworkIndex = initialState.currentArtworkIndex;
+        state.currentArtworkBackgroundIndex = initialState.currentArtworkBackgroundIndex;
+        state.currentArtworkSnowFlakeIndex = initialState.currentArtworkSnowFlakeIndex;
       })
       .addCase(getArtworksApi.pending, () => {
         // TODO
@@ -97,5 +127,12 @@ export const artworkSlice = createSlice({
   },
 });
 
-// export const { updateCardState, resetCardState, updateIndex } = cardContentSlice.actions;
-// export default cardContentSlice.reducer;
+export const {
+  updateArtworkId,
+  updateArtworkBackgroundId,
+  updateArtworkSnowFlakeId,
+  updateCurrentArtworkIndex,
+  updateCurrentArtworkBackgroundIndex,
+  updateCurrentArtworkSnowFlakeIndex,
+} = artworkSlice.actions;
+export default artworkSlice.reducer;
