@@ -19,8 +19,9 @@
     "paths": {
       "@/components/*": ["src/components/*"],
       "@/pages/*": ["src/pages/*"],
+      "@/feature/*": ["src/feature/*"],
       "@/redux-state/*": ["src/redux-state/*"],
-      "@/customType/*": ["src/types/*"],
+      "@/types/*": ["src/types/*"],
       "@/lib/*": ["src/lib/*"]
     },
   },
