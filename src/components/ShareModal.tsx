@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { Box, Flex, Image, Modal, UnstyledButton } from '@mantine/core';
 import { IconShare } from '@tabler/icons-react';
-import { CardId } from '@redux-state/cardContentSlice';
 import mobile from 'is-mobile';
+import { RootState } from 'src/store';
+import { useSelector } from 'react-redux';
 
 interface Props {
   isShare: boolean;
@@ -11,13 +12,14 @@ interface Props {
   to: string;
   from: string;
   msg: string;
-  cardId: CardId;
-  artwork: string;
+  uuid: string | null;
 }
 
-export const ShareModal = ({ isShare, setShare, title, to, from, msg, cardId, artwork }: Props) => {
-  const shareCardUrl = `https://card.teamhh.link/card/${cardId}`;
-  const imageUrl = `https://card.teamhh.link/${artwork}`;
+export const ShareModal = ({ isShare, setShare, title, to, uuid }: Props) => {
+  const { artworkInfo, currentArtworkIndex } = useSelector((state: RootState) => state.artwork);
+
+  const shareCardUrl = `https://card.teamhh.link/card/${uuid}`;
+  const imageUrl = artworkInfo[currentArtworkIndex].url;
 
   const handleShareClick = () => {
     if (navigator.share) {

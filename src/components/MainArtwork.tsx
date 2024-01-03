@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from 'src/store';
 
 export const MainArtwork = () => {
-  const { artworks, index } = useSelector((state: RootState) => state.cardContent);
+  const { currentArtworkIndex, artworkInfo } = useSelector((state: RootState) => state.artwork);
 
   return (
     <>
@@ -14,9 +14,9 @@ export const MainArtwork = () => {
           maxWidth: theme.breakpoints.sm,
         })}
       >
-        {artworks ? (
+        {artworkInfo[currentArtworkIndex] ? (
           <img
-            src={'/' + artworks[index]}
+            src={artworkInfo[currentArtworkIndex]?.url}
             style={{
               width: '100%',
               objectFit: 'cover',

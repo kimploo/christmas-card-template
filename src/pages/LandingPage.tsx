@@ -1,37 +1,41 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  initialState as initialCardContentState,
-  resetCardContent,
-  updateCardContent,
-  updateIndex,
-} from '@redux-state/cardContentSlice';
 
 import { Box, Button, Flex, Image, Text } from '@mantine/core';
 import { Carousel } from '@mantine/carousel';
 
-import { CardInputContainer } from '@components/CardInputContainer';
-import { KakaoLogin } from '@components/KakaoLogin';
-import { RootState } from 'src/store';
+import { CardInputContainer } from '@/components/CardInputContainer';
+import { KakaoLogin } from '@/components/KakaoLogin';
+import { RootState } from '../store';
+import {
+  updateArtworkBackgroundId,
+  updateArtworkId,
+  updateCurrentArtworkBackgroundIndex,
+  updateCurrentArtworkIndex,
+} from '@/feature/artwork/artwork.reducer';
+import {
+  initialState as initialCardState,
+  resetCardState,
+  updateCardState,
+} from '@/feature/card/card.reducer';
+import { BgInfo } from '@/types/bgInfo';
 
 export default function LandingPage() {
   const loginState = useSelector((state: RootState) => state.userProfile);
-  const cardContent = useSelector((state: RootState) => state.cardContent);
-  const { artworks, index } = cardContent;
+  const card = useSelector((state: RootState) => state.card);
+  const artworks = useSelector((state: RootState) => state.artwork);
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const [localIndex, setLocalIndex] = useState(index);
-
-  const [to, setTo] = useState(cardContent.to);
-  const [msg, setMsg] = useState(cardContent.msg);
-  const [from, setFrom] = useState(cardContent.from);
+  const [to, setTo] = useState(card.to);
+  const [msg, setMsg] = useState(card.msg);
+  const [from, setFrom] = useState(card.from);
 
   const handlePreview = () => {
     dispatch(
-      updateCardContent({
-        index: localIndex,
+      updateCardState({
         to,
         msg,
         from,
@@ -41,24 +45,35 @@ export default function LandingPage() {
   };
 
   const handleSlideIndex = (idx: number) => {
-    dispatch(
-      updateIndex({
-        index: idx,
-      }),
-    );
-    setLocalIndex(idx);
+    const artworkId = artworks.artworkInfo[idx].id;
+    dispatch(updateArtworkId({ artworkId }));
+    // TODO: 컴포넌트 렌더 시 handleSlideIndex가 호출 -> handleArtworkBackground 호출 -> 컴포넌트 리렌더 -> handleSlideIndex 호출 -> 배경색이 변하지 않음..
+    // const artworkBackgroundId = artworks.artworkInfo[idx].ArtworkBackground[0].id;
+    // dispatch(updateArtworkBackgroundId({ artworkBackgroundId }));
+    dispatch(updateCurrentArtworkIndex({ currentArtworkIndex: idx }));
   };
 
+  const handleArtworkBackground = (artworkBackgroundId: number, bgIdx: number) => {
+    dispatch(updateArtworkBackgroundId({ artworkBackgroundId }));
+    dispatch(updateCurrentArtworkBackgroundIndex({ currentArtworkBackgroundIndex: bgIdx }));
+  };
+
+  // const handleArtworkSnowFlake = (idx: number, sfIdx: number) => {
+  //   const artworkSnowFlakeId = artworks.artworkInfo[artworkIdx].ArtworkSnowFlake[idx].id;
+  //   dispatch(updateArtworkSnowFlakeId({ artworkSnowFlakeId }));
+  //   setSfIdx(sfIdx);
+  // };
+
   const handleReset = () => {
-    setTo(initialCardContentState.to);
-    setMsg(initialCardContentState.msg);
-    setFrom(initialCardContentState.from);
-    dispatch(resetCardContent());
+    setTo(initialCardState.to);
+    setMsg(initialCardState.msg);
+    setFrom(initialCardState.from);
+    dispatch(resetCardState());
   };
 
   return (
     <Flex direction={'column'}>
-      <Flex bg={`#FCCB6B`} justify={'center'}>
+      <Flex justify={'center'}>
         {/* 기기에 따라서 viewport 너비에 맞게 input의 너비가 조정이 되어야 한다. 현재는 모바일 전용 */}
         <Box
           style={(theme) => {
@@ -71,7 +86,7 @@ export default function LandingPage() {
         >
           <Text py={'1rem'} c={'#444444'}>
             {loginState.isLogin ? (
-              `${loginState.nickname || '사용자'}님, 원하는 카드를 선택하세요.`
+              `${loginState.nickname || '사용자'}님, 원하는 일러스트를 선택하세요.`
             ) : (
               <>
                 로그인하고 <br></br>
@@ -87,20 +102,43 @@ export default function LandingPage() {
                 height={200}
                 slideGap="md"
                 controlSize={32}
-                withIndicators
-                initialSlide={localIndex}
+                initialSlide={artworks.currentArtworkIndex}
                 onSlideChange={(index) => {
                   handleSlideIndex(index);
                 }}
               >
-                {artworks?.map((src, idx) => {
+                {artworks.artworkInfo.map((artwork, idx) => {
                   return (
                     <Carousel.Slide key={idx}>
-                      <Image h={200} fit="contain" src={src}></Image>
+                      <Image h={200} fit="contain" src={artwork.url}></Image>
                     </Carousel.Slide>
                   );
                 })}
               </Carousel>
+              <Flex justify={'center'} align={'center'} gap={4} pt={'lg'}>
+                {artworks.artworkInfo[artworks.currentArtworkIndex]
+                  ? artworks.artworkInfo[artworks.currentArtworkIndex].ArtworkBackground.map(
+                      (info, idx) => {
+                        const bgInfo = info.bgInfo as unknown as BgInfo;
+                        const bg = `linear-gradient(180deg, ${bgInfo.colors[0]} 50%, ${bgInfo.colors[1]} 50%)`;
+
+                        return (
+                          <Button
+                            key={'artworkBackground-' + info.id}
+                            bg={bg}
+                            w={20}
+                            mx={'0.5rem'}
+                            style={{
+                              borderRadius: '50%',
+                              borderColor: 'darkgray',
+                            }}
+                            onClick={() => handleArtworkBackground(info.id, idx)}
+                          ></Button>
+                        );
+                      },
+                    )
+                  : null}
+              </Flex>
               <CardInputContainer
                 to={to}
                 msg={msg}
