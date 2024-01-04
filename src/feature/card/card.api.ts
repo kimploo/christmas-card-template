@@ -26,6 +26,8 @@ export const createCardAPI = createAsyncThunk<CreateCardResDTO, CreateCardReqDTO
 export const getCardAPI = createAsyncThunk('card/get', async (cardId: CardGetArg) => {
   type RES = SuccessResDTO<CardWithInfos>;
   return await api
-    .get<RES, AxiosResponse<RES>>(`/card/${cardId.cardId}`)
+    .get<RES, AxiosResponse<RES>>(`/card/${cardId.cardId}`, {
+      withCredentials: true,
+    })
     .then((res) => res.data.data);
 });

@@ -9,6 +9,9 @@ import '@mantine/core/styles.css';
 import '@mantine/carousel/styles.css';
 import 'react-toastify/dist/ReactToastify.css';
 
+import axios from 'axios';
+axios.defaults.withCredentials = true;
+
 import * as Sentry from '@sentry/react';
 import {
   createRoutesFromChildren,
