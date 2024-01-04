@@ -110,7 +110,6 @@ export const artworkSlice = createSlice({
   extraReducers(builder) {
     builder
       .addCase(getArtworksApi.fulfilled, (state, action: PayloadAction<GetArtworkResDTO[]>) => {
-        console.log(action.payload);
         state.artworkInfo = action.payload;
         state.artworkBackgroundId = action.payload[0].ArtworkBackground[0].id;
         state.artworkSnowFlakeId = action.payload[0].ArtworkSnowFlake[0].id;
