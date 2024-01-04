@@ -66,7 +66,7 @@ function App() {
     }
 
     return (
-      <Flex justify={'flex-start'} h={'100vh'} direction={'column'} bg={'#FCCB6B'}>
+      <Flex justify={'flex-start'} h={'100vh'} direction={'column'} bg={secondBG}>
         <Flex
           bg={firstBG || `linear-gradient(180deg, #F3F19D 80%, #FCCB6B 20%)`}
           justify={'center'}
