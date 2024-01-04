@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { Box, Flex, Image, Modal, UnstyledButton } from '@mantine/core';
 import { IconShare } from '@tabler/icons-react';
-import { CardId } from '@redux-state/cardContentSlice';
-import mobile from 'is-mobile';
+import { RootState } from 'src/store';
+import { useSelector } from 'react-redux';
 
 interface Props {
   isShare: boolean;
@@ -11,13 +11,14 @@ interface Props {
   to: string;
   from: string;
   msg: string;
-  cardId: CardId;
-  artwork: string;
+  uuid: string | null;
 }
 
-export const ShareModal = ({ isShare, setShare, title, to, from, msg, cardId, artwork }: Props) => {
-  const shareCardUrl = `https://card.teamhh.link/card/${cardId}`;
-  const imageUrl = `https://card.teamhh.link/${artwork}`;
+export const ShareModal = ({ isShare, setShare, title, to, uuid }: Props) => {
+  const { artworkInfo, currentArtworkIndex } = useSelector((state: RootState) => state.artwork);
+
+  const shareCardUrl = `https://card.teamhh.link/card/${uuid}`;
+  const imageUrl = artworkInfo[currentArtworkIndex].url;
 
   const handleShareClick = () => {
     if (navigator.share) {
@@ -74,7 +75,9 @@ export const ShareModal = ({ isShare, setShare, title, to, from, msg, cardId, ar
         <Flex justify={'center'} gap={'1.5rem'} pt={'4rem'} pb={'2rem'}>
           <Box h={84}>
             <Flex justify={'center'} align={'center'} gap={'1.5rem'}>
-              {mobile() && (
+              {/* caveat: 타입에는 share 속성이 늘 있다고 하나, share 속성이 없는 경우가 있음 */}
+              {/*@ts-ignore*/}
+              {navigator.share && (
                 <UnstyledButton onClick={handleShareClick} p={4}>
                   <IconShare strokeWidth={0.8} size={76} color={'#CED4DA'}></IconShare>
                 </UnstyledButton>

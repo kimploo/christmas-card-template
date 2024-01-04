@@ -1,5 +1,5 @@
 import { Box, Flex, Textarea, TextInput } from '@mantine/core';
-import previewStyle from '@components/css/PreviewInput.module.css';
+import previewStyle from '@/components/css/PreviewInput.module.css';
 
 interface Props {
   to: string;

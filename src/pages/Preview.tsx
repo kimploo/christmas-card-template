@@ -2,25 +2,30 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../store';
 
-import { PreviewInputContainer } from '@components/PreviewInputContainer';
+import { PreviewInputContainer } from '@/components/PreviewInputContainer';
 import { Button, Flex, Text } from '@mantine/core';
-import { createCardContent } from '@redux-state/cardContentSlice';
+
+import { createCardAPI } from '@/feature/card/card.api';
 
 export default function Preview() {
   const loginState = useSelector((state: RootState) => state.userProfile);
-  const { artworks, index, to, msg, from } = useSelector((state: RootState) => state.cardContent);
+  const { to, msg, from } = useSelector((state: RootState) => state.card);
+  const { artworkId, artworkBackgroundId, artworkSnowFlakeId } = useSelector(
+    (state: RootState) => state.artwork,
+  );
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
 
+  // ? ID만 보내도 Create 가능하게 해도 되는 것인지 햇갈림
   const handleCreateCard = () => {
-    dispatch(createCardContent({ cardId: null, index, to, msg, from, artworks }))
-      .then((res) => {
-        // TODO: 타입 에러 해결
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const cardId = (res.payload as any).uuid;
-        navigate(`/card/${cardId}`);
-      })
-      .catch((e) => console.error(e));
+    dispatch(
+      createCardAPI({ from, to, msg, artworkId, artworkBackgroundId, artworkSnowFlakeId }),
+    ).then((res) => {
+      // TODO: 이 코드 타입 지정을 잘 하고 싶다...
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const uuid = (res.payload as any).uuid;
+      navigate(`/card/${uuid}`);
+    });
   };
 
   const handleGoBack = () => {

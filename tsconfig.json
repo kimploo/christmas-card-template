@@ -17,10 +17,12 @@
     "jsx": "react-jsx",
     "baseUrl": "./",
     "paths": {
-      "@components/*": ["src/components/*"],
-      "@pages/*": ["src/pages/*"],
-      "@redux-state/*": ["src/redux-state/*"],
-      "@customType/*": ["src/types/*"]
+      "@/components/*": ["src/components/*"],
+      "@/pages/*": ["src/pages/*"],
+      "@/feature/*": ["src/feature/*"],
+      "@/redux-state/*": ["src/redux-state/*"],
+      "@/types/*": ["src/types/*"],
+      "@/lib/*": ["src/lib/*"]
     },
   },
   "include": ["src"],
