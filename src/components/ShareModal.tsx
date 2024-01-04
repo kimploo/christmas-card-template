@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { Box, Flex, Image, Modal, UnstyledButton } from '@mantine/core';
 import { IconShare } from '@tabler/icons-react';
-import mobile from 'is-mobile';
 import { RootState } from 'src/store';
 import { useSelector } from 'react-redux';
 
@@ -76,7 +75,9 @@ export const ShareModal = ({ isShare, setShare, title, to, uuid }: Props) => {
         <Flex justify={'center'} gap={'1.5rem'} pt={'4rem'} pb={'2rem'}>
           <Box h={84}>
             <Flex justify={'center'} align={'center'} gap={'1.5rem'}>
-              {mobile() && (
+              {/* caveat: 타입에는 share 속성이 늘 있다고 하나, share 속성이 없는 경우가 있음 */}
+              {/*@ts-ignore*/}
+              {navigator.share && (
                 <UnstyledButton onClick={handleShareClick} p={4}>
                   <IconShare strokeWidth={0.8} size={76} color={'#CED4DA'}></IconShare>
                 </UnstyledButton>
