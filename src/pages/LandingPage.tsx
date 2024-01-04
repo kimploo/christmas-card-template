@@ -51,11 +51,13 @@ export default function LandingPage() {
     // const artworkBackgroundId = artworks.artworkInfo[idx].ArtworkBackground[0].id;
     // dispatch(updateArtworkBackgroundId({ artworkBackgroundId }));
     dispatch(updateCurrentArtworkIndex({ currentArtworkIndex: idx }));
+    dispatch(updateCardState({ to, msg, from }));
   };
 
   const handleArtworkBackground = (artworkBackgroundId: number, bgIdx: number) => {
     dispatch(updateArtworkBackgroundId({ artworkBackgroundId }));
     dispatch(updateCurrentArtworkBackgroundIndex({ currentArtworkBackgroundIndex: bgIdx }));
+    dispatch(updateCardState({ to, msg, from }));
   };
 
   // const handleArtworkSnowFlake = (idx: number, sfIdx: number) => {
