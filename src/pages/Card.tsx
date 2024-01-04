@@ -68,6 +68,7 @@ export default function Card() {
       dispatch(updateCurrentArtworkIndex({ currentArtworkIndex }));
       dispatch(updateCurrentArtworkBackgroundIndex({ currentArtworkBackgroundIndex }));
       dispatch(updateCurrentArtworkSnowFlakeIndex({ currentArtworkSnowFlakeIndex }));
+
       setIsLoading(false);
     } else {
       setIsLoading(true);
