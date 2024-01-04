@@ -33,6 +33,7 @@ jobs:
       - name: Run a multi-line script
         run: |
           yarn
+          yarn db-generate
           yarn build
         env:
           VITE_CLIENT_DOMAIN_PROD: ${{ vars.VITE_CLIENT_DOMAIN_PROD }}
