@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
-import { PreviewInputContainer } from '@components/PreviewInputContainer';
-import { Anchor, Box, Button, Flex } from '@mantine/core';
-import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { Anchor, Box, Button, Flex } from '@mantine/core';
+
 import { AppDispatch, RootState } from '../store';
-import { getCardContent } from '@redux-state/cardContentSlice';
-import { ShareModal } from '@components/ShareModal';
+import { PreviewInputContainer } from '@/components/PreviewInputContainer';
+import { ShareModal } from '@/components/ShareModal';
+import { getCardAPI } from '@/feature/card/card.api';
 
 const { PROD, VITE_CLIENT_DOMAIN_DEV, VITE_CLIENT_DOMAIN_PROD } = import.meta.env;
 
@@ -17,7 +18,7 @@ const { PROD, VITE_CLIENT_DOMAIN_DEV, VITE_CLIENT_DOMAIN_PROD } = import.meta.en
 export default function Card() {
   // TODO: 로그인한 유저에게는 다른 화면 보여주면 좋을듯
   const loginState = useSelector((state: RootState) => state.userProfile);
-  const { artworks, index, to, msg, from } = useSelector((state: RootState) => state.cardContent);
+  const { to, msg, from } = useSelector((state: RootState) => state.card);
   const dispatch = useDispatch<AppDispatch>();
 
   // TODO: 변수 명을 domain으로 하는게 좋을지, origin으로 하는게 좋을지, host로 하는게 좋을지 ..
@@ -29,7 +30,7 @@ export default function Card() {
 
   if (!cardId) {
     return (
-      <Flex bg={`#FCCB6B`} justify={'center'}>
+      <Flex justify={'center'}>
         {/* 기기에 따라서 viewport 너비에 맞게 input의 너비가 조정이 되어야 한다. 현재는 모바일 전용 */}
         <Box
           style={(theme) => ({
@@ -44,19 +45,14 @@ export default function Card() {
     );
   }
 
-  const getCard = () => {
+  useEffect(() => {
     if (cardId) {
-      dispatch(getCardContent({ cardId }));
+      dispatch(getCardAPI({ cardId }));
       setIsLoading(false);
     } else {
       setIsLoading(true);
       // TODO: reducer에서 해결하는게 나을지도
     }
-  };
-
-  useEffect(() => {
-    getCard();
-    setIsLoading(false);
     if (loginState.isLogin) {
       setShare(true);
     }
@@ -71,8 +67,7 @@ export default function Card() {
         to={to}
         msg={msg}
         from={from}
-        cardId={cardId}
-        artwork={artworks[index]}
+        uuid={cardId}
       ></ShareModal>
       <>
         {isLoading ? null : (

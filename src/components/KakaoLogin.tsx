@@ -1,6 +1,6 @@
 import { Center, Image, UnstyledButton } from '@mantine/core';
 import { useDispatch } from 'react-redux';
-import { authServiceLogin } from '@redux-state/loginSlice';
+import { authServiceLogin } from '@/redux-state/loginSlice';
 import { AppDispatch } from '../store';
 import { urlMaker } from '../util/urlMaker';
 

@@ -5,7 +5,7 @@
 
 .textarea {
   &::placeholder {
-    color: #fbffb0;
+    color: #FFFFFF;
   }
 
   &:disabled {

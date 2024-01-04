@@ -3,7 +3,7 @@ import { Container, Flex, Loader } from '@mantine/core';
 export const Loading = () => {
   return (
     <>
-      <Flex bg={`#FCCB6B`} h={'100vh'} justify={'center'} align={'center'} pt={'2rem'} pb={'1rem'}>
+      <Flex h={'100vh'} justify={'center'} align={'center'} pt={'2rem'} pb={'1rem'}>
         <Container
           px={'2rem'}
           style={(theme) => ({
