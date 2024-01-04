@@ -5,6 +5,6 @@ const baseURL = DEV ? VITE_SERVER_URI_DEV : VITE_SERVER_URI_PROD;
 const api = axios.create({
   baseURL,
 });
-axios.defaults.withCredentials = true;
+api.defaults.withCredentials = true;
 
 export default api;

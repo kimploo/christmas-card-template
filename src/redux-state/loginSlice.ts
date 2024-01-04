@@ -1,3 +1,4 @@
+import api from '@/lib/axios';
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 // import { toast } from 'react-toastify';
@@ -23,8 +24,8 @@ export const authServiceLogin = createAsyncThunk<LoginState, AbortController>(
     const url = new URL(host);
     url.pathname = 'login';
 
-    const res = await axios
-      .get(url.href, {
+    const res = await api
+      .get('/login', {
         signal: abortController.signal,
       })
       .then((res) => {
@@ -37,7 +38,7 @@ export const authServiceLogin = createAsyncThunk<LoginState, AbortController>(
           };
         } else {
           const accessToken = res.data.access_token;
-          axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
+          api.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
           return {
             userId: res.data.properties ? res.data.properties.userId : null,
             nickname: res.data.properties ? res.data.properties.nickname : null,
@@ -52,7 +53,7 @@ export const authServiceLogin = createAsyncThunk<LoginState, AbortController>(
 export const authServiceLogout = createAsyncThunk('auth/logout', async () => {
   const url = new URL(host);
   url.pathname = 'logout';
-  return axios.post(url.href).then((res) => {
+  return api.post('/logout').then((res) => {
     if (res.status === 205) {
       return {
         userId: null,
