@@ -11,8 +11,8 @@ const initialState: BackgroundState = {
     id: 1,
     bgInfo: {
       type: BgInfoType.LINEAR_GRADIENT,
-      cssValue: 'linear-gradient(180deg, #F3F19D 80%, #FCCB6B 20%)',
-      colors: ['#F3F19D', '#FCCB6B'],
+      cssValue: 'linear-gradient(180deg, #C5F0FF 80%, #CBEA88 20%)',
+      colors: ['#C5F0FF', '#CBEA88'],
     },
   },
   ArtworkSnowFlake: {
