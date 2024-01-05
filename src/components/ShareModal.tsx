@@ -15,10 +15,10 @@ interface Props {
 }
 
 export const ShareModal = ({ isShare, setShare, title, to, uuid }: Props) => {
-  const { artworkInfo, currentArtworkIndex } = useSelector((state: RootState) => state.artwork);
+  const { Artwork } = useSelector((state: RootState) => state.background);
 
   const shareCardUrl = `https://card.teamhh.link/card/${uuid}`;
-  const imageUrl = artworkInfo[currentArtworkIndex].url;
+  const imageUrl = Artwork.url;
 
   const handleShareClick = () => {
     if (navigator.share) {
