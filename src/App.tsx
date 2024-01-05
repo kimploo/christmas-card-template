@@ -1,10 +1,9 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { Flex } from '@mantine/core';
 import { useEffect, Suspense, lazy } from 'react';
-import { Outlet, createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { authServiceLogin } from './redux-state/loginSlice';
-import { AppDispatch, RootState } from './store';
+import { AppDispatch } from './store';
 import * as Sentry from '@sentry/react';
 
 const Card = lazy(() => import('./pages/Card'));
@@ -12,20 +11,13 @@ const LandingPage = lazy(() => import('./pages/LandingPage'));
 const Preview = lazy(() => import('./pages/Preview'));
 
 import { Loading } from '@/pages/Loading';
-import { Debug } from '@/components/Debug';
-import { MainArtwork } from '@/components/MainArtwork';
-import { Footer } from '@/components/Footer';
-import { SnowfallContainer } from '@/components/SnowfallContainer';
-import { ToastContainer } from 'react-toastify';
 import { getArtworksApi } from './feature/artwork/artwork.api';
+import Layout from './Layout';
 
 const { VITE_KAKAO_JAVASCRIPT_API_KEY, DEV } = import.meta.env;
 
 function App() {
   const dispatch = useDispatch<AppDispatch>();
-  const { currentArtworkIndex, artworkInfo, currentArtworkBackgroundIndex } = useSelector(
-    (state: RootState) => state.artwork,
-  );
 
   useEffect(() => {
     const controller = new AbortController();
@@ -47,50 +39,7 @@ function App() {
     return () => controller.abort();
   }, [dispatch]);
 
-  const Layout = () => {
-    const bgInfo = artworkInfo[currentArtworkIndex].ArtworkBackground[currentArtworkBackgroundIndex]
-      .bgInfo as {
-      type: string;
-      cssValue: string;
-      colors: string[];
-    };
-    let firstBG;
-    let secondBG;
-
-    if (!bgInfo) {
-      firstBG = `linear-gradient(180deg, #F3F19D 80%, #FCCB6B 20%)`;
-      secondBG = '#FCCB6B';
-    } else {
-      firstBG = bgInfo.cssValue;
-      secondBG = bgInfo.colors[1];
-    }
-
-    return (
-      <Flex justify={'flex-start'} h={'100vh'} direction={'column'} bg={secondBG}>
-        <Flex
-          bg={firstBG || `linear-gradient(180deg, #F3F19D 80%, #FCCB6B 20%)`}
-          justify={'center'}
-          pt={'2rem'}
-          pb={'1rem'}
-        >
-          <MainArtwork></MainArtwork>
-        </Flex>
-        <Flex bg={secondBG} justify={'center'} direction={'column'}>
-          {/* 기기에 따라서 viewport 너비에 맞게 input의 너비가 조정이 되어야 한다. 현재는 모바일 전용 */}
-          <Flex bg={secondBG} justify={'center'} direction={'column'}>
-            <Outlet />
-            <Footer></Footer>
-          </Flex>
-          <SnowfallContainer onOff={true}></SnowfallContainer>
-        </Flex>
-        <ToastContainer />
-        {DEV && <Debug />}
-      </Flex>
-    );
-  };
-
   const sentryCreateBrowserRouter = Sentry.wrapCreateBrowserRouter(createBrowserRouter);
-
   const router = sentryCreateBrowserRouter([
     {
       path: '/',
