@@ -23,9 +23,8 @@ function App() {
     const controller = new AbortController();
     try {
       // 쿠키가 있으면 자동으로 인증이 되기 때문에 ..
-      dispatch(authServiceLogin(controller)).then(() => {
-        dispatch(getArtworksApi({ limit: 20, page: 1 }));
-      });
+      dispatch(getArtworksApi({ limit: 20, page: 1 }));
+      dispatch(authServiceLogin(controller));
       // @ts-ignore
       if (!Kakao.isInitialized()) {
         // @ts-ignore
