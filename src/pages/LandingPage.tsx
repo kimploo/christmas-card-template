@@ -67,6 +67,7 @@ export default function LandingPage() {
   };
 
   const handleSlideIndex = (idx: number) => {
+    setIdx(idx);
     dispatch(
       updateArtwork({
         Artwork: artworks.artworkInfo[idx],
@@ -83,7 +84,6 @@ export default function LandingPage() {
         ArtworkSnowFlake: artworks.artworkInfo[idx].ArtworkSnowFlake[0],
       }),
     );
-    setIdx(idx);
   };
 
   const handleArtworkBackground = (artworkBackgroundId: number, newBgIdx: number) => {
