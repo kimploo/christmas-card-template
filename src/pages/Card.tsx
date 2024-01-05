@@ -1,17 +1,20 @@
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { Anchor, Box, Button, Flex } from '@mantine/core';
 
-import { AppDispatch, RootState } from '../store';
+import { RootState, useAppDispatch } from '../store';
 import { PreviewInputContainer } from '@/components/PreviewInputContainer';
 import { ShareModal } from '@/components/ShareModal';
 import { getCardAPI } from '@/feature/card/card.api';
 import {
-  updateCurrentArtworkBackgroundIndex,
-  updateCurrentArtworkIndex,
-  updateCurrentArtworkSnowFlakeIndex,
-} from '@/feature/artwork/artwork.reducer';
+  updateArtwork,
+  updateArtworkBackground,
+  updateArtworkSnowFlake,
+} from '@/feature/background/background.reducer';
+import { ArtworkBackground } from '@/feature/background/background.type';
+import { ArtworkSnowFlake } from '@prisma/client';
+import { CardWithInfos } from '@/feature/card/card.type';
 
 const { PROD, VITE_CLIENT_DOMAIN_DEV, VITE_CLIENT_DOMAIN_PROD } = import.meta.env;
 
@@ -23,11 +26,8 @@ const { PROD, VITE_CLIENT_DOMAIN_DEV, VITE_CLIENT_DOMAIN_PROD } = import.meta.en
 export default function Card() {
   // TODO: 로그인한 유저에게는 다른 화면 보여주면 좋을듯
   const loginState = useSelector((state: RootState) => state.userProfile);
-  const { to, msg, from, artworkId, artworkBackgroundId, artworkSnowFlakeId } = useSelector(
-    (state: RootState) => state.card,
-  );
-  const artwork = useSelector((state: RootState) => state.artwork);
-  const dispatch = useDispatch<AppDispatch>();
+  const { to, msg, from } = useSelector((state: RootState) => state.card);
+  const dispatch = useAppDispatch();
 
   // TODO: 변수 명을 domain으로 하는게 좋을지, origin으로 하는게 좋을지, host로 하는게 좋을지 ..
   const domain = PROD ? VITE_CLIENT_DOMAIN_PROD : VITE_CLIENT_DOMAIN_DEV;
@@ -55,20 +55,28 @@ export default function Card() {
 
   useEffect(() => {
     if (cardId) {
-      dispatch(getCardAPI({ cardId }));
-      const d = artwork.artworkInfo;
-      const currentArtworkIndex = d.findIndex((e) => e.id === artworkId);
-      const currentArtworkBackgroundIndex = d[currentArtworkIndex].ArtworkBackground.findIndex(
-        (e) => e.id === artworkBackgroundId,
-      );
-      const currentArtworkSnowFlakeIndex = d[currentArtworkIndex].ArtworkSnowFlake.findIndex(
-        (e) => e.id === artworkSnowFlakeId,
-      );
-
-      dispatch(updateCurrentArtworkIndex({ currentArtworkIndex }));
-      dispatch(updateCurrentArtworkBackgroundIndex({ currentArtworkBackgroundIndex }));
-      dispatch(updateCurrentArtworkSnowFlakeIndex({ currentArtworkSnowFlakeIndex }));
-
+      dispatch(getCardAPI({ cardId })).then((res) => {
+        // ? res.payload는 왜 unknown인가..
+        const p = res.payload as CardWithInfos;
+        const Artwork = p.Artwork;
+        const ArtworkBackground = p.ArtworkBackground as unknown as ArtworkBackground;
+        const ArtworkSnowFlake = p.ArtworkSnowFlake as ArtworkSnowFlake;
+        dispatch(
+          updateArtwork({
+            Artwork,
+          }),
+        );
+        dispatch(
+          updateArtworkBackground({
+            ArtworkBackground,
+          }),
+        );
+        dispatch(
+          updateArtworkSnowFlake({
+            ArtworkSnowFlake,
+          }),
+        );
+      });
       setIsLoading(false);
     } else {
       setIsLoading(true);

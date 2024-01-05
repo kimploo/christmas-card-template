@@ -1,7 +1,5 @@
 import api from '@/lib/axios';
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
-// import { toast } from 'react-toastify';
 
 const { VITE_SERVER_URI_PROD, VITE_SERVER_URI_DEV, DEV } = import.meta.env;
 const host = DEV ? VITE_SERVER_URI_DEV : VITE_SERVER_URI_PROD;
@@ -30,7 +28,6 @@ export const authServiceLogin = createAsyncThunk<LoginState, AbortController>(
       })
       .then((res) => {
         if (res.status === 401) {
-          console.log('need logout');
           return {
             userId: null,
             nickname: null,

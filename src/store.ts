@@ -4,7 +4,7 @@ import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import loginSliceReducer from '@/redux-state/loginSlice';
 import artworkSliceReducer from '@/feature/artwork/artwork.reducer';
 import cardContentReducer from '@/feature/card/card.reducer';
-import editReducer from './feature/edit/edit.reducer';
+import editReducer from './feature/post/post.reducer';
 import backgroundReducer from './feature/background/background.reducer';
 import { useDispatch } from 'react-redux';
 
