@@ -3,8 +3,9 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { AppDispatch } from 'src/store';
 import { authServiceLogin, authServiceLogout } from '../redux-state/loginSlice';
+import axios from 'axios';
 
-const { DEV } = import.meta.env;
+const { DEV, VITE_KAKAO_REST_API_KEY, VITE_SERVER_URI_DEV } = import.meta.env;
 
 export const Debug = () => {
   const navigate = useNavigate();
@@ -26,6 +27,11 @@ export const Debug = () => {
   };
 
   const handleServiceLogout = () => {
+    axios.get(
+      `https://kauth.kakao.com/oauth/logout?client_id=${VITE_KAKAO_REST_API_KEY}&logout_redirect_uri=${
+        VITE_SERVER_URI_DEV + '/auth/logout'
+      }`,
+    );
     dispatch(authServiceLogout());
   };
 
