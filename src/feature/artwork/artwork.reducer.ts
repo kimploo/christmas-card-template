@@ -44,7 +44,7 @@ const initialState: ArtworkInitialState = {
     },
     {
       id: 3,
-      url: 'https://card.teamhh.link/Happynewyear_72.png',
+      url: 'https://card.teamhh.link/LuckyPocket_72.png',
       ...initialArtworkInfo,
     },
     {
