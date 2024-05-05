@@ -119,63 +119,69 @@ export default function LandingPage() {
             return {
               textAlign: 'center',
               maxWidth: `calc(${theme.breakpoints.sm} - (16px * 8))`,
-              width: `${window.innerWidth - 16 * 4}px`,
+              width: `${window.innerWidth - 16 * 2}px`,
             };
           }}
         >
-          <Text py={'1rem'} c={'#444444'}>
-            {loginState.isLogin ? (
-              `${loginState.nickname || '사용자'}님, 원하는 일러스트를 선택하세요.`
-            ) : (
-              <>
-                로그인하고 <br></br>
-                효디 작가의 모바일카드를 만들어보세요.
-              </>
-            )}
-          </Text>
-
           {loginState.isLogin ? (
             <>
-              <Carousel
-                slideSize="33%"
-                height={200}
-                slideGap="md"
-                controlSize={32}
-                initialSlide={slideIdx}
-                onSlideChange={(index) => {
-                  handleSlideIndex(index);
+              <Box
+                style={{
+                  borderRadius: '12px',
                 }}
+                p={'md'}
+                bg={'rgba(255, 255, 255, 0.3'}
               >
-                {artworks.artworkInfo.map((artwork, idx) => {
-                  return (
-                    <Carousel.Slide key={idx}>
-                      <Image h={200} fit="contain" src={artwork.url}></Image>
-                    </Carousel.Slide>
-                  );
-                })}
-              </Carousel>
-              <Flex justify={'center'} align={'center'} gap={4} pt={'lg'}>
-                {artworks.artworkInfo[slideIdx]
-                  ? artworks.artworkInfo[slideIdx].ArtworkBackground.map((info, idx) => {
-                      const bgInfo = info.bgInfo as unknown as BgInfo;
-                      const bg = `linear-gradient(180deg, ${bgInfo.colors[0]} 50%, ${bgInfo.colors[1]} 50%)`;
+                <Text pt={'1rem'} c={'#444444'}>
+                  <>
+                    {`${loginState.nickname || '사용자'}님,`}
+                    <br></br>
+                    {`원하는 일러스트와 배경색을 선택하세요.`}
+                  </>
+                </Text>
+                {/* 버튼을 바깥쪽으로 */}
+                <Carousel
+                  slideSize="33%"
+                  height={200}
+                  slideGap="md"
+                  controlSize={32}
+                  initialSlide={slideIdx}
+                  onSlideChange={(index) => {
+                    handleSlideIndex(index);
+                  }}
+                >
+                  {artworks.artworkInfo.map((artwork, idx) => {
+                    return (
+                      <Carousel.Slide key={idx}>
+                        <Image h={200} fit="contain" src={artwork.url}></Image>
+                      </Carousel.Slide>
+                    );
+                  })}
+                </Carousel>
+                <Flex pb={'md'} justify={'center'} align={'center'} gap={4}>
+                  {artworks.artworkInfo[slideIdx]
+                    ? artworks.artworkInfo[slideIdx].ArtworkBackground.map((info, idx) => {
+                        const bgInfo = info.bgInfo as unknown as BgInfo;
+                        const bg = `linear-gradient(180deg, ${bgInfo.colors[0]} 50%, ${bgInfo.colors[1]} 50%)`;
 
-                      return (
-                        <Button
-                          key={'artworkBackground-' + info.id}
-                          bg={bg}
-                          w={20}
-                          mx={'0.5rem'}
-                          style={{
-                            borderRadius: '50%',
-                            borderColor: 'darkgray',
-                          }}
-                          onClick={() => handleArtworkBackground(info.id, idx)}
-                        ></Button>
-                      );
-                    })
-                  : null}
-              </Flex>
+                        return (
+                          <Button
+                            key={'artworkBackground-' + info.id}
+                            bg={bg}
+                            w={20}
+                            mx={'0.5rem'}
+                            style={{
+                              borderRadius: '50%',
+                              borderColor: 'darkgray',
+                            }}
+                            onClick={() => handleArtworkBackground(info.id, idx)}
+                          ></Button>
+                        );
+                      })
+                    : null}
+                </Flex>
+              </Box>
+
               <CardInputContainer
                 to={to}
                 msg={msg}
@@ -233,7 +239,15 @@ export default function LandingPage() {
               </Flex>
             </>
           ) : (
-            <KakaoLogin></KakaoLogin>
+            <>
+              <Text py={'1rem'} c={'#444444'}>
+                <>
+                  로그인하고 마음한장 모바일 카드를<br></br>
+                  무료로 만들어보세요.
+                </>
+              </Text>
+              <KakaoLogin></KakaoLogin>
+            </>
           )}
         </Box>
       </Flex>

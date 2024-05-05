@@ -73,7 +73,7 @@ export default function Preview() {
                 handleCreateCard();
               }}
             >
-              이대로 공유하기 💌
+              이대로 공유하기
             </Button>
             <Button
               style={(theme) => ({
@@ -96,7 +96,7 @@ export default function Preview() {
                 handleGoBack();
               }}
             >
-              돌아가서 수정하기 ✍🏻
+              수정하기
             </Button>
           </Flex>
         </>

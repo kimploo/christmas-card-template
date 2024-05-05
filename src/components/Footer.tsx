@@ -14,23 +14,15 @@ export const Footer = () => {
           textAlign: 'center',
         }}
       >
-        Copyright {new Date().getFullYear()}.{' '}
+        Copyright © {new Date().getFullYear()}.
         <Anchor
-          fz={'0.8rem'}
+          pl={'2px'}
+          fz={'0.775rem'}
           underline={'always'}
           c={textColor}
-          href="https://www.instagram.com/hyodee.r/"
+          href="https://www.instagram.com/mindpiece.kr"
         >
-          Hyodee
-        </Anchor>{' '}
-        &{' '}
-        <Anchor
-          fz={'0.8rem'}
-          underline={'always'}
-          c={textColor}
-          href="https://www.github.com/kimploo/"
-        >
-          Homesick
+          마음한장
         </Anchor>{' '}
         <br></br>
         All rights reserved.
