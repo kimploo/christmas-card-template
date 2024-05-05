@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { Box, Flex, Image, Modal, UnstyledButton } from '@mantine/core';
-import { IconShare } from '@tabler/icons-react';
+import { Flex, Image, Modal, UnstyledButton } from '@mantine/core';
 import { RootState } from 'src/store';
 import { useSelector } from 'react-redux';
 
@@ -101,6 +100,7 @@ export const ShareModal = ({ isShare, setOpen, setClose, title, to, uuid }: Prop
                       카카오톡
                     </Flex>
                   </UnstyledButton>
+                  {/* @ts-ignore */}
                   {navigator.share && (
                     <UnstyledButton onClick={handleShareClick} p={4}>
                       <Flex direction={'column'} justify={'center'} align={'center'} gap={'xs'}>

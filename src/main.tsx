@@ -23,7 +23,7 @@ Sentry.init({
   integrations: [
     new Sentry.BrowserTracing({
       // Set 'tracePropagationTargets' to control for which URLs distributed tracing should be enabled
-      tracePropagationTargets: [/^https:\/\/card\.teamhh\.link/],
+      tracePropagationTargets: [/^https:\/\/mindpiece\.kr/],
       routingInstrumentation: Sentry.reactRouterV6Instrumentation(
         useEffect,
         useLocation,
