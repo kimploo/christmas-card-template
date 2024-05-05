@@ -17,6 +17,7 @@ import {
   useNavigationType,
 } from 'react-router-dom';
 
+// Sentry
 Sentry.init({
   dsn: 'https://3586f14333f31c2216b8109765706902@o4506428366061568.ingest.sentry.io/4506428367634432',
   integrations: [
