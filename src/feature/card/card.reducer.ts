@@ -14,7 +14,7 @@ export const initialState: InitialState = {
   from: 'From. ',
   Artwork: {
     id: 1,
-    url: 'https://card.teamhh.link/Together_72.png',
+    url: 'https://mindpiece.kr//Together_72.png',
   },
   artworkId: 1,
   ArtworkBackground: {
@@ -29,10 +29,10 @@ export const initialState: InitialState = {
   ArtworkSnowFlake: {
     id: 1,
     imgUrls: [
-      'https://card.teamhh.link/snowflakes/white-snowflake-2x.png',
-      'https://card.teamhh.link/snowflakes/orange-snowflake-2x.png',
-      'https://card.teamhh.link/snowflakes/red-snowflake-2x.png',
-      'https://card.teamhh.link/snowflakes/yellow-snowflake-2x.png',
+      'https://mindpiece.kr//snowflakes/white-snowflake-2x.png',
+      'https://mindpiece.kr//snowflakes/orange-snowflake-2x.png',
+      'https://mindpiece.kr//snowflakes/red-snowflake-2x.png',
+      'https://mindpiece.kr//snowflakes/yellow-snowflake-2x.png',
     ],
   },
   artworkSnowFlakeId: 1,

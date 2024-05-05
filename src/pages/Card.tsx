@@ -48,7 +48,7 @@ export default function Card() {
             width: `${window.innerWidth - 16 * 4}px`,
           })}
         >
-          {`올바른 주소를 입력하세요. ex) https://card.teamhh.link/card/happy-new-year`}
+          {`올바른 주소를 입력하세요. ex) https://mindpiece.kr//card/happy-new-year`}
         </Box>
       </Flex>
     );
