@@ -21,10 +21,10 @@ const initialArtworkInfo = {
     {
       id: 1,
       imgUrls: [
-        'https://mindpiece.kr//snowflakes/white-snowflake-2x.png',
-        'https://mindpiece.kr//snowflakes/orange-snowflake-2x.png',
-        'https://mindpiece.kr//snowflakes/red-snowflake-2x.png',
-        'https://mindpiece.kr//snowflakes/yellow-snowflake-2x.png',
+        'https://mindpiece.kr/snowflakes/white-snowflake-2x.png',
+        'https://mindpiece.kr/snowflakes/orange-snowflake-2x.png',
+        'https://mindpiece.kr/snowflakes/red-snowflake-2x.png',
+        'https://mindpiece.kr/snowflakes/yellow-snowflake-2x.png',
       ],
     },
   ],
@@ -34,32 +34,32 @@ const initialState: ArtworkInitialState = {
   artworkInfo: [
     {
       id: 1,
-      url: 'https://mindpiece.kr//Together_72.png',
+      url: 'https://mindpiece.kr/Together_72.png',
       ...initialArtworkInfo,
     },
     {
       id: 2,
-      url: 'https://mindpiece.kr//Snowman_72.png',
+      url: 'https://mindpiece.kr/Snowman_72.png',
       ...initialArtworkInfo,
     },
     {
       id: 3,
-      url: 'https://mindpiece.kr//LuckyPocket_72.png',
+      url: 'https://mindpiece.kr/LuckyPocket_72.png',
       ...initialArtworkInfo,
     },
     {
       id: 4,
-      url: 'https://mindpiece.kr//Christmas_72.png',
+      url: 'https://mindpiece.kr/Christmas_72.png',
       ...initialArtworkInfo,
     },
     {
       id: 5,
-      url: 'https://mindpiece.kr//Congrats_72.png',
+      url: 'https://mindpiece.kr/Congrats_72.png',
       ...initialArtworkInfo,
     },
     {
       id: 6,
-      url: 'https://mindpiece.kr//Chuseok_72.png',
+      url: 'https://mindpiece.kr/Chuseok_72.png',
       ...initialArtworkInfo,
     },
   ],

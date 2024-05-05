@@ -5,7 +5,7 @@ import { Artwork, ArtworkSnowFlake } from '@prisma/client';
 const initialState: BackgroundState = {
   Artwork: {
     id: 1,
-    url: 'https://mindpiece.kr//Together_72.png',
+    url: 'https://mindpiece.kr/Together_72.png',
   },
   ArtworkBackground: {
     id: 1,
@@ -18,10 +18,10 @@ const initialState: BackgroundState = {
   ArtworkSnowFlake: {
     id: 1,
     imgUrls: [
-      'https://mindpiece.kr//snowflakes/white-snowflake-2x.png',
-      'https://mindpiece.kr//snowflakes/orange-snowflake-2x.png',
-      'https://mindpiece.kr//snowflakes/red-snowflake-2x.png',
-      'https://mindpiece.kr//snowflakes/yellow-snowflake-2x.png',
+      'https://mindpiece.kr/snowflakes/white-snowflake-2x.png',
+      'https://mindpiece.kr/snowflakes/orange-snowflake-2x.png',
+      'https://mindpiece.kr/snowflakes/red-snowflake-2x.png',
+      'https://mindpiece.kr/snowflakes/yellow-snowflake-2x.png',
     ],
   },
 };

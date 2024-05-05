@@ -17,7 +17,7 @@ interface Props {
 export const ShareModal = ({ isShare, setOpen, setClose, title, to, uuid }: Props) => {
   const { Artwork } = useSelector((state: RootState) => state.background);
 
-  const shareCardUrl = `https://mindpiece.kr//card/${uuid}`;
+  const shareCardUrl = `https://mindpiece.kr/card/${uuid}`;
   const imageUrl = Artwork.url;
 
   const handleShareClick = () => {
