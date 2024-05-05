@@ -34,7 +34,7 @@ export default function Layout() {
         <MainArtwork></MainArtwork>
       </Flex>
       <Flex bg={secondBG} justify={'center'} direction={'column'}>
-        {/* 기기에 따라서 viewport 너비에 맞게 input의 너비가 조정이 되어야 한다. 현재는 모바일 전용 */}
+        {/* 기기에 따라서 viewport 너비에 맞게 input의 너비가 조정이 되어야 한다. 현재는 모바일 전용! */}
         <Flex bg={secondBG} justify={'center'} direction={'column'}>
           <Outlet />
           <Footer></Footer>
