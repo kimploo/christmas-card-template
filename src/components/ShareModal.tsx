@@ -101,7 +101,7 @@ export const ShareModal = ({ isShare, setOpen, setClose, title, to, uuid }: Prop
                       카카오톡
                     </Flex>
                   </UnstyledButton>
-                  {
+                  {navigator.share && (
                     <UnstyledButton onClick={handleShareClick} p={4}>
                       <Flex direction={'column'} justify={'center'} align={'center'} gap={'xs'}>
                         <Image
@@ -111,7 +111,7 @@ export const ShareModal = ({ isShare, setOpen, setClose, title, to, uuid }: Prop
                         공유하기
                       </Flex>
                     </UnstyledButton>
-                  }
+                  )}
                 </Flex>
               </Modal.Body>
             </Flex>
