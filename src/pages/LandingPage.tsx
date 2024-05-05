@@ -140,24 +140,25 @@ export default function LandingPage() {
                   </>
                 </Text>
                 {/* 버튼을 바깥쪽으로 */}
-                <Carousel
-                  slideSize="33%"
-                  height={200}
-                  slideGap="md"
-                  controlSize={32}
-                  initialSlide={slideIdx}
-                  onSlideChange={(index) => {
-                    handleSlideIndex(index);
-                  }}
-                >
-                  {artworks.artworkInfo.map((artwork, idx) => {
-                    return (
-                      <Carousel.Slide key={idx}>
-                        <Image h={200} fit="contain" src={artwork.url}></Image>
-                      </Carousel.Slide>
-                    );
-                  })}
-                </Carousel>
+                <Box py={'1rem'}>
+                  <Carousel
+                    slideSize="33%"
+                    slideGap="md"
+                    controlSize={32}
+                    initialSlide={slideIdx}
+                    onSlideChange={(index) => {
+                      handleSlideIndex(index);
+                    }}
+                  >
+                    {artworks.artworkInfo.map((artwork, idx) => {
+                      return (
+                        <Carousel.Slide key={idx}>
+                          <Image src={artwork.url}></Image>
+                        </Carousel.Slide>
+                      );
+                    })}
+                  </Carousel>
+                </Box>
                 <Flex pb={'md'} justify={'center'} align={'center'} gap={4}>
                   {artworks.artworkInfo[slideIdx]
                     ? artworks.artworkInfo[slideIdx].ArtworkBackground.map((info, idx) => {

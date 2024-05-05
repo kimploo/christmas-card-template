@@ -15,6 +15,7 @@ import {
 import { ArtworkBackground } from '@/feature/background/background.type';
 import { ArtworkSnowFlake } from '@prisma/client';
 import { CardWithInfos } from '@/feature/card/card.type';
+import { useDisclosure } from '@mantine/hooks';
 
 const { PROD, VITE_CLIENT_DOMAIN_DEV, VITE_CLIENT_DOMAIN_PROD } = import.meta.env;
 
@@ -32,7 +33,7 @@ export default function Card() {
   // TODO: 변수 명을 domain으로 하는게 좋을지, origin으로 하는게 좋을지, host로 하는게 좋을지 ..
   const domain = PROD ? VITE_CLIENT_DOMAIN_PROD : VITE_CLIENT_DOMAIN_DEV;
   const [isLoading, setIsLoading] = useState(true);
-  const [isShare, setShare] = useState(false);
+  const [isShare, { open, close }] = useDisclosure(false);
 
   const { cardId } = useParams();
 
@@ -83,7 +84,7 @@ export default function Card() {
       // TODO: reducer에서 해결하는게 나을지도
     }
     if (loginState.isLogin) {
-      setShare(true);
+      open();
     }
   }, [dispatch]);
 
@@ -91,7 +92,8 @@ export default function Card() {
     <>
       <ShareModal
         isShare={isShare}
-        setShare={setShare}
+        setOpen={open}
+        setClose={close}
         title={'작성한 카드를 소중한 사람에게 공유하세요.'}
         to={to}
         msg={msg}
