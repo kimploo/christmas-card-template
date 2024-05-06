@@ -8,7 +8,7 @@ import { MantineColorsTuple, MantineProvider, createTheme } from '@mantine/core'
 import '@mantine/core/styles.css';
 import '@mantine/carousel/styles.css';
 import 'react-toastify/dist/ReactToastify.css';
-import './global.css';
+import 'pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css';
 
 import * as Sentry from '@sentry/react';
 import {
@@ -59,7 +59,8 @@ const brandTextColors: MantineColorsTuple = [
 ];
 
 const theme = createTheme({
-  fontFamily: 'Noto Sans KR, sans-serif',
+  fontFamily:
+    '"Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif',
   colors: {
     brandText: brandTextColors,
   },
