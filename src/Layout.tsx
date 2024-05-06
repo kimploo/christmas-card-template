@@ -1,6 +1,6 @@
 import { Flex } from '@mantine/core';
 import { MainArtwork } from './components/MainArtwork';
-import { Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import { Footer } from './components/Footer';
 import { SnowfallContainer } from './components/SnowfallContainer';
 import { ToastContainer } from 'react-toastify';
@@ -12,8 +12,6 @@ const { DEV } = import.meta.env;
 
 export default function Layout() {
   const background = useSelector((state: RootState) => state.background);
-  const location = useLocation();
-  const navigate = useNavigate();
 
   // TODO: custom hook
   useEffect(() => {
@@ -21,8 +19,9 @@ export default function Layout() {
     const isMindpieceKr = /^https:\/\/mindpiece\.kr\//.test(window.location.href);
 
     if (DEV) return;
-    if (!isMindpieceKr) return navigate('https://mindpiece.kr' + pathname);
-  }, [location, navigate]);
+    if (!isMindpieceKr) window.location.href = 'https://mindpiece.kr' + pathname;
+    return;
+  }, []);
 
   const bgInfo = background.ArtworkBackground.bgInfo;
   let firstBG;
