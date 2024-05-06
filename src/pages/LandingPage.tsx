@@ -130,7 +130,7 @@ export default function LandingPage() {
                   borderRadius: '12px',
                 }}
                 p={'md'}
-                bg={'rgba(255, 255, 255, 0.3'}
+                bg={'rgba(255, 255, 255, 0.5'}
               >
                 <Text pt={'1rem'} c={'#444444'}>
                   <>
