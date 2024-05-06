@@ -49,10 +49,19 @@ jobs:
           aws s3 rm s3://${{ secrets.AWS_BUCKET_FRONT }} --recursive
           aws s3 sync ./dist s3://${{ secrets.AWS_BUCKET_FRONT }}
 
-      - name: Invalidate CloudFront
+      - name: Invalidate CloudFront (mindpiece.kr)
         uses: chetan/invalidate-cloudfront-action@v2
         env:
           DISTRIBUTION: E2BEDCXXNLTXTU
+          PATHS: "/*"
+          AWS_REGION: "ap-northeast-2"
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+      - name: Invalidate CloudFront (card.teamhh.link)
+        uses: chetan/invalidate-cloudfront-action@v2
+        env:
+          DISTRIBUTION: E1SJYWR0PXWJUR
           PATHS: "/*"
           AWS_REGION: "ap-northeast-2"
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
