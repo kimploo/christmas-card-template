@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { useEffect, Suspense, lazy } from 'react';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider, useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { authServiceLogin } from './redux-state/loginSlice';
 import { AppDispatch } from './store';
@@ -18,6 +18,17 @@ const { VITE_KAKAO_JAVASCRIPT_API_KEY, DEV } = import.meta.env;
 
 function App() {
   const dispatch = useDispatch<AppDispatch>();
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const { pathname } = location;
+    const isMindpieceKr = /^https:\/\/mindpiece\.kr\//.test(window.location.href);
+
+    if (!isMindpieceKr) {
+      navigate('https://mindpiece.kr' + pathname);
+    }
+  }, [location, navigate]);
 
   useEffect(() => {
     const controller = new AbortController();
