@@ -8,6 +8,7 @@ import { MantineColorsTuple, MantineProvider, createTheme } from '@mantine/core'
 import '@mantine/core/styles.css';
 import '@mantine/carousel/styles.css';
 import 'react-toastify/dist/ReactToastify.css';
+import './global.css';
 
 import * as Sentry from '@sentry/react';
 import {
@@ -58,7 +59,7 @@ const brandTextColors: MantineColorsTuple = [
 ];
 
 const theme = createTheme({
-  fontFamily: 'Noto Sans Korean, sans-serif',
+  fontFamily: 'Noto Sans KR, sans-serif',
   colors: {
     brandText: brandTextColors,
   },
