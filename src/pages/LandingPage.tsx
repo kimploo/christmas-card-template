@@ -136,6 +136,8 @@ export default function LandingPage() {
                   <>
                     {`${loginState.nickname || '사용자'}님,`}
                     <br></br>
+                    {`마음한장에 오신 것을 환영합니다.`}
+                    <br></br>
                     {`원하는 일러스트와 배경색을 선택하세요.`}
                   </>
                 </Text>
