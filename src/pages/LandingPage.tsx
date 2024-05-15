@@ -29,23 +29,23 @@ export default function LandingPage() {
   const [msg, setMsg] = useState(edit.msg);
   const [from, setFrom] = useState(edit.from);
   const [slideIdx, setIdx] = useState(0);
-  const [bgIdx, setBgIdx] = useState(0);
+  const [bgIdx, setBgIdx] = useState(1);
 
   useEffect(() => {
     dispatch(
       updateArtwork({
-        Artwork: artworks.artworkInfo[0],
+        Artwork: artworks.artworkInfo[1],
       }),
     );
     dispatch(
       updateArtworkBackground({
-        ArtworkBackground: artworks.artworkInfo[0]
+        ArtworkBackground: artworks.artworkInfo[1]
           .ArtworkBackground[0] as unknown as ArtworkBackground,
       }),
     );
     dispatch(
       updateArtworkSnowFlake({
-        ArtworkSnowFlake: artworks.artworkInfo[0].ArtworkSnowFlake[0],
+        ArtworkSnowFlake: artworks.artworkInfo[1].ArtworkSnowFlake[0],
       }),
     );
   }, []);
