@@ -11,8 +11,10 @@ import { resetPostContent } from '@/feature/post/post.reducer';
 
 export default function Preview() {
   const loginState = useSelector((state: RootState) => state.userProfile);
-  const { to, msg, from, currentArtworkId, currentArtworkBackgroundId, currentArtworkSnowFlakeId } =
-    useSelector((state: RootState) => state.edit);
+  const { Artwork, ArtworkBackground, ArtworkSnowFlake } = useSelector(
+    (state: RootState) => state.background,
+  );
+  const { to, msg, from } = useSelector((state: RootState) => state.edit);
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
 
@@ -23,9 +25,9 @@ export default function Preview() {
         from,
         to,
         msg,
-        artworkId: currentArtworkId,
-        artworkBackgroundId: currentArtworkBackgroundId,
-        artworkSnowFlakeId: currentArtworkSnowFlakeId,
+        artworkId: Artwork.id,
+        artworkBackgroundId: ArtworkBackground.id,
+        artworkSnowFlakeId: ArtworkSnowFlake.id,
       }),
     ).then((res) => {
       const uuid = (res.payload as CreateCardResDTO).uuid;

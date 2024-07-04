@@ -65,8 +65,9 @@ export const cardSlice = createSlice({
       })
       .addCase(createCardAPI.rejected, (_, action) => {
         // TODO
-        console.error(action.error);
-        toast.error('createCardAPI Error');
+        if (action.error.code !== 'ERR_CANCELED') {
+          toast.error('createCardAPI Error');
+        }
       })
       .addCase(getCardAPI.fulfilled, (state, action: PayloadAction<CardWithInfos>) => {
         // TODO: 코드를 더 잘 쓸 발법이 없을까

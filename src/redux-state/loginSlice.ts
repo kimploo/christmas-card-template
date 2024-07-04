@@ -83,7 +83,6 @@ export const loginSlice = createSlice({
         state.isLogin = action.payload.isLogin;
       })
       .addCase(authServiceLogin.rejected, (state, action) => {
-        console.error(action.error);
         state.nickname = null;
         state.isLogin = false;
       })

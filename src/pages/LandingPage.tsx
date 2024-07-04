@@ -56,11 +56,6 @@ export default function LandingPage() {
         to,
         msg,
         from,
-        currentArtworkId: artworks.artworkInfo[slideIdx].id,
-        currentArtworkBackgroundId: (
-          artworks.artworkInfo[slideIdx].ArtworkBackground[bgIdx] as unknown as ArtworkBackground
-        ).id,
-        currentArtworkSnowFlakeId: artworks.artworkInfo[slideIdx].ArtworkSnowFlake[0].id,
       }),
     );
     navigate(`/preview`);
